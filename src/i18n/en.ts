@@ -65,7 +65,6 @@ export const en: Dict = {
     advice: 'Recommended treatment: copper, within 48 h.',
     irrigation: 'Irrigation planned',
     irrigationValue: 'Tomorrow 6\u00a0am · 12\u00a0L/m²',
-    replay: 'Replay',
     steps: ['Photo', 'Diagnosis', 'Action'],
     label: 'Animated demo: photo of a leaf, then diagnosis, then irrigation advice',
   },

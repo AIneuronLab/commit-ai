@@ -3,11 +3,11 @@
  *   1. Photo     — viewfinder, shutter flash
  *   2. Diagnosis — heat-map blooms on the lesions, confidence ring fills, result card slides up
  *   3. Action    — irrigation card fills like a tank
- * It does not loop: "Replay" restarts it. With reduced motion the final state is shown at once.
+ * It loops while it is on screen (hold, reset, play again). With reduced motion the final state is shown at once.
  */
 import { useEffect, useRef, useState } from 'react';
 import { animate, motion, useInView, useReducedMotion } from 'motion/react';
-import { Droplet, RotateCcw } from 'lucide-react';
+import { Droplet } from 'lucide-react';
 import { EASE_OUT } from '../motion';
 import { PhoneFrame } from './Mockups';
 import { useApp } from '../i18n';
@@ -81,23 +81,32 @@ export function BayKatDemo() {
   const { t } = useApp();
   const reduce = useReducedMotion();
   const host = useRef<HTMLDivElement>(null);
-  const inView = useInView(host, { once: true, amount: 0.5 });
+  const inView = useInView(host, { amount: 0.35 });
   const [phase, setPhase] = useState(reduce ? 3 : 0);
-  const [run, setRun] = useState(0);
 
   useEffect(() => {
     if (reduce) { setPhase(3); return; }
     if (!inView) return;
-    setPhase(0);
-    const ids = [setTimeout(() => setPhase(1), 1200), setTimeout(() => setPhase(2), 2100), setTimeout(() => setPhase(3), 3900)];
-    return () => ids.forEach(clearTimeout);
-  }, [inView, run, reduce]);
+    let alive = true;
+    const ids: ReturnType<typeof setTimeout>[] = [];
+    const cycle = () => {
+      setPhase(0);
+      ids.push(
+        setTimeout(() => setPhase(1), 1200),
+        setTimeout(() => setPhase(2), 2100),
+        setTimeout(() => setPhase(3), 3900),
+        setTimeout(() => alive && cycle(), 8600),
+      );
+    };
+    cycle();
+    return () => { alive = false; ids.forEach(clearTimeout); };
+  }, [inView, reduce]);
 
   const step = phase >= 3 ? 2 : phase === 2 ? 1 : 0;
   const hint = phase === 0 ? t.baykat.aim : phase === 1 ? t.baykat.analysing : t.baykat.captured;
 
   return (
-    <div ref={host} className="flex flex-col items-center gap-4">
+    <div ref={host} className="flex flex-col items-center">
       <PhoneFrame>
         <div role="img" aria-label={t.baykat.label} className="flex h-full flex-col px-3.5 pt-10 pb-3 text-fg">
           <div className="flex items-center justify-between">
@@ -121,7 +130,7 @@ export function BayKatDemo() {
             <Corner className="bottom-2.5 left-2.5 rounded-bl-md border-b-2 border-l-2" />
             <Corner className="right-2.5 bottom-2.5 rounded-br-md border-r-2 border-b-2" />
             <motion.span
-              key={`${run}-${phase === 0 ? 'a' : phase === 1 ? 'b' : 'c'}`}
+              key={phase === 0 ? 'a' : phase === 1 ? 'b' : 'c'}
               className="absolute bottom-2.5 left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-2.5 py-0.5 text-[11px] whitespace-nowrap text-white"
               initial={reduce ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
@@ -131,7 +140,7 @@ export function BayKatDemo() {
             </motion.span>
             {phase === 1 && !reduce && (
               <motion.span
-                key={`flash-${run}`}
+                key="flash"
                 aria-hidden="true"
                 className="absolute inset-0 bg-white"
                 initial={{ opacity: 0 }}
@@ -179,13 +188,6 @@ export function BayKatDemo() {
         </div>
       </PhoneFrame>
 
-      <button
-        onClick={() => { setPhase(0); setRun((r) => r + 1); }}
-        disabled={phase < 3}
-        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line-strong px-4 text-[14px] font-medium text-soft transition hover:border-brand-azure hover:text-fg disabled:pointer-events-none disabled:opacity-0"
-      >
-        <RotateCcw className="size-4" /> {t.baykat.replay}
-      </button>
     </div>
   );
 }

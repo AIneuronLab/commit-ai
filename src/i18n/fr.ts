@@ -63,7 +63,6 @@ export const fr = {
     advice: 'Traitement conseillé : cuivre, sous 48 h.',
     irrigation: 'Irrigation prévue',
     irrigationValue: 'Demain 6\u00a0h · 12\u00a0L/m²',
-    replay: 'Rejouer',
     steps: ['Photo', 'Diagnostic', 'Action'],
     label: 'Démonstration animée : photo d’une feuille, diagnostic puis conseil d’irrigation',
   },

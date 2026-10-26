@@ -6,7 +6,7 @@
 import type { ReactNode } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, FileText, Lock } from 'lucide-react';
-import { GrowBars, EASE_OUT } from '../motion';
+import { GrowBars } from '../motion';
 import { useApp } from '../i18n';
 
 export function BrowserFrame({ url, children, className = '' }: { url: string; children: ReactNode; className?: string }) {
@@ -76,18 +76,36 @@ export function DashboardMock() {
   );
 }
 
-/** Messages appear one after the other and the conversation loops. */
-function LoopMsg({ children, delay, className }: { children: ReactNode; delay: number; className: string }) {
+/** One message of the looping conversation: it appears at `at` (0–1 of the 9 s cycle) and fades out at the end. */
+const CYCLE = 9;
+function LoopMsg({ children, at, className }: { children: ReactNode; at: number; className: string }) {
   const reduce = useReducedMotion();
   return (
     <motion.div
       className={className}
       initial={reduce ? false : { opacity: 0, y: 10 }}
-      animate={reduce ? undefined : { opacity: [0, 1, 1, 0], y: [10, 0, 0, 0] }}
-      transition={{ duration: 9, delay, repeat: Infinity, times: [0, 0.08, 0.88, 1], ease: EASE_OUT }}
+      animate={reduce ? undefined : { opacity: [0, 0, 1, 1, 0], y: [10, 10, 0, 0, 0] }}
+      transition={{ duration: CYCLE, repeat: Infinity, times: [0, at, at + 0.04, 0.9, 1], ease: 'linear' }}
     >
       {children}
     </motion.div>
+  );
+}
+
+/** Three pulsing dots shown just before the assistant answers. */
+function Typing({ from, to }: { from: number; to: number }) {
+  const reduce = useReducedMotion();
+  if (reduce) return null;
+  return (
+    <motion.span
+      aria-hidden="true"
+      className="absolute top-0 left-0 flex items-center gap-1 rounded-2xl rounded-bl-sm border border-line bg-card-alt px-3 py-3"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: [0, 0, 1, 1, 0, 0] }}
+      transition={{ duration: CYCLE, repeat: Infinity, times: [0, from, from + 0.015, to, to + 0.015, 1], ease: 'linear' }}
+    >
+      {[0, 1, 2].map((i) => <i key={i} className="block size-1.5 animate-pulse rounded-full bg-muted" style={{ animationDelay: `${i * 0.18}s` }} />)}
+    </motion.span>
   );
 }
 
@@ -109,16 +127,19 @@ export function ChatMock() {
           <b className="font-display text-sm">{c.title}</b>
           <span className="font-mono text-[11px] text-muted">RAG · Mistral</span>
         </div>
-        <LoopMsg delay={0.4} className="max-w-[80%] self-end rounded-2xl rounded-br-sm bg-brand-deep px-3 py-2 text-[13px] leading-snug text-white">
+        <LoopMsg at={0.04} className="max-w-[80%] self-end rounded-2xl rounded-br-sm bg-brand-deep px-3 py-2 text-[13px] leading-snug text-white">
           {c.q}
         </LoopMsg>
-        <LoopMsg delay={1.8} className="max-w-[88%] self-start rounded-2xl rounded-bl-sm border border-line bg-card-alt px-3 py-2.5 text-[13px] leading-relaxed text-soft">
-          {c.a1} <b className="text-fg">{c.a2}</b> {c.a3}
-          <span className="mt-1.5 flex gap-1.5">
-            <span className="rounded bg-accent-soft px-1.5 font-mono text-[11px] text-accent">{c.page}</span>
-            <span className="rounded bg-accent-soft px-1.5 font-mono text-[11px] text-accent">art. 4.2</span>
-          </span>
-        </LoopMsg>
+        <div className="relative max-w-[88%] self-start">
+          <Typing from={0.13} to={0.24} />
+          <LoopMsg at={0.25} className="rounded-2xl rounded-bl-sm border border-line bg-card-alt px-3 py-2.5 text-[13px] leading-relaxed text-soft">
+            {c.a1} <b className="text-fg">{c.a2}</b> {c.a3}
+            <span className="mt-1.5 flex gap-1.5">
+              <span className="rounded bg-accent-soft px-1.5 font-mono text-[11px] text-accent">{c.page}</span>
+              <span className="rounded bg-accent-soft px-1.5 font-mono text-[11px] text-accent">art. 4.2</span>
+            </span>
+          </LoopMsg>
+        </div>
         <div className="mt-auto flex items-center gap-2 rounded-xl border border-line bg-card-alt py-2 pr-2 pl-3 text-xs text-muted">
           {c.ask}
           <span className="ml-auto flex size-6.5 items-center justify-center rounded-lg bg-brand-deep text-white"><ArrowRight className="size-3.5" /></span>
