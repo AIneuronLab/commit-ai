@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Commit·AI — API, chatbots IA et data en production</title>
+    <meta name="description" content="Commit·AI conçoit des API sécurisées, des chatbots IA sur vos documents et des pipelines de données qui tournent en production. Dakar, Sénégal." />
+    <meta name="theme-color" content="#070b12" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Commit·AI — De l’idée à la solution intelligente" />
+    <meta property="og:description" content="API sécurisées, chatbots IA et pipelines de données en production." />
+    <meta property="og:image" content="/portrait.jpg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Space+Grotesk:wght@600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Space+Grotesk:wght@600;700&display=swap" />
+    </noscript>
+    <script>
+      // apply the saved theme before first paint (no flash)
+      try {
+        if (localStorage.getItem('ca-theme') === 'light') document.documentElement.classList.add('light');
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <!-- Netlify Forms needs a plain HTML form at build time to register the form; React posts to it. -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" />
+      <input name="message" />
+    </form>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

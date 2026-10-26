@@ -1,0 +1,147 @@
+@import 'tailwindcss';
+
+/*
+ * Commit·AI design tokens (Tailwind v4).
+ * Theme-aware colours switch with the `.light` class on <html>; brand colours are fixed.
+ * Dark text contrast is checked by scripts/contrast.mjs (every text token >= 4.5:1 on every surface).
+ */
+@custom-variant light (&:where(.light, .light *));
+
+@theme {
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* brand (fixed) */
+  --color-brand: #2196f3;
+  --color-brand-deep: #1565c0;
+  --color-brand-azure: #4fc3f7;
+  --color-brand-core: #67e8f9;
+  --color-brand-navy: #0d47a1;
+  --color-coral: #f87171;
+  --color-amber: #fbbf24;
+  --color-mint: #34d399;
+
+  /* theme-aware */
+  --color-bg: var(--ca-bg);
+  --color-bg-alt: var(--ca-bg-alt);
+  --color-card: var(--ca-card);
+  --color-card-alt: var(--ca-card-alt);
+  --color-line: var(--ca-line);
+  --color-line-strong: var(--ca-line-strong);
+  --color-fg: var(--ca-fg);
+  --color-soft: var(--ca-soft);
+  --color-muted: var(--ca-muted);
+  --color-accent: var(--ca-accent);
+  --color-accent-soft: var(--ca-accent-soft);
+  --color-ok: var(--ca-ok);
+  --color-warn: var(--ca-warn);
+  --color-glass: var(--ca-glass);
+  --color-nav: var(--ca-nav);
+
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-loop: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+:root {
+  /* dark: graphite with a blue bias; text is light, never grey-on-grey */
+  --ca-bg: #070b12;
+  --ca-bg-alt: #0b111b;
+  --ca-card: #111a28;
+  --ca-card-alt: #0d1521;
+  --ca-line: #26354b;
+  --ca-line-strong: #3f78bd;
+  --ca-fg: #f4f7fb;
+  --ca-soft: #d9e1ec;
+  --ca-muted: #b0bccd;
+  --ca-accent: #66d0fb;
+  --ca-accent-soft: #14294a;
+  --ca-ok: #46e0aa;
+  --ca-warn: #fdd04a;
+  --ca-glass: rgb(17 26 40 / 0.72);
+  --ca-nav: rgb(7 11 18 / 0.82);
+  --ca-hero-glow: rgb(33 150 243 / 0.22);
+  color-scheme: dark;
+}
+
+.light {
+  --ca-bg: #ffffff;
+  --ca-bg-alt: #f3f7fc;
+  --ca-card: #ffffff;
+  --ca-card-alt: #f6f9fd;
+  --ca-line: #d5e0ee;
+  --ca-line-strong: #86b3e6;
+  --ca-fg: #0b1730;
+  --ca-soft: #26385a;
+  --ca-muted: #475873;
+  --ca-accent: #1565c0;
+  --ca-accent-soft: #e2effc;
+  --ca-ok: #047857;
+  --ca-warn: #9a4a06;
+  --ca-glass: rgb(255 255 255 / 0.8);
+  --ca-nav: rgb(255 255 255 / 0.86);
+  --ca-hero-glow: rgb(33 150 243 / 0.14);
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-bg font-sans text-fg antialiased;
+    overflow-x: clip;
+    /* room for the bottom tab bar on phones */
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  }
+  @media (min-width: 768px) {
+    body { padding-bottom: 0; }
+  }
+  :focus-visible { outline: 2px solid var(--color-brand-azure); outline-offset: 3px; border-radius: 6px; }
+  ::selection { background: var(--color-brand); color: #fff; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+}
+
+/* soft tints used by chips and callouts */
+.tint-ok { background: color-mix(in srgb, var(--ca-ok) 14%, transparent); border-color: color-mix(in srgb, var(--ca-ok) 40%, transparent); }
+.tint-accent { background: color-mix(in srgb, var(--ca-accent) 12%, transparent); }
+.tint-fg { background: color-mix(in srgb, var(--ca-fg) 8%, transparent); }
+
+/* surfaces */
+.grad-section { background: linear-gradient(180deg, var(--ca-bg) 0%, var(--ca-bg-alt) 100%); }
+.grad-card-a { background: radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--color-brand) 16%, transparent), transparent 60%), var(--ca-card); }
+.grad-card-b { background: radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--color-mint) 14%, transparent), transparent 60%), var(--ca-card); }
+.grad-phone { background: linear-gradient(145deg, #3a4a63, #0d1522); }
+.light .grad-phone { background: linear-gradient(145deg, #c5d3e6, #8aa0bf); }
+
+.grid-bg {
+  background-image: linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 70% 80% at 60% 40%, #000, transparent 75%);
+}
+.light .grid-bg {
+  background-image: linear-gradient(rgb(11 23 48 / 0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(11 23 48 / 0.05) 1px, transparent 1px);
+}
+
+/* horizontal swipe rows on phones */
+.snap-row {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  margin-inline: -1rem;
+  padding-inline: 1rem;
+  scroll-padding-inline: 1rem;
+}
+.snap-row::-webkit-scrollbar { display: none; }
+.snap-row > * { scroll-snap-align: start; flex: none; }
+@media (min-width: 1024px) {
+  .snap-row { display: grid; overflow: visible; margin-inline: 0; padding-inline: 0; scroll-snap-type: none; }
+  .snap-row > * { flex: initial; }
+}
