@@ -1,6 +1,7 @@
 /** Single source of truth for contact details and headline numbers. Nothing else in the app hardcodes these. */
 export const SITE = {
   brand: 'Commit·AI',
+  url: 'https://commitai.dev',
   owner: 'Anthony Mboumba Ikapi',
   email: 'commit.ai@outlook.com',
   whatsapp: { display: '+221 78 959 20 97', number: '221789592097' },

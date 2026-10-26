@@ -17,3 +17,10 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "SAMEORIGIN"
+
+# the old Netlify address sends everyone to the real domain (permanent redirect, also for deep links)
+[[redirects]]
+  from = "https://commitai.netlify.app/*"
+  to = "https://commitai.dev/:splat"
+  status = 301
+  force = true
