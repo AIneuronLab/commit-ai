@@ -106,7 +106,7 @@ export const en: Dict = {
     linkedin: 'LinkedIn',
     github: 'GitHub',
     waText: 'Hello, I would like to discuss a project with Commit·AI.',
-    form: { title: 'Or leave a message', name: 'Your name', email: 'Your email', message: 'Your need in a few lines', send: 'Send', sending: 'Sending…', sent: 'Thank you! Your message is on its way, we will reply quickly.', error: 'Could not send right now. Message us on WhatsApp or by email.' },
+    form: { title: 'Or leave a message', name: 'Your name', email: 'Your email', message: 'Your need in a few lines', send: 'Send', sending: 'Sending…', mailto: 'Your email app is opening: send the message to finish.', sent: 'Thank you! Your message is on its way, we will reply quickly.', error: 'Could not send right now. Message us on WhatsApp or by email.' },
     sheet: { title: 'Start a project', lead: 'Pick whichever way is easiest for you.', form: 'Leave a message' },
   },
   footer: { copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Built in Dakar', top: 'Back to top' },

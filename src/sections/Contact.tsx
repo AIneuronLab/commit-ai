@@ -7,7 +7,10 @@ import { Reveal } from '../motion';
 import { SITE, waLink } from '../data/site';
 import { useApp } from '../i18n';
 
-type Status = 'idle' | 'sending' | 'sent' | 'error';
+type Status = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
+
+/** Public by design (Web3Forms: it only maps to your email address). Set VITE_WEB3FORMS_KEY at build time. */
+const FORM_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
 
 const field = 'min-h-12 w-full rounded-xl border border-line bg-card-alt px-4 py-3 text-[16px] text-fg placeholder:text-muted outline-none transition focus:border-brand-azure';
 
@@ -19,12 +22,29 @@ function Form() {
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '');
+    const email = String(data.get('email') ?? '');
+    const message = String(data.get('message') ?? '');
+    if (data.get('botcheck')) { form.reset(); setStatus('sent'); return; } // a bot ticked the hidden box: pretend, send nothing
+
+    if (!FORM_KEY) {
+      // no key configured (local dev, or not set yet): let the visitor's own mail app send it
+      const body = `${message}\n\n— ${name} (${email})`;
+      window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(`${SITE.brand} — ${name}`)}&body=${encodeURIComponent(body)}`;
+      setStatus('mailto');
+      return;
+    }
+
     setStatus('sending');
     try {
-      const data = new FormData(form);
-      const body = new URLSearchParams({ 'form-name': 'contact', ...Object.fromEntries([...data.entries()].map(([k, v]) => [k, String(v)])) }).toString();
-      const res = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
-      if (!res.ok) throw new Error(String(res.status));
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_key: FORM_KEY, subject: `Nouveau message depuis ${SITE.url.replace('https://', '')}`, from_name: SITE.brand, name, email, message, botcheck: false }),
+      });
+      const json = (await res.json()) as { success?: boolean };
+      if (!res.ok || !json.success) throw new Error(String(res.status));
       form.reset();
       setStatus('sent');
     } catch {
@@ -33,10 +53,9 @@ function Form() {
   }
 
   return (
-    <form id="message" name="contact" method="POST" onSubmit={onSubmit} className="flex flex-col gap-3 rounded-2xl border border-line bg-card p-5 sm:p-6">
+    <form id="message" onSubmit={onSubmit} className="flex flex-col gap-3 rounded-2xl border border-line bg-card p-5 sm:p-6">
       <h3 className="m-0 font-display text-xl font-semibold">{f.title}</h3>
-      <input type="hidden" name="form-name" value="contact" />
-      <p className="sr-only" aria-hidden="true"><label>Ne pas remplir <input name="bot-field" tabIndex={-1} autoComplete="off" /></label></p>
+      <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       <label className="flex flex-col gap-1.5 text-[14px] text-soft">{f.name}
         <input name="name" required autoComplete="name" className={field} />
       </label>
@@ -51,6 +70,7 @@ function Form() {
       </button>
       <p role="status" aria-live="polite" className={`m-0 min-h-6 text-[15px] ${status === 'error' ? 'text-warn' : 'text-ok'}`}>
         {status === 'sent' && <span className="inline-flex items-start gap-2"><Check className="mt-0.5 size-5 shrink-0" />{f.sent}</span>}
+        {status === 'mailto' && f.mailto}
         {status === 'error' && f.error}
       </p>
     </form>

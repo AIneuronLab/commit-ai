@@ -33,13 +33,6 @@
     </script>
   </head>
   <body>
-    <!-- Netlify Forms needs a plain HTML form at build time to register the form; React posts to it. -->
-    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-      <input name="bot-field" />
-      <input name="name" />
-      <input name="email" />
-      <input name="message" />
-    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

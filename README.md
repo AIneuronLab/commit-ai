@@ -23,8 +23,19 @@ node scripts/contrast.mjs   # vérifie le contraste (4,5:1) de tous les textes, 
 
 `src/lib/github.ts` lit l'API GitHub publique **dans le navigateur du visiteur** quand la section « Labo » approche de l'écran, garde le résultat 1 h dans `localStorage`, et retombe sur les valeurs de `GITHUB_SNAPSHOT` si GitHub est injoignable. Le total de contributions (projets privés compris) et la carte d'activité viennent de `github-contributions-api.jogruber.de`, un service tiers : si vous préférez ne pas l'utiliser, retirez l'appel dans `fetchLive`.
 
-## Déploiement Netlify (plan gratuit)
+## Hébergement : Cloudflare Pages (gratuit)
 
-`netlify.toml` fixe la commande (`npm run build`) et le dossier publié (`dist`). Le formulaire de contact est déclaré dans `index.html` (`<form name="contact" data-netlify="true">`) : Netlify le détecte au premier déploiement, les messages arrivent dans *Forms*.
+| Réglage Cloudflare Pages | Valeur |
+|---|---|
+| Branche de production | `main` |
+| Commande de build | `npm run build` |
+| Dossier publié | `dist` |
+| Variables | `NODE_VERSION` = `22`, `VITE_WEB3FORMS_KEY` = ta clé Web3Forms |
 
-Le plan gratuit donne 300 crédits par mois (plafond dur) : un déploiement en production coûte 15 crédits, 1 Go de bande passante 20. Les aperçus de branche sont gratuits : travaillez sur une branche, fusionnez dans `main` seulement quand c'est prêt, et ne planifiez pas de rebuild automatique.
+`public/_headers` règle le cache et les en-têtes de sécurité. Les requêtes vers les fichiers statiques sont gratuites et illimitées. Chaque branche ou pull request reçoit un aperçu `*.pages.dev`.
+
+Le domaine `commitai.dev` doit utiliser les serveurs de noms de Cloudflare (obligatoire pour un domaine nu sur Cloudflare). L'achat et le renouvellement restent chez Spaceship.
+
+## Formulaire de contact : Web3Forms
+
+Le formulaire envoie un `POST` JSON à `api.web3forms.com` avec la clé `VITE_WEB3FORMS_KEY` (publique par conception : elle ne fait que désigner ton email). Les messages arrivent dans ta boîte `commit.ai@outlook.com`. Le plan gratuit donne 250 messages par mois. Sans clé (développement local, ou clé pas encore ajoutée), le formulaire ouvre la messagerie du visiteur avec le message pré-rempli. Une case cachée `botcheck` sert de piège à robots.
