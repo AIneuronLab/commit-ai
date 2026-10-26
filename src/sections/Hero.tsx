@@ -1,13 +1,13 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, FolderKanban } from 'lucide-react';
-import { LogoMark } from '../brand/Logo';
+import { HeroPortrait } from '../components/HeroPortrait';
 import { CountUp } from '../components/CountUp';
-import { EASE_LOOP, EASE_OUT, Orbit, Reveal, ShineText } from '../motion';
+import { EASE_OUT, Reveal, ShineText } from '../motion';
 import { SITE } from '../data/site';
 import { useApp } from '../i18n';
 
 export function Hero({ onStart }: { onStart: () => void }) {
-  const { t, mode } = useApp();
+  const { t } = useApp();
   const reduce = useReducedMotion();
   return (
     <section id="top" className="relative overflow-hidden bg-[radial-gradient(ellipse_60%_55%_at_75%_40%,var(--ca-hero-glow),transparent_70%)]">
@@ -50,47 +50,7 @@ export function Hero({ onStart }: { onStart: () => void }) {
           </Reveal>
         </div>
 
-        {/* portrait: nothing floats on the photo except the name tag */}
-        <div className="relative mx-auto aspect-[54/66] w-full max-w-[340px] sm:max-w-[460px] lg:max-w-[540px]">
-          <Orbit className="absolute inset-[-6%] rounded-full border border-dashed border-line-strong" />
-          <Orbit reverse duration={90} className="absolute inset-[2%] rounded-full border border-line" />
-          <motion.span
-            aria-hidden="true"
-            className="absolute inset-x-[16%] inset-y-[12%] rounded-full bg-brand/40 blur-3xl"
-            animate={reduce ? undefined : { opacity: [0.55, 1, 0.55], scale: [1, 1.08, 1] }}
-            transition={{ duration: 5, repeat: Infinity, ease: EASE_LOOP }}
-          />
-          <motion.span
-            aria-hidden="true"
-            className="absolute top-[6%] left-[13%] h-[86%] w-[76%] rounded-[40px] bg-gradient-to-br from-brand-azure via-brand to-brand-navy"
-            initial={{ rotate: 5 }}
-            animate={reduce ? undefined : { rotate: [5, 8, 5], y: [0, -6, 0] }}
-            transition={{ duration: 9, repeat: Infinity, ease: EASE_LOOP }}
-          />
-          <motion.img
-            src="/portrait.jpg"
-            alt={t.hero.portraitAlt}
-            width={540}
-            height={660}
-            fetchPriority="high"
-            className="absolute top-[4%] left-[11%] h-[86%] w-[76%] rounded-[36px] object-cover object-[50%_12%] shadow-[0_50px_90px_-40px_rgba(0,0,0,.85)]"
-            initial={reduce ? false : { opacity: 0, y: 30, clipPath: 'inset(100% 0 0 0 round 36px)' }}
-            animate={{ opacity: 1, y: 0, clipPath: 'inset(0% 0 0 0 round 36px)' }}
-            transition={{ duration: 1.1, delay: 0.25, ease: EASE_OUT }}
-          />
-          <motion.div
-            className="absolute right-0 bottom-[3%] flex items-center gap-3 rounded-2xl border border-line-strong bg-glass py-2.5 pr-4 pl-2.5 shadow-[0_30px_60px_-25px_rgba(0,0,0,.6)] backdrop-blur"
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.1, ease: EASE_OUT }}
-          >
-            <LogoMark size={38} variant={mode} />
-            <span className="flex flex-col leading-tight">
-              <b className="text-[14.5px]">{SITE.owner}</b>
-              <span className="text-[13px] text-muted">{t.hero.role} · Commit<span className="text-brand-azure light:text-brand-deep">·AI</span></span>
-            </span>
-          </motion.div>
-        </div>
+        <HeroPortrait />
       </div>
     </section>
   );
