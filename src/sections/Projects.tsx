@@ -17,6 +17,7 @@ function Text({ id, kicker }: { id: ClientProjectId; kicker: string }) {
       <h3 className="m-0 font-display text-[26px] leading-tight font-bold tracking-tight sm:text-[32px]">{p.title}</h3>
       <p className="m-0 text-[17px] text-muted">{p.desc}</p>
       <p className="tint-ok m-0 mt-1 inline-flex items-center gap-2 self-start rounded-full border px-3.5 py-2 text-[15px] text-ok"><Check className="size-4" />{p.result}</p>
+      {p.note && <p className="m-0 text-[14px] text-muted">{p.note}</p>}
     </div>
   );
 }

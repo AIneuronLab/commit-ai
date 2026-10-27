@@ -43,10 +43,10 @@ export const fr = {
     lead: 'Des projets livrés et utilisés au quotidien, à Dakar et ailleurs.',
     disclaimer: 'Interfaces illustrées à partir des projets livrés ; les données affichées sont des exemples.',
     items: {
-      tenders: { title: 'Veille des appels d’offres', desc: 'Les offres publiques sont collectées chaque jour, triées par l’IA et réunies dans un tableau de bord.', result: 'En production depuis avril 2026' },
-      hrbot: { title: 'Chatbot RH sur documents', desc: 'Les équipes posent leurs questions et reçoivent une réponse avec la page source.', result: 'Guide RH de 88 pages interrogeable' },
-      baykat: { title: 'BayKat, assistant agricole', desc: 'Une photo de la feuille suffit : diagnostic de la maladie et conseil d’irrigation.', result: 'Sur web et mobile' },
-      activity: { title: 'ActivityConnect', desc: 'Réservations d’activités et paiement mobile Wave, dans une application web rapide.', result: 'Réservation et paiement Wave' },
+      tenders: { title: 'Veille des appels d’offres', desc: 'Les offres publiques sont collectées chaque jour, triées par l’IA et réunies dans un tableau de bord.', result: 'En production depuis avril 2026', note: '' },
+      hrbot: { title: 'Chatbot RH sur documents', desc: 'Les équipes posent leurs questions et reçoivent une réponse avec la page source.', result: 'Guide RH de 88 pages interrogeable', note: '' },
+      baykat: { title: 'BayKat, assistant agricole', desc: 'Une photo de la feuille suffit : diagnostic de la maladie et conseil d’irrigation.', result: 'Sur web et mobile', note: 'Présenté avec l’accord de SOTILMA.' },
+      activity: { title: 'ActivityConnect', desc: 'Réservations d’activités et paiement mobile Wave, dans une application web rapide.', result: 'Réservation et paiement Wave', note: 'Projet personnel d’Anthony, réalisé pour sa compagne.' },
     },
   },
   mock: {
