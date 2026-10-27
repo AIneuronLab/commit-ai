@@ -41,7 +41,6 @@ export function Hero({ onStart }: { onStart: () => void }) {
           <p className="m-0 flex flex-wrap gap-x-5 gap-y-1 text-[15px] text-muted">
             <span><b className="text-fg"><CountUp to={prod.to} suffix={prod.suffix} /></b> {t.stats.prod}</span>
             <span><b className="text-fg"><CountUp to={countries.to} /></b> {t.stats.countries}</span>
-            <span>{t.hero.pay}</span>
           </p>
         </div>
         <HeroPortrait />

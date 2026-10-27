@@ -8,7 +8,6 @@ export const fr = {
     titleA: 'Chatbots, API et tableaux de bord',
     titleB: 'qui tournent déjà en production.',
     lead: 'Nous aidons les PME, ONG et startups de Dakar et d’ailleurs à gagner du temps : un chatbot qui répond à partir de vos documents, une API qui relie vos outils, un tableau de bord qui remplace le tableur. Nous construisons aussi le site ou l’application qui va avec.',
-    pay: 'Paiement par Wave, Orange Money ou virement',
     primary: 'Démarrer un projet',
     secondary: 'Voir les réalisations',
     role: 'Fondateur',
