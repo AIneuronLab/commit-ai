@@ -3,13 +3,14 @@ import type { Dict } from './fr';
 export const en: Dict = {
   lang: 'en',
   a11y: { toLight: 'Switch to light mode', toDark: 'Switch to dark mode', switchLang: 'FR — Passer en français', menu: 'Main navigation', close: 'Close', skip: 'Skip to content' },
-  nav: { services: 'Services', projects: 'Work', lab: 'GitHub Lab', journey: 'Journey', contact: 'Contact', cta: 'Start a project' },
+  nav: { services: 'Services', projects: 'Work', lab: 'GitHub Lab', journey: 'About us', contact: 'Contact', cta: 'Start a project' },
   tabs: { home: 'Home', services: 'Services', projects: 'Work', lab: 'Lab', contact: 'Contact' },
   hero: {
     availability: 'Available — freelance & roles',
-    titleA: 'From idea to',
-    titleB: 'intelligent solution.',
-    lead: 'We build secure APIs, AI chatbots and data pipelines that run in production — and now the interfaces that go with them.',
+    titleA: 'Chatbots, APIs and dashboards',
+    titleB: 'already running in production.',
+    lead: 'We help SMEs, NGOs and startups in Dakar and beyond save time: a chatbot that answers from your documents, an API that connects your tools, a dashboard that replaces the spreadsheet. We also build the website or app that goes with it.',
+    pay: 'Pay by Wave, Orange Money or bank transfer',
     primary: 'Start a project',
     secondary: 'See our work',
     role: 'Founder',
@@ -17,19 +18,18 @@ export const en: Dict = {
   },
   stats: { prod: 'projects in production', frameworks: 'backend frameworks', countries: 'countries of experience', efficiency: 'data efficiency gain' },
   how: {
-    title: 'From your need to a solution, in three steps',
-    lead: 'No jargon: we start from your problem and show you the result.',
+    title: 'How it works',
+    lead: 'One call, one quote, then you follow progress every week.',
     steps: [
-      { k: '01 · Your need', t: 'You tell us what is blocking you', d: 'Lost documents, manual tasks, scattered data: we listen and measure the problem.' },
-      { k: '02 · Our solution', t: 'We build it, brick by brick', d: 'Mock-up, development, tests: you see the solution move forward every week.' },
-      { k: '03 · Your result', t: 'You measure the gain', d: 'Go-live, monitoring and clear numbers: time saved, errors avoided.' },
+      { t: 'A free 30-minute call', d: 'You describe what costs you time: lost documents, data retyped by hand, scattered figures. We tell you honestly whether we can help.' },
+      { t: 'A fixed quote within 48 hours', d: 'Price, schedule and scope in writing. You pay in three parts (40% at signing, 30% at the mock-up, 30% at go-live), or another way if you prefer.' },
+      { t: 'You watch it progress, then you measure', d: 'A weekly check-in and a test link. At go-live, we measure with you the time saved or errors avoided.' },
     ],
   },
   services: {
-    kicker: '01 / Services',
-    title: 'Your need, our solution',
-    lead: 'We start from what slows you down and deliver a solution that already runs elsewhere, in production.',
-    need: 'The need',
+    kicker: 'Services',
+    title: 'What we build',
+    lead: 'Solutions already running for clients, not mock-ups.',
     items: [
       { need: 'Hours lost searching through your documents.', title: 'AI chatbots on your documents', desc: 'Ask your guides, contracts and reports questions in plain language, with sourced answers (RAG).', proof: 'In production: Ashia Group’s HR chatbot.' },
       { need: 'Your tools do not talk to each other, everything is typed twice.', title: 'Custom APIs & backends', desc: 'Secure REST APIs (JWT, CORS), documented with Swagger and ready for production.', proof: 'NestJS, FastAPI: APIs running in production.' },
@@ -40,7 +40,7 @@ export const en: Dict = {
     ],
   },
   projects: {
-    kicker: '02 / Work',
+    kicker: 'Work',
     title: 'Solutions already running',
     lead: 'Delivered projects used every day, in Dakar and beyond.',
     disclaimer: 'Interfaces illustrated from delivered projects; the data shown are examples.',
@@ -69,7 +69,7 @@ export const en: Dict = {
     label: 'Animated demo: photo of a leaf, then diagnosis, then irrigation advice',
   },
   lab: {
-    kicker: '03 / GitHub Lab',
+    kicker: 'GitHub Lab',
     title: 'The code, live',
     lead: 'Our GitHub activity and a few public repositories. Client projects stay private.',
     repos: 'public repositories',
@@ -84,9 +84,12 @@ export const en: Dict = {
     contribOn: 'contributions on',
   },
   journey: {
-    kicker: '04 / Journey',
-    title: 'From mechatronics to AI',
-    lead: 'Three countries, two disciplines, one obsession: automate what can be automated and make data useful.',
+    kicker: 'About us',
+    title: 'A studio in Dakar, a path across three countries',
+    about: [
+      'Commit·AI is the studio of Anthony Mboumba Ikapi, an AI and backend engineer based in Dakar. He started in mechatronics in Kigali, moved to data in Libreville, then built APIs and chatbots for companies in Senegal.',
+      'You talk directly to the person who builds: no intermediary, and answers on WhatsApp.',
+    ],
     timeline: [
       ['March 2026 — now', 'Backend & AI Developer', 'Ashia Group · Dakar'],
       ['Jan. — March 2026', 'Backend & AI Developer', 'SOTILMA · Dakar'],
@@ -94,10 +97,10 @@ export const en: Dict = {
       ['2023 — 2024', 'Data Scientist / Data Analyst', 'DIV SOLUTION · Libreville'],
       ['2022 — 2023', 'Mechatronics assistant', 'Rwanda Plastic Industry · Kigali'],
     ],
-    term: { label: 'Career shown as a Git history', rows: ['feat: RAG chatbot in production · Ashia', 'feat: tender monitoring API', 'deploy: BayKat v1 · web + mobile', 'perf: +20 % data efficiency · DIV', 'feat(front): ActivityConnect v1', 'init: mechatronics · Kigali'], commit: 'your project', done: '✓  1 need → 1 solution in production', shipped: 'deployed · you save time' },
   },
+  testimonials: { kicker: 'Testimonials', title: 'What our clients say' },
   contact: {
-    kicker: '05 / Contact',
+    kicker: 'Contact',
     title: 'Let’s talk about your project',
     lead: 'An idea, an AI need, an API, a website? Write to us, we reply quickly.',
     whatsapp: 'Message on WhatsApp',

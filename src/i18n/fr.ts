@@ -1,13 +1,14 @@
 export const fr = {
   lang: 'fr',
   a11y: { toLight: 'Passer en mode clair', toDark: 'Passer en mode sombre', switchLang: 'EN — Switch to English', menu: 'Navigation principale', close: 'Fermer', skip: 'Aller au contenu' },
-  nav: { services: 'Services', projects: 'Réalisations', lab: 'Labo GitHub', journey: 'Parcours', contact: 'Contact', cta: 'Démarrer un projet' },
+  nav: { services: 'Services', projects: 'Réalisations', lab: 'Labo GitHub', journey: 'Qui nous sommes', contact: 'Contact', cta: 'Démarrer un projet' },
   tabs: { home: 'Accueil', services: 'Services', projects: 'Projets', lab: 'Labo', contact: 'Contact' },
   hero: {
     availability: 'Disponible — missions & postes',
-    titleA: 'De l’idée à la solution',
-    titleB: 'intelligente.',
-    lead: 'Nous concevons des API sécurisées, des chatbots IA et des pipelines de données qui tournent en production — et nous construisons désormais les interfaces qui vont avec.',
+    titleA: 'Chatbots, API et tableaux de bord',
+    titleB: 'qui tournent déjà en production.',
+    lead: 'Nous aidons les PME, ONG et startups de Dakar et d’ailleurs à gagner du temps : un chatbot qui répond à partir de vos documents, une API qui relie vos outils, un tableau de bord qui remplace le tableur. Nous construisons aussi le site ou l’application qui va avec.',
+    pay: 'Paiement par Wave, Orange Money ou virement',
     primary: 'Démarrer un projet',
     secondary: 'Voir les réalisations',
     role: 'Fondateur',
@@ -15,19 +16,18 @@ export const fr = {
   },
   stats: { prod: 'projets en production', frameworks: 'frameworks backend', countries: 'pays d’expérience', efficiency: 'd’efficacité data' },
   how: {
-    title: 'De votre besoin à la solution, en trois temps',
-    lead: 'Pas de jargon : nous partons de votre problème et nous vous montrons le résultat.',
+    title: 'Comment ça se passe',
+    lead: 'Un appel, un devis, puis vous suivez l’avancement chaque semaine.',
     steps: [
-      { k: '01 · Votre besoin', t: 'Vous nous dites ce qui bloque', d: 'Documents introuvables, tâches manuelles, données éparpillées : nous écoutons et nous mesurons le problème.' },
-      { k: '02 · Notre solution', t: 'Nous construisons, brique par brique', d: 'Maquette, développement, tests : vous voyez la solution avancer chaque semaine.' },
-      { k: '03 · Votre résultat', t: 'Vous mesurez le gain', d: 'Mise en production, suivi et chiffres clairs : temps gagné, erreurs évitées.' },
+      { t: 'Un appel gratuit de 30 minutes', d: 'Vous nous décrivez ce qui vous fait perdre du temps : documents introuvables, tâches recopiées à la main, chiffres éparpillés. Nous vous disons franchement si nous pouvons aider.' },
+      { t: 'Un devis ferme sous 48 h', d: 'Prix, planning et contenu par écrit. Vous payez en trois fois (40 % à la signature, 30 % à la validation de la maquette, 30 % à la mise en ligne), ou autrement si vous préférez.' },
+      { t: 'Vous voyez avancer, puis vous mesurez', d: 'Un point chaque semaine et un lien de test. À la mise en ligne, nous mesurons avec vous le temps gagné ou les erreurs évitées.' },
     ],
   },
   services: {
-    kicker: '01 / Services',
-    title: 'Votre besoin, notre solution',
-    lead: 'Nous partons de ce qui vous freine, et nous livrons une solution qui tourne déjà ailleurs, en production.',
-    need: 'Le besoin',
+    kicker: 'Services',
+    title: 'Ce que nous construisons',
+    lead: 'Des solutions qui tournent déjà chez des clients, pas des maquettes.',
     items: [
       { need: 'Des heures perdues à chercher dans vos documents.', title: 'Chatbots IA sur vos documents', desc: 'Interrogez vos guides, contrats et rapports en langage naturel, avec des réponses sourcées (RAG).', proof: 'En production : chatbot RH d’Ashia Group.' },
       { need: 'Vos outils ne se parlent pas, tout se saisit deux fois.', title: 'API & backends sur mesure', desc: 'API REST sécurisées (JWT, CORS), documentées avec Swagger et prêtes pour la production.', proof: 'NestJS, FastAPI : des API qui tournent en production.' },
@@ -38,7 +38,7 @@ export const fr = {
     ],
   },
   projects: {
-    kicker: '02 / Réalisations',
+    kicker: 'Réalisations',
     title: 'Des solutions qui tournent déjà',
     lead: 'Des projets livrés et utilisés au quotidien, à Dakar et ailleurs.',
     disclaimer: 'Interfaces illustrées à partir des projets livrés ; les données affichées sont des exemples.',
@@ -67,7 +67,7 @@ export const fr = {
     label: 'Démonstration animée : photo d’une feuille, diagnostic puis conseil d’irrigation',
   },
   lab: {
-    kicker: '03 / Labo GitHub',
+    kicker: 'Labo GitHub',
     title: 'Le code, en direct',
     lead: 'Notre activité GitHub et quelques dépôts publics. Les projets clients restent privés.',
     repos: 'dépôts publics',
@@ -82,9 +82,12 @@ export const fr = {
     contribOn: 'contributions le',
   },
   journey: {
-    kicker: '04 / Parcours',
-    title: 'De la mécatronique à l’IA',
-    lead: 'Trois pays, deux disciplines, une même obsession : automatiser ce qui peut l’être et rendre la donnée utile.',
+    kicker: 'Qui nous sommes',
+    title: 'Un studio à Dakar, un parcours entre trois pays',
+    about: [
+      'Commit·AI est le studio d’Anthony Mboumba Ikapi, ingénieur IA et backend installé à Dakar. Il a commencé par la mécatronique à Kigali, puis la data à Libreville, avant de construire des API et des chatbots pour des entreprises sénégalaises.',
+      'Vous parlez directement à la personne qui construit : pas d’intermédiaire, et une réponse sur WhatsApp.',
+    ],
     timeline: [
       ['Mars 2026 — auj.', 'Développeur Backend & IA', 'Ashia Group · Dakar'],
       ['Janv. — Mars 2026', 'Développeur Backend & IA', 'SOTILMA · Dakar'],
@@ -92,10 +95,10 @@ export const fr = {
       ['2023 — 2024', 'Data Scientist / Data Analyst', 'DIV SOLUTION · Libreville'],
       ['2022 — 2023', 'Assistant mécatronique', 'Rwanda Plastic Industry · Kigali'],
     ],
-    term: { label: 'Parcours présenté comme un historique Git', rows: ['feat: chatbot RAG en production · Ashia', 'feat: API veille d’appels d’offres', 'deploy: BayKat v1 · web + mobile', 'perf: +20 % efficacité data · DIV', 'feat(front): ActivityConnect v1', 'init: mécatronique · Kigali'], commit: 'votre projet', done: '✓  1 besoin → 1 solution en production', shipped: 'déployé · vous gagnez du temps' },
   },
+  testimonials: { kicker: 'Témoignages', title: 'Ce que disent nos clients' },
   contact: {
-    kicker: '05 / Contact',
+    kicker: 'Contact',
     title: 'Parlons de votre projet',
     lead: 'Une idée, un besoin en IA, une API, un site ? Écrivez-nous, nous vous répondons rapidement.',
     whatsapp: 'Écrire sur WhatsApp',

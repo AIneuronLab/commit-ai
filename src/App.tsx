@@ -8,6 +8,7 @@ import { Services } from './sections/Services';
 import { Projects } from './sections/Projects';
 import { Lab } from './sections/Lab';
 import { Journey } from './sections/Journey';
+import { Testimonials } from './sections/Testimonials';
 import { Contact, ContactSheet } from './sections/Contact';
 
 function Shell() {
@@ -24,6 +25,7 @@ function Shell() {
         <How />
         <Services />
         <Projects />
+        <Testimonials />
         <Lab />
         <Journey />
         <Contact />

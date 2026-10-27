@@ -16,6 +16,7 @@ node scripts/contrast.mjs   # vérifie le contraste (4,5:1) de tous les textes, 
 | Email, WhatsApp, LinkedIn, GitHub, chiffres du haut de page (« 10+ projets en production ») | `src/data/site.ts` |
 | Projets clients affichés (écrits à la main : rien n'est lu dans les dépôts privés) | `src/data/projects.ts` → `CLIENT_PROJECTS`, textes dans `src/i18n/` |
 | Dépôts GitHub publics du « Labo » | `src/data/projects.ts` → `FEATURED_REPOS` |
+| Citations de clients (la section n'apparaît que s'il y en a, avec leur accord) | `src/data/testimonials.ts` |
 | Tous les textes FR / EN | `src/i18n/fr.ts` et `src/i18n/en.ts` (l'anglais doit avoir la même forme que le français : TypeScript le vérifie) |
 | Couleurs | `src/index.css` (les jetons `--ca-*`), puis `node scripts/contrast.mjs` |
 
