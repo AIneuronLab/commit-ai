@@ -23,18 +23,22 @@ node scripts/contrast.mjs   # vérifie le contraste (4,5:1) de tous les textes, 
 
 `src/lib/github.ts` lit l'API GitHub publique **dans le navigateur du visiteur** quand la section « Labo » approche de l'écran, garde le résultat 1 h dans `localStorage`, et retombe sur les valeurs de `GITHUB_SNAPSHOT` si GitHub est injoignable. Le total de contributions (projets privés compris) et la carte d'activité viennent de `github-contributions-api.jogruber.de`, un service tiers : si vous préférez ne pas l'utiliser, retirez l'appel dans `fetchLive`.
 
-## Hébergement : Cloudflare Pages (gratuit)
+## Hébergement : Cloudflare Workers, fichiers statiques (gratuit)
 
-| Réglage Cloudflare Pages | Valeur |
+Le site est un Worker `commit-ai` qui ne sert que les fichiers de `dist/` (config dans `wrangler.jsonc`). Les requêtes vers les fichiers statiques sont gratuites et illimitées. Chaque `git push` sur `main` relance le build et le déploiement ; les autres branches reçoivent un aperçu.
+
+| Réglage (Workers Builds) | Valeur |
 |---|---|
 | Branche de production | `main` |
 | Commande de build | `npm run build` |
-| Dossier publié | `dist` |
-| Variables | `NODE_VERSION` = `22`, `VITE_WEB3FORMS_KEY` = ta clé Web3Forms |
+| Commande de déploiement | `npx wrangler deploy` |
+| Variables **de build** | `NODE_VERSION` = `22`, `VITE_WEB3FORMS_KEY` = clé Web3Forms |
 
-`public/_headers` règle le cache et les en-têtes de sécurité. Les requêtes vers les fichiers statiques sont gratuites et illimitées. Chaque branche ou pull request reçoit un aperçu `*.pages.dev`.
+Attention : `VITE_WEB3FORMS_KEY` doit être une variable de **build** (section *Build*, *Variables and secrets*), pas une variable du Worker : Vite l'intègre pendant la construction du site. Après l'avoir changée, relancer un build.
 
-Le domaine `commitai.dev` doit utiliser les serveurs de noms de Cloudflare (obligatoire pour un domaine nu sur Cloudflare). L'achat et le renouvellement restent chez Spaceship.
+`public/_headers` règle le cache et les en-têtes de sécurité.
+
+Le domaine `commitai.dev` est acheté chez Spaceship mais son DNS est géré par Cloudflare (serveurs de noms `*.ns.cloudflare.com`). Les domaines `commitai.dev` et `www.commitai.dev` sont ajoutés au Worker dans *Settings*, *Domains & Routes*, *Custom domain* ; Cloudflare crée les enregistrements et le certificat HTTPS.
 
 ## Formulaire de contact : Web3Forms
 
