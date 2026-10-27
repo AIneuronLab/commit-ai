@@ -10,7 +10,7 @@ export function HeroPortrait() {
   const reduce = useReducedMotion();
   return (
     <motion.figure
-      className="m-0 mx-auto w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[460px]"
+      className="m-0 mx-auto w-full max-w-[300px] sm:max-w-[360px] lg:max-w-[400px]"
       initial={reduce ? false : { opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: EASE_OUT }}
@@ -21,9 +21,9 @@ export function HeroPortrait() {
         width={540}
         height={660}
         fetchPriority="high"
-        className="aspect-[54/66] w-full rounded-[28px] border border-line object-cover object-[50%_12%] shadow-[0_30px_60px_-30px_rgba(0,0,0,.55)]"
+        className="aspect-square w-full rounded-full border-2 border-line-strong object-cover object-[50%_8%] shadow-[0_30px_60px_-30px_rgba(0,0,0,.55)]"
       />
-      <figcaption className="mt-4 flex items-center gap-3">
+      <figcaption className="mt-5 flex items-center justify-center gap-3">
         <LogoMark size={34} variant={mode} />
         <span className="flex flex-col leading-tight">
           <b className="text-[15px]">{SITE.owner}</b>
