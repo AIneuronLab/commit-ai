@@ -26,7 +26,7 @@ function Shell() {
       <TopBar onStart={open} />
       <main id="main">
         <Hero onStart={open} />
-        <Marquee label={t.hero.stackLabel} />
+        <Marquee label={t.hero.stackLabel} title={t.hero.stackTitle} />
         <How />
         <Services />
         <Projects />

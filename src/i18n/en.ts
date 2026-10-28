@@ -11,6 +11,7 @@ export const en: Dict = {
     titleB: 'already running in production.',
     lead: 'We help SMEs, NGOs and startups in Dakar and beyond save time: a chatbot that answers from your documents, an API that connects your tools, a dashboard that replaces the spreadsheet. We also build the website or app that goes with it.',
     stackLabel: 'Technologies we use',
+    stackTitle: 'Stack',
     corners: ['Chatbots & APIs', 'Dakar, Senegal', 'Open for projects'],
     primary: 'Start a project',
     secondary: 'See our work',

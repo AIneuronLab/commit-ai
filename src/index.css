@@ -147,14 +147,14 @@
 }
 
 /* technologies band */
-.marquee { overflow: hidden; padding-block: 1.1rem; }
-.marquee-track li { white-space: nowrap; }
-.marquee-track { display: flex; width: max-content; animation: ca-marquee 42s linear infinite; }
+.marquee { overflow: hidden; padding-block: 1rem; }
+.marquee-mask { -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { display: flex; width: max-content; animation: ca-marquee 36s linear infinite; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 @keyframes ca-marquee { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; width: auto; }
-  .marquee-track ul { flex-wrap: wrap; row-gap: 0.5rem; padding-left: 1.5rem; }
+  .marquee-track ul { flex-wrap: wrap; row-gap: 0.6rem; }
   .marquee-track ul[aria-hidden] { display: none; }
 }
 
