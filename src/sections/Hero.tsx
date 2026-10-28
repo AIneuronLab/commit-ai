@@ -9,7 +9,6 @@ import { SITE } from '../data/site';
 import { useApp } from '../i18n';
 
 const stat = (id: string) => SITE.stats.find((s) => s.id === id)!;
-const label = 'pointer-events-none absolute font-mono text-[12px] tracking-wide text-muted';
 
 export function Hero({ onStart }: { onStart: () => void }) {
   const { t } = useApp();
@@ -18,16 +17,9 @@ export function Hero({ onStart }: { onStart: () => void }) {
   const rise = (delay: number) => ({ initial: reduce ? false : { y: 16 }, animate: { y: 0 }, transition: { duration: 0.7, delay, ease: EASE_OUT } } as const);
   const prod = stat('prod');
   const countries = stat('countries');
-  const c = t.hero.corners;
   return (
     <section id="top" className="relative overflow-hidden bg-[radial-gradient(ellipse_60%_50%_at_80%_30%,var(--ca-hero-glow),transparent_70%)]">
       <span aria-hidden="true" className="grid-bg absolute inset-0 opacity-70" />
-      {/* corner labels, wide screens only */}
-      <span aria-hidden="true" className={`${label} top-5 left-6 hidden lg:block`}><i className="mr-2 not-italic text-accent">01.</i>{c[0]}</span>
-      <span aria-hidden="true" className={`${label} top-5 right-6 hidden lg:block`}><i className="mr-2 not-italic text-accent">02.</i>{c[1]}</span>
-      <span aria-hidden="true" className={`${label} bottom-5 left-6 hidden lg:block`}><i className="mr-2 not-italic text-accent">03.</i>{SITE.email}</span>
-      <span aria-hidden="true" className={`${label} right-6 bottom-5 hidden lg:block`}><i className="mr-2 not-italic text-accent">04.</i>{c[2]}</span>
-
       <div className="relative mx-auto grid max-w-[1200px] items-center gap-12 px-4 pt-8 pb-14 sm:px-6 lg:grid-cols-[1.15fr_.85fr] lg:gap-14 lg:pt-20 lg:pb-24">
         <div className="flex min-w-0 flex-col gap-6">
           <motion.div {...rise(0)} className="inline-flex items-center gap-2.5 self-start rounded-full border border-line px-3.5 py-2 font-mono text-[13px] text-soft">
