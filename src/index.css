@@ -145,3 +145,23 @@
   .snap-row { display: grid; overflow: visible; margin-inline: 0; padding-inline: 0; scroll-snap-type: none; }
   .snap-row > * { flex: initial; }
 }
+
+/* technologies band */
+.marquee { overflow: hidden; padding-block: 1.1rem; }
+.marquee-track li { white-space: nowrap; }
+.marquee-track { display: flex; width: max-content; animation: ca-marquee 42s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes ca-marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; width: auto; }
+  .marquee-track ul { flex-wrap: wrap; row-gap: 0.5rem; padding-left: 1.5rem; }
+  .marquee-track ul[aria-hidden] { display: none; }
+}
+
+/* swipeable row of cards (phones, tablets) */
+.hrow {
+  display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  overscroll-behavior-x: contain; margin-inline: -1rem; padding-inline: 1rem; scroll-padding-inline: 1rem;
+}
+.hrow::-webkit-scrollbar { display: none; }
+.hrow > * { scroll-snap-align: start; flex: none; }

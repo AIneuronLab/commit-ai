@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, useScroll } from 'motion/react';
+import { Magnetic } from './Magnetic';
 import { FolderKanban, GitBranch, House, Layers, MessageCircle, Moon, Sun } from 'lucide-react';
 import { Logo } from '../brand/Logo';
 import { useApp } from '../i18n';
@@ -26,6 +27,7 @@ const buzz = () => { try { navigator.vibrate?.(8); } catch { /* not supported */
 
 export function TopBar({ onStart }: { onStart: () => void }) {
   const { t, lang, mode, toggleLang, toggleMode } = useApp();
+  const { scrollYProgress } = useScroll();
   const links: [string, string][] = [['#services', t.nav.services], ['#projects', t.nav.projects], ['#lab', t.nav.lab], ['#journey', t.nav.journey], ['#contact', t.nav.contact]];
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-nav pt-[env(safe-area-inset-top,0px)] backdrop-blur-xl">
@@ -41,9 +43,10 @@ export function TopBar({ onStart }: { onStart: () => void }) {
           <button onClick={toggleMode} aria-label={mode === 'dark' ? t.a11y.toLight : t.a11y.toDark} className="flex size-11 items-center justify-center rounded-full border border-line text-soft transition hover:border-line-strong">
             {mode === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
           </button>
-          <button onClick={onStart} className="hidden min-h-11 items-center rounded-full bg-brand-deep px-5 text-[15px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand lg:inline-flex">{t.nav.cta}</button>
+          <div className="hidden lg:block"><Magnetic className="inline-flex"><button onClick={onStart} className="min-h-11 rounded-full bg-brand-deep px-5 text-[15px] font-semibold text-white transition hover:bg-brand">{t.nav.cta}</button></Magnetic></div>
         </div>
       </nav>
+      <motion.span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[2px] origin-left bg-accent" style={{ scaleX: scrollYProgress }} />
     </header>
   );
 }

@@ -1,11 +1,12 @@
-import type { ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { Check } from 'lucide-react';
-import { SectionHead } from '../components/ui';
+import { H2, Kicker, SectionHead } from '../components/ui';
 import { serviceIcons } from '../icons/ServiceIcons';
-import { Reveal } from '../motion';
 import { BayKatDemo } from '../mockups/BayKatDemo';
 import { BrowserFrame, ChatMock, DashboardMock } from '../mockups/Mockups';
 import { CLIENT_PROJECTS, type ClientProjectId } from '../data/projects';
+import { DESKTOP_MOTION, useMedia } from '../lib/useMedia';
 import { useApp } from '../i18n';
 
 function Text({ id, kicker }: { id: ClientProjectId; kicker: string }) {
@@ -22,54 +23,88 @@ function Text({ id, kicker }: { id: ClientProjectId; kicker: string }) {
   );
 }
 
-const Slot = ({ className = '', children }: { className?: string; children: ReactNode }) => (
-  <li className={`flex ${className}`}>{children}</li>
-);
+/** Same card in both layouts: stacked on phones, text beside the visual on large screens. */
+function Card({ id, kicker, tone, children }: { id: ClientProjectId; kicker: string; tone: string; children: ReactNode }) {
+  return (
+    <article className={`${tone} flex w-[90%] shrink-0 flex-col gap-7 rounded-[28px] border border-line p-6 sm:w-[78%] sm:p-9 lg:grid lg:h-[min(620px,calc(100vh-9rem))] lg:w-[min(960px,72vw)] lg:grid-cols-[300px_1fr] lg:items-center lg:gap-10`}>
+      <Text id={id} kicker={kicker} />
+      <div className="flex min-h-0 items-center justify-center">{children}</div>
+    </article>
+  );
+}
 
-export function Projects() {
-  const { t, mode } = useApp();
+function useCards() {
+  const { mode } = useApp();
   const meta = Object.fromEntries(CLIENT_PROJECTS.map((p) => [p.id, `${p.client} · ${p.year}`])) as Record<ClientProjectId, string>;
   const WebApp = serviceIcons.webApp;
+  return [
+    <Card key="tenders" id="tenders" kicker={meta.tenders} tone="grad-card-a">
+      <BrowserFrame url="veille.ashia-group.com" className="h-[360px] w-full lg:h-[min(420px,100%)]"><DashboardMock /></BrowserFrame>
+    </Card>,
+    <Card key="hrbot" id="hrbot" kicker={meta.hrbot} tone="grad-card-a">
+      <BrowserFrame url="rh.ashia-group.com/assistant" className="h-[360px] w-full lg:h-[min(420px,100%)]"><ChatMock /></BrowserFrame>
+    </Card>,
+    <Card key="baykat" id="baykat" kicker={meta.baykat} tone="grad-card-b">
+      <BayKatDemo frameClass="lg:h-[min(520px,calc(100vh-15rem))] lg:w-auto" />
+    </Card>,
+    <Card key="activity" id="activity" kicker={meta.activity} tone="grad-card-a">
+      <span className="flex size-32 items-center justify-center rounded-[36px] border border-line-strong bg-card-alt sm:size-40">
+        <WebApp className="size-24 sm:size-28" ink={mode === 'dark' ? '#EEF5FD' : '#0B1730'} soft="rgba(79,195,247,.22)" />
+      </span>
+    </Card>,
+  ];
+}
+
+/** Large screens with a mouse: the section is pinned and vertical scroll slides the cards sideways. */
+function Pinned({ cards }: { cards: ReactNode[] }) {
+  const { t } = useApp();
+  const section = useRef<HTMLElement>(null);
+  const track = useRef<HTMLDivElement>(null);
+  const [dist, setDist] = useState(0);
+  const { scrollYProgress } = useScroll({ target: section, offset: ['start start', 'end end'] });
+  const x = useTransform(scrollYProgress, [0, 1], [0, -dist]);
+
+  useEffect(() => {
+    const el = track.current;
+    if (!el) return;
+    const measure = () => setDist(Math.max(0, el.scrollWidth - window.innerWidth));
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    window.addEventListener('resize', measure);
+    return () => { ro.disconnect(); window.removeEventListener('resize', measure); };
+  }, []);
+
+  return (
+    <section id="projects" ref={section} className="relative border-t border-line bg-[radial-gradient(ellipse_50%_40%_at_80%_10%,var(--ca-hero-glow),transparent_70%)]" style={{ height: `calc(100vh + ${dist}px)` }}>
+      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+        <motion.div ref={track} style={{ x }} className="flex w-max items-center gap-8 px-[max(1.5rem,calc((100vw-1200px)/2))]">
+          <div className="flex w-[360px] shrink-0 flex-col gap-4 pr-6">
+            <Kicker>{t.projects.kicker}</Kicker>
+            <H2 className="lg:text-[44px]">{t.projects.title}</H2>
+            <p className="m-0 text-[17px] text-muted">{t.projects.lead}</p>
+            <p className="m-0 text-[13px] text-muted">{t.projects.disclaimer}</p>
+          </div>
+          {cards}
+        </motion.div>
+        <div aria-hidden="true" className="absolute inset-x-[max(1.5rem,calc((100vw-1200px)/2))] bottom-8 h-[2px] bg-line">
+          <motion.span className="block h-full origin-left bg-accent" style={{ scaleX: scrollYProgress }} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Projects() {
+  const { t } = useApp();
+  const desktop = useMedia(DESKTOP_MOTION);
+  const cards = useCards();
+  if (desktop) return <Pinned cards={cards} />;
   return (
     <section id="projects" className="overflow-hidden border-t border-line bg-[radial-gradient(ellipse_50%_40%_at_80%_10%,var(--ca-hero-glow),transparent_70%)]">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-4 py-14 sm:px-6 lg:gap-12 lg:py-24">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-4 py-14 sm:px-6 lg:py-20">
         <SectionHead kicker={t.projects.kicker} title={t.projects.title} lead={t.projects.lead} />
-        <ul className="snap-row m-0 list-none p-0 lg:grid-cols-2 lg:gap-7">
-          <Slot className="w-[90%] sm:w-[78%] lg:col-span-2 lg:w-auto">
-            <Reveal className="w-full">
-              <article className="grad-card-a grid gap-8 rounded-[28px] border border-line p-6 sm:p-9 lg:grid-cols-[340px_1fr] lg:items-center lg:gap-12">
-                <Text id="tenders" kicker={meta.tenders} />
-                <BrowserFrame url="veille.ashia-group.com" className="h-[400px] sm:h-[480px]"><DashboardMock /></BrowserFrame>
-              </article>
-            </Reveal>
-          </Slot>
-          <Slot className="w-[90%] sm:w-[78%] lg:w-auto">
-            <Reveal className="w-full">
-              <article className="grad-card-a flex h-full flex-col gap-7 rounded-[28px] border border-line p-6 sm:p-9">
-                <Text id="hrbot" kicker={meta.hrbot} />
-                <BrowserFrame url="rh.ashia-group.com/assistant" className="my-auto h-[360px]"><ChatMock /></BrowserFrame>
-              </article>
-            </Reveal>
-          </Slot>
-          <Slot className="w-[90%] sm:w-[78%] lg:w-auto">
-            <Reveal className="w-full" delay={0.08}>
-              <article className="grad-card-b flex h-full flex-col gap-7 rounded-[28px] border border-line p-6 sm:p-9">
-                <Text id="baykat" kicker={meta.baykat} />
-                <div className="mt-auto flex justify-center"><BayKatDemo /></div>
-              </article>
-            </Reveal>
-          </Slot>
-          <Slot className="w-[90%] sm:w-[78%] lg:col-span-2 lg:w-auto">
-            <Reveal className="w-full">
-              <article className="grad-card-a flex flex-col items-start gap-6 rounded-[28px] border border-line p-6 sm:p-9 lg:flex-row lg:items-center lg:gap-12">
-                <span className="flex size-24 shrink-0 items-center justify-center rounded-[28px] border border-line-strong bg-card-alt">
-                  <WebApp className="size-18" ink={mode === 'dark' ? '#EEF5FD' : '#0B1730'} soft="rgba(79,195,247,.22)" />
-                </span>
-                <Text id="activity" kicker={meta.activity} />
-              </article>
-            </Reveal>
-          </Slot>
-        </ul>
+        <div className="hrow">{cards}</div>
         <p className="m-0 text-[13px] text-muted">{t.projects.disclaimer}</p>
       </div>
     </section>

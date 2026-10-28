@@ -26,7 +26,7 @@ export function Sheet({ open, onClose, title, children }: { open: boolean; onClo
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center md:items-center">
+        <div data-lenis-prevent className="fixed inset-0 z-50 flex items-end justify-center md:items-center">
           <motion.button
             aria-label={t.a11y.close}
             tabIndex={-1}

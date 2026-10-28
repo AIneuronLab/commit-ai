@@ -20,6 +20,14 @@ node scripts/contrast.mjs   # vérifie le contraste (4,5:1) de tous les textes, 
 | Tous les textes FR / EN | `src/i18n/fr.ts` et `src/i18n/en.ts` (l'anglais doit avoir la même forme que le français : TypeScript le vérifie) |
 | Couleurs | `src/index.css` (les jetons `--ca-*`), puis `node scripts/contrast.mjs` |
 
+## Mouvement
+
+- **Partout** : titres qui se révèlent mot par mot (`RevealText`), bande de technologies (`Marquee`), halo de points autour du portrait (`DotSphere`, canvas 2D), barre de progression du défilement.
+- **Grands écrans avec une souris seulement** (`DESKTOP_MOTION` dans `src/lib/useMedia.ts`) : défilement fluide (Lenis, `useSmoothScroll`), section Réalisations épinglée qui défile à l'horizontale, curseur qui réagit, boutons magnétiques.
+- **Téléphones et tablettes** : défilement natif, cartes à balayer.
+- **« Réduire les animations »** activé dans le système : plus aucun mouvement (sphère figée, bande repliée, titres affichés d'un coup).
+- Le texte du haut de page n'est jamais invisible au premier affichage (vitesse). Objectif : Lighthouse mobile ≥ 90 ; mesuré à 100.
+
 ## Données GitHub (sans coût Netlify)
 
 `src/lib/github.ts` lit l'API GitHub publique **dans le navigateur du visiteur** quand la section « Labo » approche de l'écran, garde le résultat 1 h dans `localStorage`, et retombe sur les valeurs de `GITHUB_SNAPSHOT` si GitHub est injoignable. Le total de contributions (projets privés compris) et la carte d'activité viennent de `github-contributions-api.jogruber.de`, un service tiers : si vous préférez ne pas l'utiliser, retirez l'appel dans `fetchLive`.

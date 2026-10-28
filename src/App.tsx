@@ -2,6 +2,9 @@ import { useCallback, useState } from 'react';
 import { MotionConfig } from 'motion/react';
 import { AppProvider, useApp } from './i18n';
 import { TabBar, TopBar } from './components/Nav';
+import { Cursor } from './components/Cursor';
+import { Marquee } from './components/Marquee';
+import { useSmoothScroll } from './lib/useSmoothScroll';
 import { Hero } from './sections/Hero';
 import { How } from './sections/How';
 import { Services } from './sections/Services';
@@ -13,6 +16,7 @@ import { Contact, ContactSheet } from './sections/Contact';
 
 function Shell() {
   const { t } = useApp();
+  useSmoothScroll();
   const [sheet, setSheet] = useState(false);
   const open = useCallback(() => setSheet(true), []);
   const close = useCallback(() => setSheet(false), []);
@@ -22,6 +26,7 @@ function Shell() {
       <TopBar onStart={open} />
       <main id="main">
         <Hero onStart={open} />
+        <Marquee label={t.hero.stackLabel} />
         <How />
         <Services />
         <Projects />
@@ -31,6 +36,7 @@ function Shell() {
         <Contact />
       </main>
       <TabBar />
+      <Cursor />
       <ContactSheet open={sheet} onClose={close} />
     </>
   );

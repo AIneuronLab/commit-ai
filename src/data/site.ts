@@ -16,5 +16,8 @@ export const SITE = {
   ],
 } as const;
 
+/** Technologies named on the site (shown in the drifting band). */
+export const STACK = ['FastAPI', 'NestJS', 'Spring Boot', 'Python', 'React', 'n8n', 'RAG', 'LLM', 'Swagger'] as const;
+
 export const waLink = (text?: string) =>
   `https://wa.me/${SITE.whatsapp.number}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
