@@ -14,6 +14,9 @@ export const CLIENT_PROJECTS: { id: ClientProjectId; client: string; year: strin
   { id: 'activity', client: 'ActivityConnect', year: '2026' },
 ];
 
+/** The live ActivityConnect booking site, linked from its card. */
+export const SITE_ACTIVITY = { host: 'activityconnect.commitai.dev', url: 'https://activityconnect.commitai.dev' };
+
 export type RepoFallback = { language: string | null; pushedAt: string };
 
 export const FEATURED_REPOS: { name: string; fallback: RepoFallback }[] = [

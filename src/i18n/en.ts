@@ -45,6 +45,8 @@ export const en: Dict = {
     title: 'Solutions already running',
     lead: 'Delivered projects used every day, in Dakar and beyond.',
     disclaimer: 'Interfaces illustrated from delivered projects; the data shown are examples.',
+    visit: 'Visit the live site',
+    activityAlt: 'Screenshot of the ActivityConnect website: a game night and the next date to book',
     items: {
       tenders: { title: 'Tender monitoring', desc: 'Public tenders are collected daily, sorted by AI and gathered in a dashboard.', result: 'In production since April 2026', note: '' },
       hrbot: { title: 'HR chatbot on documents', desc: 'Teams ask their questions and get an answer with the source page.', result: '88-page HR guide you can query', note: '' },

@@ -43,6 +43,8 @@ export const fr = {
     title: 'Des solutions qui tournent déjà',
     lead: 'Des projets livrés et utilisés au quotidien, à Dakar et ailleurs.',
     disclaimer: 'Interfaces illustrées à partir des projets livrés ; les données affichées sont des exemples.',
+    visit: 'Voir le site en ligne',
+    activityAlt: 'Capture du site ActivityConnect : une soirée jeux et la prochaine date à réserver',
     items: {
       tenders: { title: 'Veille des appels d’offres', desc: 'Les offres publiques sont collectées chaque jour, triées par l’IA et réunies dans un tableau de bord.', result: 'En production depuis avril 2026', note: '' },
       hrbot: { title: 'Chatbot RH sur documents', desc: 'Les équipes posent leurs questions et reçoivent une réponse avec la page source.', result: 'Guide RH de 88 pages interrogeable', note: '' },

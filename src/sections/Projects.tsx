@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { Check } from 'lucide-react';
+import { ArrowUpRight, Check } from 'lucide-react';
 import { H2, Kicker, SectionHead } from '../components/ui';
-import { serviceIcons } from '../icons/ServiceIcons';
 import { BayKatDemo } from '../mockups/BayKatDemo';
 import { BrowserFrame, ChatMock, DashboardMock } from '../mockups/Mockups';
 import { CLIENT_PROJECTS, type ClientProjectId } from '../data/projects';
 import { DESKTOP_MOTION, useMedia } from '../lib/useMedia';
+import { SITE_ACTIVITY } from '../data/projects';
 import { useApp } from '../i18n';
 
 function Text({ id, kicker }: { id: ClientProjectId; kicker: string }) {
@@ -19,6 +19,11 @@ function Text({ id, kicker }: { id: ClientProjectId; kicker: string }) {
       <p className="m-0 text-[17px] text-muted">{p.desc}</p>
       <p className="tint-ok m-0 mt-1 inline-flex items-center gap-2 self-start rounded-full border px-3.5 py-2 text-[15px] text-ok"><Check className="size-4" />{p.result}</p>
       {p.note && <p className="m-0 text-[14px] text-muted">{p.note}</p>}
+      {id === 'activity' && (
+        <a href={SITE_ACTIVITY.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 self-start text-[15px] font-semibold text-accent hover:underline">
+          {t.projects.visit}<ArrowUpRight className="size-4" />
+        </a>
+      )}
     </div>
   );
 }
@@ -34,9 +39,8 @@ function Card({ id, kicker, tone, children }: { id: ClientProjectId; kicker: str
 }
 
 function useCards() {
-  const { mode } = useApp();
+  const { t } = useApp();
   const meta = Object.fromEntries(CLIENT_PROJECTS.map((p) => [p.id, `${p.client} · ${p.year}`])) as Record<ClientProjectId, string>;
-  const WebApp = serviceIcons.webApp;
   return [
     <Card key="tenders" id="tenders" kicker={meta.tenders} tone="grad-card-a">
       <BrowserFrame url="veille.ashia-group.com" className="h-[360px] w-full lg:h-[min(420px,100%)]"><DashboardMock /></BrowserFrame>
@@ -48,9 +52,11 @@ function useCards() {
       <BayKatDemo />
     </Card>,
     <Card key="activity" id="activity" kicker={meta.activity} tone="grad-card-a">
-      <span className="flex size-32 items-center justify-center rounded-[36px] border border-line-strong bg-card-alt sm:size-40">
-        <WebApp className="size-24 sm:size-28" ink={mode === 'dark' ? '#EEF5FD' : '#0B1730'} soft="rgba(79,195,247,.22)" />
-      </span>
+      <a href={SITE_ACTIVITY.url} target="_blank" rel="noopener noreferrer" aria-label={`${t.projects.items.activity.title} — ${t.projects.visit}`} className="block w-full">
+        <BrowserFrame url={SITE_ACTIVITY.host} className="w-full">
+          <img src="/activityconnect.webp" width={765} height={575} loading="lazy" alt={t.projects.activityAlt} className="block h-auto w-full" />
+        </BrowserFrame>
+      </a>
     </Card>,
   ];
 }
