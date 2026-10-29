@@ -5,37 +5,44 @@ export const fr = {
   tabs: { home: 'Accueil', services: 'Services', projects: 'Projets', lab: 'Labo', contact: 'Contact' },
   hero: {
     availability: 'Disponible — missions & postes',
-    titleA: 'Des outils qui font gagner',
-    titleB: 'des heures à votre équipe.',
-    lead: 'Nous aidons les PME, ONG et startups de Dakar et d’ailleurs à gagner du temps : un chatbot qui répond à partir de vos documents, une API qui relie vos outils, un tableau de bord qui remplace le tableur. Nous construisons aussi le site ou l’application qui va avec.',
+    titleA: 'Nous',
+    words: ['automatisons', 'développons', 'déployons'],
+    titleB: 'vos outils métier.',
+    lead: 'Automatisation, développement web et mobile, IA : nous construisons ce qui fait gagner des heures aux PME, ONG et startups de Dakar et d’ailleurs, du premier appel à la mise en ligne.',
     stackLabel: 'Technologies que nous utilisons',
     stackTitle: 'Technologies',
     primary: 'Démarrer un projet',
     secondary: 'Voir les réalisations',
-    role: 'Fondateur',
-    portraitAlt: 'Portrait d’Anthony Mboumba Ikapi, fondateur de Commit·AI',
+    flow: {
+      label: 'Schéma : WhatsApp, e-mails, documents, formulaires et paiements entrent dans Commit·AI et ressortent en site web, application mobile, API ou rapports automatiques.',
+      inLabel: 'Ce qui entre',
+      outLabel: 'Ce qui sort',
+      inputs: ['WhatsApp', 'E-mails', 'Documents', 'Formulaires', 'Paiements Wave'],
+      hub: 'Commit·AI',
+      hubSub: 'automatisation · IA',
+      outputs: ['Site web', 'Application mobile', 'API', 'Rapports automatiques'],
+    },
   },
-  stats: { prod: 'projets en production', frameworks: 'frameworks backend', countries: 'pays d’expérience', efficiency: 'd’efficacité data' },
+  stats: { prod: 'projets en production', frameworks: 'frameworks backend', countries: 'pays d’expérience', efficiency: 'd’efficacité data', quote: 'pour un devis ferme', call: 'd’appel gratuit' },
   how: {
+    kicker: 'Méthode',
     title: 'Comment ça se passe',
     lead: 'Un appel, un devis, puis vous suivez l’avancement chaque semaine.',
     steps: [
-      { t: 'Un appel gratuit de 30 minutes', d: 'Vous nous décrivez ce qui vous fait perdre du temps : documents introuvables, tâches recopiées à la main, chiffres éparpillés. Nous vous disons franchement si nous pouvons aider.' },
-      { t: 'Un devis ferme sous 48 h', d: 'Prix, planning et contenu par écrit. Vous payez en trois fois (40 % à la signature, 30 % à la validation de la maquette, 30 % à la mise en ligne), ou autrement si vous préférez.' },
-      { t: 'Vous voyez avancer, puis vous mesurez', d: 'Un point chaque semaine et un lien de test. À la mise en ligne, nous mesurons avec vous le temps gagné ou les erreurs évitées.' },
+      { tag: '30 min', t: 'Un appel gratuit de 30 minutes', d: 'Vous nous décrivez ce qui vous fait perdre du temps : documents introuvables, tâches recopiées à la main, chiffres éparpillés. Nous vous disons franchement si nous pouvons aider.' },
+      { tag: '48 h', t: 'Un devis ferme sous 48 h', d: 'Prix, planning et contenu par écrit. Vous payez en trois fois (40 % à la signature, 30 % à la validation de la maquette, 30 % à la mise en ligne), ou autrement si vous préférez.' },
+      { tag: 'chaque semaine', t: 'Vous voyez avancer, puis vous mesurez', d: 'Un point chaque semaine et un lien de test. À la mise en ligne, nous mesurons avec vous le temps gagné ou les erreurs évitées.' },
     ],
   },
   services: {
     kicker: 'Services',
     title: 'Ce que nous construisons',
-    lead: 'Des solutions qui tournent déjà chez des clients, pas des maquettes.',
+    lead: 'Quatre métiers, une seule équipe : du premier script à l’application en ligne.',
     items: [
-      { need: 'Des heures perdues à chercher dans vos documents.', title: 'Chatbots IA sur vos documents', desc: 'Interrogez vos guides, contrats et rapports en langage naturel, avec des réponses sourcées (RAG).', proof: 'En production : chatbot RH d’Ashia Group.' },
-      { need: 'Vos outils ne se parlent pas, tout se saisit deux fois.', title: 'API & backends sur mesure', desc: 'API REST sécurisées (JWT, CORS), documentées avec Swagger et prêtes pour la production.', proof: 'NestJS, FastAPI : des API qui tournent en production.' },
-      { need: 'Des tâches répétitives faites à la main chaque jour.', title: 'Automatisation & collecte de données', desc: 'Scraping, pipelines d’ingestion et tâches planifiées qui suppriment le travail manuel.', proof: 'Veille des appels d’offres automatisée depuis avril 2026.' },
-      { need: 'Des données éparpillées, aucune vue claire pour décider.', title: 'Tableaux de bord & analyse', desc: 'Des KPI clairs et des rapports automatisés pour décider plus vite.', proof: '+20 % d’efficacité data chez DIV SOLUTION.' },
-      { need: 'Vous voulez l’IA, mais sans risque ni usine à gaz.', title: 'Modèles d’IA', desc: 'Vision par ordinateur, prédiction et LLM intégrés directement à vos applications.', proof: 'BayKat : vision et prédiction, sur web et mobile.' },
-      { need: 'Pas de site, ou un site qui ne fait ni vendre ni payer.', title: 'Sites & applications web', desc: 'Des interfaces modernes et rapides, connectées à votre backend et à vos paiements.', proof: 'ActivityConnect : réservations et paiement Wave.' },
+      { title: 'Automatisation & IA', desc: 'Collecte de données, workflows qui suppriment les tâches répétitives, chatbots qui répondent à partir de vos documents, modèles de vision et de prédiction intégrés à vos outils.', tags: ['n8n', 'Python', 'RAG', 'LLM'], proof: 'En production : veille d’appels d’offres automatisée et chatbot RH chez Ashia Group.' },
+      { title: 'Sites & applications web', desc: 'Des interfaces rapides, connectées à votre backend et à vos paiements : site vitrine, réservation en ligne, espace client.', tags: ['React', 'Wave', 'SEO'], proof: 'ActivityConnect : réservation en ligne et paiement Wave.' },
+      { title: 'Applications mobiles', desc: 'Des applications pour iOS et Android qui servent sur le terrain, même avec une connexion limitée.', tags: ['iOS', 'Android'], proof: 'BayKat : diagnostic par photo, sur web et mobile.' },
+      { title: 'Backend & API', desc: 'API REST sécurisées (JWT, CORS), documentées avec Swagger, qui relient vos outils entre eux et tiennent la charge en production.', tags: ['FastAPI', 'NestJS', 'Spring Boot', 'Swagger'], proof: 'Des API NestJS et FastAPI tournent en production.' },
     ],
   },
   projects: {
@@ -45,16 +52,16 @@ export const fr = {
     disclaimer: 'Interfaces illustrées à partir des projets livrés ; les données affichées sont des exemples.',
     visit: 'Voir le site en ligne',
     activityAlt: 'Capture du site ActivityConnect : une soirée jeux et la prochaine date à réserver',
+    flows: {
+      tenders: [['Source', 'Portails d’appels d’offres publics'], ['IA', 'Tri et résumé des offres'], ['Sortie', 'Alerte chaque matin à l’équipe']],
+      hrbot: [['Source', 'Guide RH de 88 pages'], ['RAG', 'Recherche dans le texte'], ['Sortie', 'Réponse avec la page source']],
+    },
     items: {
-      tenders: { title: 'Veille des appels d’offres', desc: 'Les offres publiques sont collectées chaque jour, triées par l’IA et réunies dans un tableau de bord.', result: 'En production depuis avril 2026', note: '' },
+      tenders: { title: 'Veille des appels d’offres', desc: 'Les offres publiques sont collectées chaque jour, triées par l’IA et envoyées à l’équipe commerciale.', result: 'En production depuis avril 2026', note: '' },
       hrbot: { title: 'Chatbot RH sur documents', desc: 'Les équipes posent leurs questions et reçoivent une réponse avec la page source.', result: 'Guide RH de 88 pages interrogeable', note: '' },
       baykat: { title: 'BayKat, l’agronome dans la poche', desc: 'Une photo de la feuille suffit : diagnostic de la maladie et conseil d’irrigation.', result: 'Sur web et mobile', note: 'Présenté avec l’accord de SOTILMA.' },
       activity: { title: 'ActivityConnect', desc: 'Site web de réservation d’activités en ligne : le client choisit son créneau et paie par Wave.', result: 'Réservation en ligne et paiement Wave', note: '' },
     },
-  },
-  mock: {
-    dash: { title: 'Veille des appels d’offres', updated: 'mis à jour il y a 4 min', collected: 'Offres collectées', today: 'aujourd’hui', relevant: 'Pertinentes', filtered: 'filtrées par IA', saved: 'Temps gagné', perWeek: 'par semaine', perMonth: 'Offres par mois', latest: 'Dernières offres', rows: [['Système d’information RH', 'Ministère · Dakar', 'Pertinent'], ['Plateforme e-learning', 'ONG · Thiès', 'Pertinent'], ['Maintenance réseau', 'Port autonome', 'À étudier'], ['Chatbot service client', 'Banque · Dakar', 'Nouveau']] },
-    chat: { title: 'Assistant RH', sources: 'SOURCES', synced: 'Drive synchronisé', q: 'Combien de jours de congé après 2 ans d’ancienneté ?', a1: 'Après 2 ans, vous avez droit à', a2: '26 jours ouvrables', a3: 'par an, plus 1 jour par tranche de 5 ans.', ask: 'Posez votre question…', contracts: 'Contrats 2026', procedures: 'Procédures.docx', guide: 'Guide RH.pdf', page: 'Guide RH · p. 34' },
   },
   baykat: {
     online: 'IA en ligne',
@@ -86,6 +93,10 @@ export const fr = {
   },
   journey: {
     kicker: 'Qui nous sommes',
+    strip: '14.7167° N, 17.4677° O · Dakar, Sénégal',
+    stripAlt: 'Passerelle piétonne au coucher du soleil à Dakar',
+    role: 'Fondateur',
+    portraitAlt: 'Portrait d’Anthony Mboumba Ikapi, fondateur de Commit·AI',
     title: 'Un studio à Dakar, un parcours entre trois pays',
     about: [
       'Commit·AI est le studio d’Anthony Mboumba Ikapi, ingénieur IA et backend installé à Dakar. Il a commencé par la mécatronique à Kigali, puis la data à Libreville, avant de construire des API et des chatbots pour des entreprises sénégalaises.',
@@ -113,7 +124,7 @@ export const fr = {
     form: { title: 'Ou laissez un message', name: 'Votre nom', email: 'Votre email', message: 'Votre besoin en quelques lignes', send: 'Envoyer', sending: 'Envoi…', mailto: 'Votre application de messagerie s’ouvre : envoyez le message pour terminer.', sent: 'Merci ! Votre message est bien parti, nous vous répondons rapidement.', error: 'Envoi impossible pour le moment. Écrivez-nous sur WhatsApp ou par email.' },
     sheet: { title: 'Démarrer un projet', lead: 'Choisissez le moyen le plus simple pour vous.', form: 'Laisser un message' },
   },
-  footer: { copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Conçu à Dakar', top: 'Haut de page' },
+  footer: { photos: 'Photos de Dakar : Eyelit Studio et Bamby Diagne, via Unsplash.', copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Conçu à Dakar', top: 'Haut de page' },
 };
 
 export type Dict = typeof fr;

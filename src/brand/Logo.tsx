@@ -107,7 +107,7 @@ export function Logo({ size = 36, variant = 'dark', animated = false, className 
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <LogoMark size={size} variant={variant} animated={animated} />
       <span
-        className={`font-display font-bold tracking-tight ${variant === 'dark' ? 'text-white' : 'text-ink'}`}
+        className={`font-logo font-bold tracking-tight ${variant === 'dark' ? 'text-white' : 'text-ink'}`}
         style={{ fontSize: size * 0.56 }}
       >
         Commit<span className="text-brand">·AI</span>

@@ -31,22 +31,22 @@ export function Lab() {
   const near = useInView(host, { once: true, margin: '600px 0px' });
   const { data, live, loading } = useGithub(near);
   return (
-    <section id="lab" ref={host} className="border-t border-line bg-bg-alt">
+    <section id="lab" ref={host} className="border-t border-line bg-bg-alt/70">
       <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-4 py-14 sm:px-6 lg:gap-12 lg:py-24">
-        <SectionHead kicker={t.lab.kicker} title={t.lab.title} lead={t.lab.lead} />
+        <SectionHead index="04" kicker={t.lab.kicker} title={t.lab.title} lead={t.lab.lead} />
 
         <Reveal className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-1 lg:gap-5">
-            <div className="flex flex-col gap-1 rounded-2xl border border-line bg-card p-5">
+            <div className="flex flex-col gap-1 rounded-lg border border-line bg-card p-5">
               <b className="font-display text-4xl tabular-nums sm:text-5xl"><CountUp to={data.publicRepos} /></b>
               <span className="text-[14px] text-muted">{t.lab.repos}</span>
             </div>
-            <div className="flex flex-col gap-1 rounded-2xl border border-line bg-card p-5">
+            <div className="flex flex-col gap-1 rounded-lg border border-line bg-card p-5">
               <b className="font-display text-4xl text-accent tabular-nums sm:text-5xl"><CountUp to={data.contributions} /></b>
               <span className="text-[14px] text-muted">{t.lab.contributions}</span>
             </div>
           </div>
-          <div className="flex flex-col gap-4 rounded-2xl border border-line bg-card p-5 sm:p-6">
+          <div className="flex flex-col gap-4 rounded-lg border border-line bg-card p-5 sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="text-[15px] font-medium">{t.lab.heat}</span>
               <span className={`inline-flex items-center gap-2 font-mono text-[12px] ${live ? 'text-ok' : 'text-muted'}`}>
@@ -67,7 +67,7 @@ export function Lab() {
           {data.repos.map((r, i) => (
             <li key={r.name} className="flex w-[78%] sm:w-[45%] lg:w-auto">
               <Reveal delay={(i % 3) * 0.07} className="w-full">
-                <a href={r.url} target="_blank" rel="noopener noreferrer" className="group flex h-full min-h-36 flex-col gap-3 rounded-2xl border border-line bg-card p-5 transition hover:-translate-y-1 hover:border-line-strong">
+                <a href={r.url} target="_blank" rel="noopener noreferrer" className="group flex h-full min-h-36 flex-col gap-3 rounded-lg border border-line bg-card p-5 transition hover:-translate-y-1 hover:border-line-strong">
                   <span className="flex items-start justify-between gap-3">
                     <b className="font-mono text-[15px] break-all">{r.name}</b>
                     <ArrowUpRight className="size-5 shrink-0 text-muted transition group-hover:text-accent" aria-hidden="true" />
@@ -83,7 +83,7 @@ export function Lab() {
           ))}
         </ul>
 
-        <a href={SITE.github.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 self-start rounded-full border border-line-strong px-6 font-medium text-fg transition hover:-translate-y-0.5 hover:border-brand-azure">
+        <a href={SITE.github.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 self-start rounded-md border border-line-strong px-5 font-medium text-fg transition hover:-translate-y-0.5 hover:border-brand-azure">
           {t.lab.viewAll} <ArrowUpRight className="size-4.5" />
         </a>
       </div>

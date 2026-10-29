@@ -1,32 +1,37 @@
-import { Check } from 'lucide-react';
-import { SectionHead } from '../components/ui';
-import { serviceIcons, type ServiceIconKey } from '../icons/ServiceIcons';
+import { Check, Globe, Server, Smartphone, Workflow } from 'lucide-react';
+import { SectionHead, Ticks, spotProps } from '../components/ui';
 import { Reveal } from '../motion';
 import { useApp } from '../i18n';
 
-const ICONS: ServiceIconKey[] = ['chatbot', 'api', 'automation', 'dashboard', 'aiModel', 'webApp'];
+const ICONS = [Workflow, Globe, Smartphone, Server];
+/** Bento: the first and last cards are wide on large screens. */
+const SPAN = ['lg:col-span-4', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-4'];
 
 export function Services() {
-  const { t, mode } = useApp();
-  const ink = mode === 'dark' ? '#EEF5FD' : '#0B1730';
-  const soft = mode === 'dark' ? 'rgba(79,195,247,.22)' : 'rgba(33,150,243,.18)';
+  const { t } = useApp();
   return (
     <section id="services" className="border-t border-line">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-4 py-14 sm:px-6 lg:gap-10 lg:py-24">
-        <SectionHead kicker={t.services.kicker} title={t.services.title} lead={t.services.lead} />
-        <ul className="m-0 grid list-none gap-x-14 p-0 md:grid-cols-2">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-4 py-14 sm:px-6 lg:gap-12 lg:py-24">
+        <SectionHead index="02" kicker={t.services.kicker} title={t.services.title} lead={t.services.lead} />
+        <ul className="m-0 grid list-none gap-4 p-0 md:grid-cols-2 lg:grid-cols-6">
           {t.services.items.map((s, i) => {
-            const Icon = serviceIcons[ICONS[i]];
+            const Icon = ICONS[i];
             return (
-              <li key={s.title} className="border-t border-line">
-                <Reveal delay={(i % 2) * 0.06} className="flex gap-5 py-7">
-                  <Icon className="size-14 shrink-0" ink={ink} soft={soft} />
-                  <div className="flex min-w-0 flex-col gap-2">
-                    <p className="m-0 text-[14px] text-muted">{s.need}</p>
-                    <h3 className="m-0 font-display text-[22px] leading-snug font-semibold">{s.title}</h3>
-                    <p className="m-0 text-[16px] leading-relaxed text-soft">{s.desc}</p>
-                    <p className="m-0 mt-1 flex items-start gap-2 text-[15px]"><Check className="mt-0.5 size-4.5 shrink-0 text-ok" />{s.proof}</p>
-                  </div>
+              <li key={s.title} className={`flex ${SPAN[i]}`}>
+                <Reveal delay={(i % 2) * 0.07} className="flex w-full">
+                  <article {...spotProps} className="spot group relative flex w-full flex-col gap-4 rounded-lg border border-line bg-card/70 p-6 transition-colors hover:border-line-strong sm:p-7">
+                    <Ticks />
+                    <div className="flex items-start justify-between gap-4">
+                      <span className="flex size-12 items-center justify-center rounded-md border border-line-strong bg-accent-soft text-accent"><Icon className="size-6" aria-hidden="true" /></span>
+                      <span className="font-mono text-[12px] tracking-[0.14em] text-muted">{String(i + 1).padStart(2, '0')}</span>
+                    </div>
+                    <h3 className="m-0 font-display text-[24px] leading-tight font-semibold tracking-tight sm:text-[28px]">{s.title}</h3>
+                    <p className="m-0 max-w-[560px] text-[16px] leading-relaxed text-soft">{s.desc}</p>
+                    <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
+                      {s.tags.map((tag) => <li key={tag} className="rounded-md border border-line px-2.5 py-1 font-mono text-[12px] text-soft">{tag}</li>)}
+                    </ul>
+                    <p className="m-0 mt-auto flex items-start gap-2 border-t border-line pt-4 text-[15px] text-muted"><Check className="mt-0.5 size-4.5 shrink-0 text-ok" aria-hidden="true" />{s.proof}</p>
+                  </article>
                 </Reveal>
               </li>
             );

@@ -42,7 +42,7 @@ export function Sheet({ open, onClose, title, children }: { open: boolean; onClo
             aria-modal="true"
             aria-label={title}
             tabIndex={-1}
-            className="relative w-full max-w-lg rounded-t-[28px] border border-line-strong bg-card px-5 pt-3 pb-[max(1.5rem,env(safe-area-inset-bottom))] shadow-[0_-30px_80px_-20px_rgba(0,0,0,.6)] outline-none md:rounded-[28px] md:pb-6"
+            className="relative w-full max-w-lg rounded-t-xl border border-line-strong bg-card px-5 pt-3 pb-[max(1.5rem,env(safe-area-inset-bottom))] shadow-[0_-30px_80px_-20px_rgba(0,0,0,.6)] outline-none md:rounded-xl md:pb-6"
             initial={reduce ? { opacity: 0 } : { y: '100%' }}
             animate={reduce ? { opacity: 1 } : { y: 0 }}
             exit={reduce ? { opacity: 0 } : { y: '100%' }}
@@ -55,7 +55,7 @@ export function Sheet({ open, onClose, title, children }: { open: boolean; onClo
             <span aria-hidden="true" className="mx-auto mb-3 block h-1.5 w-11 rounded-full bg-line-strong md:hidden" />
             <div className="mb-4 flex items-center justify-between gap-3">
               <h2 className="m-0 font-display text-2xl font-bold tracking-tight">{title}</h2>
-              <button onClick={onClose} aria-label={t.a11y.close} className="flex size-11 items-center justify-center rounded-full border border-line text-soft hover:border-line-strong">
+              <button onClick={onClose} aria-label={t.a11y.close} className="flex size-11 items-center justify-center rounded-md border border-line text-soft hover:border-line-strong">
                 <X className="size-5" />
               </button>
             </div>
