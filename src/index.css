@@ -165,3 +165,7 @@
 }
 .hrow::-webkit-scrollbar { display: none; }
 .hrow > * { scroll-snap-align: start; flex: none; }
+
+/* The BayKat phone keeps its 250x520 layout and is scaled down as a whole on large screens. */
+@media (min-width: 1024px) { .bk-phone { zoom: 0.86; } }
+@media (min-width: 1024px) and (max-height: 720px) { .bk-phone { zoom: 0.7; } }

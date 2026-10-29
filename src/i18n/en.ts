@@ -49,7 +49,7 @@ export const en: Dict = {
       tenders: { title: 'Tender monitoring', desc: 'Public tenders are collected daily, sorted by AI and gathered in a dashboard.', result: 'In production since April 2026', note: '' },
       hrbot: { title: 'HR chatbot on documents', desc: 'Teams ask their questions and get an answer with the source page.', result: '88-page HR guide you can query', note: '' },
       baykat: { title: 'BayKat, an agronomist in your pocket', desc: 'One photo of the leaf is enough: disease diagnosis and irrigation advice.', result: 'On web and mobile', note: 'Shown with SOTILMA’s permission.' },
-      activity: { title: 'ActivityConnect', desc: 'Activity bookings and Wave mobile payment, in a fast web app.', result: 'Booking and Wave payment', note: 'A personal project by Anthony, built for his partner.' },
+      activity: { title: 'ActivityConnect', desc: 'Online activity-booking website: customers pick a slot and pay with Wave.', result: 'Online booking and Wave payment', note: '' },
     },
   },
   mock: {

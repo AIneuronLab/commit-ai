@@ -97,7 +97,7 @@ function Leaf({ detected }: { detected: boolean }) {
 
 const Corner = ({ className }: { className: string }) => <span aria-hidden="true" className={`absolute size-4 border-brand-core ${className}`} />;
 
-export function BayKatDemo({ frameClass = '' }: { frameClass?: string }) {
+export function BayKatDemo() {
   const { t } = useApp();
   const reduce = useReducedMotion();
   const host = useRef<HTMLDivElement>(null);
@@ -129,8 +129,8 @@ export function BayKatDemo({ frameClass = '' }: { frameClass?: string }) {
   const tight = phase >= 1;
 
   return (
-    <div ref={host} className="flex w-full flex-col items-center">
-      <PhoneFrame className={frameClass}>
+    <div ref={host} className="bk-phone flex w-full flex-col items-center">
+      <PhoneFrame>
         <div role="img" aria-label={t.baykat.label} className="relative flex h-full flex-col px-3.5 pt-10 pb-3 text-fg">
           <div className="flex items-center justify-between">
             <b className="font-display text-[17px]">BayKat</b>

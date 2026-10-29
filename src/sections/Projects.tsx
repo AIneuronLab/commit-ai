@@ -26,7 +26,7 @@ function Text({ id, kicker }: { id: ClientProjectId; kicker: string }) {
 /** Same card in both layouts: stacked on phones, text beside the visual on large screens. */
 function Card({ id, kicker, tone, children }: { id: ClientProjectId; kicker: string; tone: string; children: ReactNode }) {
   return (
-    <article className={`${tone} flex w-[90%] shrink-0 flex-col gap-7 rounded-[28px] border border-line p-6 sm:w-[78%] sm:p-9 lg:grid lg:h-[min(620px,calc(100vh-9rem))] lg:w-[min(960px,72vw)] lg:grid-cols-[300px_1fr] lg:items-center lg:gap-10`}>
+    <article className={`${tone} flex w-[90%] shrink-0 flex-col gap-7 rounded-[28px] border border-line p-6 sm:w-[78%] sm:p-9 lg:grid lg:h-[min(520px,calc(100vh-10rem))] lg:w-[min(820px,66vw)] lg:grid-cols-[280px_1fr] lg:items-center lg:gap-8 lg:p-8`}>
       <Text id={id} kicker={kicker} />
       <div className="flex shrink-0 items-center justify-center lg:min-h-0 lg:shrink">{children}</div>
     </article>
@@ -45,7 +45,7 @@ function useCards() {
       <BrowserFrame url="rh.ashia-group.com/assistant" className="h-[360px] w-full lg:h-[min(420px,100%)]"><ChatMock /></BrowserFrame>
     </Card>,
     <Card key="baykat" id="baykat" kicker={meta.baykat} tone="grad-card-b">
-      <BayKatDemo frameClass="lg:h-[min(520px,calc(100vh-15rem))] lg:w-auto" />
+      <BayKatDemo />
     </Card>,
     <Card key="activity" id="activity" kicker={meta.activity} tone="grad-card-a">
       <span className="flex size-32 items-center justify-center rounded-[36px] border border-line-strong bg-card-alt sm:size-40">
