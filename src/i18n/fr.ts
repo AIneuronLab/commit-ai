@@ -5,8 +5,8 @@ export const fr = {
   tabs: { home: 'Accueil', services: 'Services', projects: 'Projets', lab: 'Labo', contact: 'Contact' },
   hero: {
     availability: 'Disponible — missions & postes',
-    titleA: 'Chatbots, API et tableaux de bord',
-    titleB: 'qui tournent déjà en production.',
+    titleA: 'Des outils qui font gagner',
+    titleB: 'des heures à votre équipe.',
     lead: 'Nous aidons les PME, ONG et startups de Dakar et d’ailleurs à gagner du temps : un chatbot qui répond à partir de vos documents, une API qui relie vos outils, un tableau de bord qui remplace le tableur. Nous construisons aussi le site ou l’application qui va avec.',
     stackLabel: 'Technologies que nous utilisons',
     stackTitle: 'Technologies',
@@ -46,7 +46,7 @@ export const fr = {
     items: {
       tenders: { title: 'Veille des appels d’offres', desc: 'Les offres publiques sont collectées chaque jour, triées par l’IA et réunies dans un tableau de bord.', result: 'En production depuis avril 2026', note: '' },
       hrbot: { title: 'Chatbot RH sur documents', desc: 'Les équipes posent leurs questions et reçoivent une réponse avec la page source.', result: 'Guide RH de 88 pages interrogeable', note: '' },
-      baykat: { title: 'BayKat, assistant agricole', desc: 'Une photo de la feuille suffit : diagnostic de la maladie et conseil d’irrigation.', result: 'Sur web et mobile', note: 'Présenté avec l’accord de SOTILMA.' },
+      baykat: { title: 'BayKat, l’agronome dans la poche', desc: 'Une photo de la feuille suffit : diagnostic de la maladie et conseil d’irrigation.', result: 'Sur web et mobile', note: 'Présenté avec l’accord de SOTILMA.' },
       activity: { title: 'ActivityConnect', desc: 'Réservations d’activités et paiement mobile Wave, dans une application web rapide.', result: 'Réservation et paiement Wave', note: 'Projet personnel d’Anthony, réalisé pour sa compagne.' },
     },
   },
@@ -57,7 +57,7 @@ export const fr = {
   baykat: {
     online: 'IA en ligne',
     aim: 'Cadrez la feuille',
-    captured: 'Photo prise',
+    detected: '3 zones détectées',
     analysing: 'Analyse en cours…',
     diagnosis: 'Diagnostic',
     disease: 'Mildiou détecté sur la feuille',

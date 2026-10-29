@@ -28,7 +28,7 @@ function Card({ id, kicker, tone, children }: { id: ClientProjectId; kicker: str
   return (
     <article className={`${tone} flex w-[90%] shrink-0 flex-col gap-7 rounded-[28px] border border-line p-6 sm:w-[78%] sm:p-9 lg:grid lg:h-[min(620px,calc(100vh-9rem))] lg:w-[min(960px,72vw)] lg:grid-cols-[300px_1fr] lg:items-center lg:gap-10`}>
       <Text id={id} kicker={kicker} />
-      <div className="flex min-h-0 items-center justify-center">{children}</div>
+      <div className="flex shrink-0 items-center justify-center lg:min-h-0 lg:shrink">{children}</div>
     </article>
   );
 }

@@ -7,8 +7,8 @@ export const en: Dict = {
   tabs: { home: 'Home', services: 'Services', projects: 'Work', lab: 'Lab', contact: 'Contact' },
   hero: {
     availability: 'Available — freelance & roles',
-    titleA: 'Chatbots, APIs and dashboards',
-    titleB: 'already running in production.',
+    titleA: 'Tools that give your team',
+    titleB: 'hours back every week.',
     lead: 'We help SMEs, NGOs and startups in Dakar and beyond save time: a chatbot that answers from your documents, an API that connects your tools, a dashboard that replaces the spreadsheet. We also build the website or app that goes with it.',
     stackLabel: 'Technologies we use',
     stackTitle: 'Stack',
@@ -48,7 +48,7 @@ export const en: Dict = {
     items: {
       tenders: { title: 'Tender monitoring', desc: 'Public tenders are collected daily, sorted by AI and gathered in a dashboard.', result: 'In production since April 2026', note: '' },
       hrbot: { title: 'HR chatbot on documents', desc: 'Teams ask their questions and get an answer with the source page.', result: '88-page HR guide you can query', note: '' },
-      baykat: { title: 'BayKat, farming assistant', desc: 'One photo of the leaf is enough: disease diagnosis and irrigation advice.', result: 'On web and mobile', note: 'Shown with SOTILMA’s permission.' },
+      baykat: { title: 'BayKat, an agronomist in your pocket', desc: 'One photo of the leaf is enough: disease diagnosis and irrigation advice.', result: 'On web and mobile', note: 'Shown with SOTILMA’s permission.' },
       activity: { title: 'ActivityConnect', desc: 'Activity bookings and Wave mobile payment, in a fast web app.', result: 'Booking and Wave payment', note: 'A personal project by Anthony, built for his partner.' },
     },
   },
@@ -59,7 +59,7 @@ export const en: Dict = {
   baykat: {
     online: 'AI online',
     aim: 'Frame the leaf',
-    captured: 'Photo taken',
+    detected: '3 areas detected',
     analysing: 'Analysing…',
     diagnosis: 'Diagnosis',
     disease: 'Downy mildew detected on the leaf',
