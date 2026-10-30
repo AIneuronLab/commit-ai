@@ -6,8 +6,8 @@ import { useApp } from '../i18n';
 const ICONS = [Workflow, Globe, Smartphone, Server];
 const PHOTOS = [
   { src: '/svc-automation.webp', pos: 'object-[50%_22%]' },
-  { src: '/svc-web.webp', pos: 'object-[50%_55%]' },
-  { src: '/svc-mobile.webp', pos: 'object-[50%_28%]' },
+  { src: '/svc-web.webp', pos: 'object-[50%_22%]' },
+  { src: '/svc-mobile.webp', pos: 'object-[50%_42%]' },
   { src: '/svc-backend.webp', pos: 'object-[50%_50%]' },
 ];
 /** Bento: the first and last cards are wide on large screens. */
@@ -30,7 +30,7 @@ export function Services() {
                       <img src={PHOTOS[i].src} alt="" aria-hidden="true" width={1000} height={600} loading="lazy" className={`size-full object-cover transition-transform duration-700 group-hover:scale-105 ${PHOTOS[i].pos}`} />
                       <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-card via-card/10 to-transparent" />
                       <span className="absolute bottom-3 left-5 flex size-11 items-center justify-center rounded-md bg-brand-deep text-white shadow-lg sm:left-6"><Icon className="size-5.5" aria-hidden="true" /></span>
-                      <span className="absolute right-5 bottom-4 font-mono text-[12px] tracking-[0.14em] text-white/90 sm:right-6">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="absolute right-5 bottom-4 font-mono text-[12px] tracking-[0.14em] text-muted sm:right-6">{String(i + 1).padStart(2, '0')}</span>
                     </div>
                     <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
                     <h3 className="m-0 font-display text-[24px] leading-tight font-semibold tracking-tight sm:text-[28px]">{s.title}</h3>

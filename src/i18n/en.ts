@@ -117,5 +117,5 @@ export const en: Dict = {
     form: { title: 'Or leave a message', name: 'Your name', email: 'Your email', message: 'Your need in a few lines', send: 'Send', sending: 'Sending…', mailto: 'Your email app is opening: send the message to finish.', sent: 'Thank you! Your message is on its way, we will reply quickly.', error: 'Could not send right now. Message us on WhatsApp or by email.' },
     sheet: { title: 'Start a project', lead: 'Pick whichever way is easiest for you.', form: 'Leave a message' },
   },
-  footer: { photos: 'Photos via Unsplash: Eyelit Studio, Bamby Diagne, Denny Müller, Homa Appliances, Yoco Photography, Steward Masweneng, Caspar Camille Rubin, Richard Nyoni.', copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Built in Dakar', top: 'Back to top' },
+  footer: { photos: 'Photos via Unsplash: Eyelit Studio, Bamby Diagne, Denny Müller, Homa Appliances, Caspar Camille Rubin, Richard Nyoni, Daniel Korpai, Balázs Kétyi.', copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Built in Dakar', top: 'Back to top' },
 };
