@@ -17,7 +17,7 @@ export function Services() {
   const { t } = useApp();
   return (
     <section id="services" className="border-t border-line">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-4 py-14 sm:px-6 lg:gap-12 lg:py-24">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-4 py-16 sm:px-6 lg:gap-12 lg:py-24">
         <SectionHead index="02" kicker={t.services.kicker} title={t.services.title} lead={t.services.lead} />
         <ul className="m-0 grid list-none gap-4 p-0 md:grid-cols-2 lg:grid-cols-6">
           {t.services.items.map((s, i) => {

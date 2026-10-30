@@ -14,8 +14,8 @@ const THUMBS: Partial<Record<ClientProjectId, { src: string; pos: string }>> = {
 export function Projects() {
   const { t } = useApp();
   return (
-    <section id="projects" className="border-t border-line">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-4 py-14 sm:px-6 lg:gap-12 lg:py-24">
+    <section id="projects" className="border-t border-line bg-bg-alt/70">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-4 py-16 sm:px-6 lg:gap-12 lg:py-24">
         <SectionHead index="03" kicker={t.projects.kicker} title={t.projects.title} lead={t.projects.lead} />
         <ol className="m-0 list-none border-b border-line p-0">
           {CLIENT_PROJECTS.map((p, i) => {

@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react';
-import { Kicker, H2 } from '../components/ui';
+import { SectionHead } from '../components/ui';
 import { Reveal, EASE_OUT } from '../motion';
 import { useApp } from '../i18n';
 
@@ -9,12 +9,8 @@ export function How() {
   const reduce = useReducedMotion();
   return (
     <section className="border-t border-line bg-bg-alt/70">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-12 px-4 py-14 sm:px-6 lg:py-20">
-        <div className="flex max-w-[640px] flex-col gap-4">
-          <Kicker index="01">{t.how.kicker}</Kicker>
-          <H2 className="lg:text-[44px]">{t.how.title}</H2>
-          <p className="m-0 text-[17px] text-muted">{t.how.lead}</p>
-        </div>
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-4 py-16 sm:px-6 lg:gap-12 lg:py-24">
+        <SectionHead index="01" kicker={t.how.kicker} title={t.how.title} lead={t.how.lead} />
         <ol className="relative m-0 grid list-none gap-10 p-0 md:grid-cols-3 md:gap-8">
           <motion.span
             aria-hidden="true"

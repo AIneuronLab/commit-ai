@@ -11,7 +11,7 @@ export const Kicker = ({ children, index }: { children: ReactNode; index?: strin
 );
 
 export const H2 = ({ children, className = '' }: { children: ReactNode; className?: string }) => (
-  <h2 className={`m-0 font-display text-[32px] leading-[1.04] font-semibold tracking-[-0.03em] text-balance sm:text-[40px] lg:text-[52px] ${className}`}>{typeof children === 'string' ? <RevealText parts={[{ text: children }]} /> : children}</h2>
+  <h2 className={`m-0 font-display text-[32px] leading-[1.04] font-semibold tracking-[-0.03em] text-balance sm:text-[40px] lg:text-[48px] ${className}`}>{typeof children === 'string' ? <RevealText parts={[{ text: children }]} /> : children}</h2>
 );
 
 export const SectionHead = ({ index, kicker, title, lead }: { index: string; kicker: string; title: string; lead: string }) => (

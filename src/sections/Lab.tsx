@@ -31,8 +31,8 @@ export function Lab() {
   const near = useInView(host, { once: true, margin: '600px 0px' });
   const { data, live, loading } = useGithub(near);
   return (
-    <section id="lab" ref={host} className="border-t border-line bg-bg-alt/70">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-4 py-14 sm:px-6 lg:gap-12 lg:py-24">
+    <section id="lab" ref={host} className="border-t border-line">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-4 py-16 sm:px-6 lg:gap-12 lg:py-24">
         <SectionHead index="04" kicker={t.lab.kicker} title={t.lab.title} lead={t.lab.lead} />
 
         <Reveal className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
