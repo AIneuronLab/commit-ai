@@ -64,7 +64,7 @@ function Form() {
       <label className="flex flex-col gap-1.5 font-mono text-[12px] tracking-[0.08em] text-soft uppercase">{f.message}
         <textarea name="message" required rows={4} className={`${field} resize-y`} />
       </label>
-      <button disabled={status === 'sending'} className="mt-1 inline-flex min-h-13 items-center justify-center gap-2 rounded-md btn-primary px-7 font-medium text-white transition hover:-translate-y-0.5 disabled:opacity-60">
+      <button disabled={status === 'sending'} className="mt-1 inline-flex min-h-13 items-center justify-center gap-2 rounded-md btn-primary px-7 font-medium transition hover:-translate-y-0.5 disabled:opacity-60">
         {status === 'sending' ? f.sending : f.send}
       </button>
       <p role="status" aria-live="polite" className={`m-0 min-h-6 text-[15px] ${status === 'error' ? 'text-warn' : 'text-ok'}`}>
@@ -91,7 +91,6 @@ export function Contact() {
   return (
     <>
       <section id="contact" className="relative overflow-hidden border-t border-line">
-        <img src="/dakar-monument.webp" alt="" aria-hidden="true" width={900} height={1350} loading="lazy" className="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[42%] object-cover object-[50%_40%] opacity-25 mix-blend-luminosity [mask-image:linear-gradient(to_left,#000,transparent)] lg:block" />
         <div className="relative mx-auto grid max-w-[1200px] gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24">
           <div className="flex flex-col gap-5">
             <Kicker index="06">{t.contact.kicker}</Kicker>
@@ -101,12 +100,12 @@ export function Contact() {
               href={waLink(t.contact.waText)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-2 flex items-center gap-4 btn-primary rounded-lg p-5 text-white transition hover:-translate-y-0.5"
+              className="group mt-2 flex items-center gap-4 btn-primary rounded-lg p-5 transition hover:-translate-y-0.5"
             >
-              <span className="flex size-13 shrink-0 items-center justify-center rounded-md bg-white/15"><MessageCircle className="size-6" /></span>
+              <span className="flex size-13 shrink-0 items-center justify-center rounded-md bg-black/10"><MessageCircle className="size-6" /></span>
               <span className="flex min-w-0 flex-1 flex-col leading-tight">
                 <b className="text-lg">{t.contact.whatsapp}</b>
-                <span className="text-[14px] text-white/90">{SITE.whatsapp.display} · {t.contact.whatsappHint}</span>
+                <span className="text-[14px] text-black/70">{SITE.whatsapp.display} · {t.contact.whatsappHint}</span>
               </span>
               <ArrowUpRight className="size-6 shrink-0 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
@@ -134,9 +133,9 @@ export function ContactSheet({ open, onClose }: { open: boolean; onClose: () => 
     <Sheet open={open} onClose={onClose} title={s.title}>
       <p className="m-0 mb-4 text-[16px] text-muted">{s.lead}</p>
       <div className="flex flex-col gap-3">
-        <a href={waLink(t.contact.waText)} target="_blank" rel="noopener noreferrer" onClick={onClose} className="flex min-h-16 items-center gap-3.5 btn-primary rounded-lg px-4 py-3 text-white">
-          <span className="flex size-11 items-center justify-center rounded-xl bg-white/15"><MessageCircle className="size-5" /></span>
-          <span className="flex flex-col leading-tight"><b>{t.contact.whatsapp}</b><span className="text-[14px] text-white/90">{t.contact.whatsappHint}</span></span>
+        <a href={waLink(t.contact.waText)} target="_blank" rel="noopener noreferrer" onClick={onClose} className="flex min-h-16 items-center gap-3.5 btn-primary rounded-lg px-4 py-3">
+          <span className="flex size-11 items-center justify-center rounded-xl bg-black/10"><MessageCircle className="size-5" /></span>
+          <span className="flex flex-col leading-tight"><b>{t.contact.whatsapp}</b><span className="text-[14px] text-black/70">{t.contact.whatsappHint}</span></span>
         </a>
         <a href={`mailto:${SITE.email}`} onClick={onClose} className="flex min-h-16 items-center gap-3.5 rounded-lg border border-line bg-card-alt px-4 py-3">
           <span className="flex size-11 items-center justify-center rounded-md bg-accent-soft text-accent"><Mail className="size-5" /></span>

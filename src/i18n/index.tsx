@@ -29,7 +29,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   useLayoutEffect(() => {
     document.documentElement.classList.toggle('light', mode === 'light');
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', mode === 'light' ? '#ffffff' : '#070b12');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', mode === 'light' ? '#f6f2ea' : '#0a0a0b');
   }, [mode]);
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
 

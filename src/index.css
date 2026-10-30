@@ -15,11 +15,11 @@
   --font-logo: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
 
   /* brand (fixed) */
-  --color-brand: #2196f3;
-  --color-brand-deep: #1565c0;
-  --color-brand-azure: #4fc3f7;
-  --color-brand-core: #67e8f9;
-  --color-brand-navy: #0d47a1;
+  --color-brand: #c9a24a;
+  --color-brand-deep: #a8822e;
+  --color-brand-azure: #e2c47c;
+  --color-brand-core: #f2d27a;
+  --color-brand-navy: #3d2f12;
   --color-coral: #f87171;
   --color-amber: #fbbf24;
   --color-mint: #34d399;
@@ -47,43 +47,44 @@
 
 :root,
 .force-dark {
-  /* dark: graphite with a blue bias; text is light, never grey-on-grey */
-  --ca-bg: #070b12;
-  --ca-bg-alt: #0b111b;
-  --ca-card: #111a28;
-  --ca-card-alt: #0d1521;
-  --ca-line: #26354b;
-  --ca-line-strong: #3d86d6;
-  --ca-fg: #f4f7fb;
-  --ca-soft: #d9e1ec;
-  --ca-muted: #b0bccd;
-  --ca-accent: #4cc3ff;
-  --ca-accent-soft: #11366f;
-  --ca-ok: #46e0aa;
-  --ca-warn: #fdd04a;
-  --ca-glass: rgb(17 26 40 / 0.72);
-  --ca-nav: rgb(7 11 18 / 0.82);
-  --ca-hero-glow: rgb(33 150 243 / 0.22);
+  /* dark: warm black, ivory text, gold accents */
+  --ca-bg: #0a0a0b;
+  --ca-bg-alt: #0f0f10;
+  --ca-card: #151516;
+  --ca-card-alt: #111112;
+  --ca-line: #2a2825;
+  --ca-line-strong: #5e4c27;
+  --ca-fg: #f5f1e8;
+  --ca-soft: #dcd5c6;
+  --ca-muted: #aaa293;
+  --ca-accent: #d9b766;
+  --ca-accent-soft: #2a2312;
+  --ca-ok: #63d39b;
+  --ca-warn: #f0c75e;
+  --ca-glass: rgb(21 21 22 / 0.72);
+  --ca-nav: rgb(10 10 11 / 0.82);
+  --ca-hero-glow: rgb(201 162 74 / 0.16);
   color-scheme: dark;
 }
 
 .light {
-  --ca-bg: #e8eef6;
-  --ca-bg-alt: #dde6f1;
-  --ca-card: #f6f9fd;
-  --ca-card-alt: #eef3fa;
-  --ca-line: #c3d0e2;
-  --ca-line-strong: #7ba7dc;
-  --ca-fg: #0b1730;
-  --ca-soft: #26385a;
-  --ca-muted: #425470;
-  --ca-accent: #0f5bbf;
-  --ca-accent-soft: #cfe2fa;
-  --ca-ok: #045f44;
-  --ca-warn: #9a4a06;
-  --ca-glass: rgb(255 255 255 / 0.8);
-  --ca-nav: rgb(255 255 255 / 0.86);
-  --ca-hero-glow: rgb(33 150 243 / 0.14);
+  /* light: warm ivory paper, ink text, deep gold */
+  --ca-bg: #f6f2ea;
+  --ca-bg-alt: #efe9dc;
+  --ca-card: #fcfaf6;
+  --ca-card-alt: #f4efe5;
+  --ca-line: #dcd2bf;
+  --ca-line-strong: #b4964f;
+  --ca-fg: #121110;
+  --ca-soft: #2d2a25;
+  --ca-muted: #5b554b;
+  --ca-accent: #7a5a12;
+  --ca-accent-soft: #efe3c2;
+  --ca-ok: #1d6b44;
+  --ca-warn: #8a4b06;
+  --ca-glass: rgb(252 250 246 / 0.8);
+  --ca-nav: rgb(246 242 234 / 0.88);
+  --ca-hero-glow: rgb(184 150 79 / 0.16);
   color-scheme: light;
 }
 
@@ -119,7 +120,7 @@
     overflow-x: clip;
   }
   :focus-visible { outline: 2px solid var(--color-brand-azure); outline-offset: 3px; border-radius: 6px; }
-  ::selection { background: var(--color-brand); color: #fff; }
+  ::selection { background: var(--color-brand); color: #0c0b09; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
   }
@@ -188,7 +189,7 @@ body::before {
   background-size: 64px 64px;
 }
 .light body::before {
-  background-image: linear-gradient(rgb(11 23 48 / 0.04) 1px, transparent 1px), linear-gradient(90deg, rgb(11 23 48 / 0.04) 1px, transparent 1px);
+  background-image: linear-gradient(rgb(60 45 15 / 0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(60 45 15 / 0.05) 1px, transparent 1px);
 }
 
 /* data packets travelling along the pipeline lines */
@@ -205,9 +206,10 @@ body::before {
 .caret { animation: ca-blink 1s steps(1) infinite; }
 @media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
 
-/* primary buttons: a livelier blue with a soft glow under it */
+/* primary buttons: gold with ink text and a soft glow under it */
 .btn-primary {
-  background: linear-gradient(135deg, #1976d2, #1259b8);
-  box-shadow: 0 10px 28px -10px rgb(33 150 243 / 0.65);
+  color: #0c0b09;
+  background: linear-gradient(135deg, #e6c878, #c39a3f);
+  box-shadow: 0 10px 28px -12px rgb(201 162 74 / 0.6);
 }
-.btn-primary:hover { background: linear-gradient(135deg, #2386e3, #1565c0); }
+.btn-primary:hover { background: linear-gradient(135deg, #efd38a, #cfa648); }

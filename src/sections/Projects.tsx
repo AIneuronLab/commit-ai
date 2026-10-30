@@ -42,7 +42,7 @@ export function Projects() {
           const head = (
             <div className="flex flex-col gap-2">
               <span className="font-mono text-[12px] tracking-[0.12em] text-accent uppercase">{meta[id]}</span>
-              <h3 className="m-0 font-display text-[28px] leading-tight font-semibold tracking-[-0.03em] sm:text-[36px]">{item.title}</h3>
+              <h3 className="m-0 font-serif text-[34px] leading-[1.05] font-normal sm:text-[44px]">{item.title}</h3>
             </div>
           );
           const blocks = [
@@ -52,7 +52,7 @@ export function Projects() {
               <dt className="mb-2 text-[13px] font-medium text-muted">{p.result}</dt>
               <dd className="m-0">
                 <ul className="m-0 flex list-none flex-col gap-2 p-0">
-                  {item.results.map((r) => <li key={r} className="flex items-start gap-2.5 text-[16px] font-medium text-fg"><span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-ok" />{r}</li>)}
+                  {item.results.map((r) => <li key={r} className="flex items-start gap-2.5 text-[16px] font-medium text-fg"><span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-brand" />{r}</li>)}
                 </ul>
               </dd>
             </div>,

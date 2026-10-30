@@ -17,7 +17,7 @@ function DakarStrip() {
   const { scrollYProgress } = useScroll({ target: box, offset: ['start end', 'end start'] });
   const y = useTransform(scrollYProgress, [0, 1], ['-9%', '9%']);
   return (
-    <figure ref={box} className="relative m-0 h-44 overflow-hidden rounded-lg border border-line bg-[#0b1f3d] sm:h-60 lg:h-72">
+    <figure ref={box} className="relative m-0 h-44 overflow-hidden rounded-lg border border-line bg-[#1c160a] sm:h-60 lg:h-72">
       <motion.img
         src="/dakar-bridge.webp"
         alt={t.journey.stripAlt}

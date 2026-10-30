@@ -68,15 +68,15 @@ export function HeroFlow() {
             <animate attributeName="opacity" values="0.55;0" dur="2.4s" repeatCount="indefinite" />
           </rect>
         )}
-        <rect x={HUB.x} y={HUB.y} width={HUB.w} height={HUB.h} rx="10" className="fill-brand-deep stroke-brand-azure" strokeWidth="1.25" />
-        <text x={HUB.x + HUB.w / 2} y={CY - 2} textAnchor="middle" fontSize="22" fontWeight="600" fill="#fff">{f.hub}</text>
-        <text x={HUB.x + HUB.w / 2} y={CY + 22} textAnchor="middle" fontSize="11.5" letterSpacing="1.2" fill="#e8f4ff" className="font-mono">{f.hubSub.toUpperCase()}</text>
+        <rect x={HUB.x} y={HUB.y} width={HUB.w} height={HUB.h} rx="10" className="fill-brand stroke-brand-core" strokeWidth="1.25" />
+        <text x={HUB.x + HUB.w / 2} y={CY - 2} textAnchor="middle" fontSize="22" fontWeight="600" fill="#0c0b09">{f.hub}</text>
+        <text x={HUB.x + HUB.w / 2} y={CY + 22} textAnchor="middle" fontSize="11.5" letterSpacing="1.2" fill="#3d2f12" className="font-mono">{f.hubSub.toUpperCase()}</text>
         <circle cx={HUB.x + 16} cy={HUB.y + 16} r="3.5" className="fill-ok">{!reduce && <animate attributeName="opacity" values="1;.25;1" dur="2s" repeatCount="indefinite" />}</circle>
 
         {outs.map((y, i) => (
           <g key={`no${i}`}>
             <rect x={W - NODE_W} y={y - NODE_H / 2} width={NODE_W} height={NODE_H} rx="6" className="fill-card stroke-line-strong" />
-            <rect x={W - 3} y={y - NODE_H / 2 + 10} width="3" height={NODE_H - 20} rx="1.5" className="fill-ok" />
+            <rect x={W - 3} y={y - NODE_H / 2 + 10} width="3" height={NODE_H - 20} rx="1.5" className="fill-brand-core" />
             <text x={W - NODE_W + 20} y={y + 4.5} fontSize="13.5" className="fill-fg font-mono">{f.outputs[i]}</text>
           </g>
         ))}
@@ -91,9 +91,9 @@ export function HeroFlow() {
           ))}
         </ul>
         <Link delay={0} />
-        <div className="rounded-lg border border-brand-azure bg-brand-deep px-4 py-4 text-center text-white">
+        <div className="rounded-lg border border-brand-core bg-brand px-4 py-4 text-center text-[#0c0b09]">
           <b className="block text-xl font-semibold">{f.hub}</b>
-          <span className="font-mono text-[11px] tracking-[0.12em] text-[#e8f4ff] uppercase">{f.hubSub}</span>
+          <span className="font-mono text-[11px] tracking-[0.12em] text-[#3d2f12] uppercase">{f.hubSub}</span>
         </div>
         <Link delay={0.7} />
         <p className="m-0 mb-2 font-mono text-[11px] tracking-[0.16em] text-muted uppercase">{f.outLabel}</p>

@@ -22,7 +22,7 @@ export function Services() {
                 <Reveal delay={(i % 2) * 0.07} className="flex w-full">
                   <article className="flex w-full flex-col gap-5 rounded-xl border border-line bg-card p-6 transition-colors hover:border-line-strong sm:p-8">
                     <div className="flex items-center gap-4">
-                      <span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-brand-deep text-white"><Icon className="size-6" aria-hidden="true" /></span>
+                      <span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-brand text-[#0c0b09]"><Icon className="size-6" aria-hidden="true" /></span>
                       <h3 className="m-0 font-display text-[22px] leading-tight font-semibold tracking-tight sm:text-[24px]">{it.title}</h3>
                     </div>
                     <p className="m-0 text-[17px] leading-relaxed text-soft">{it.desc}</p>
@@ -43,10 +43,10 @@ export function Services() {
         </ul>
         <Reveal className="mt-4 flex flex-col gap-6">
           <div className="flex max-w-[640px] flex-col gap-2">
-            <h3 className="m-0 font-display text-[24px] font-semibold tracking-tight sm:text-[28px]">{s.flowTitle}</h3>
+            <h3 className="m-0 font-serif text-[30px] font-normal sm:text-[36px]">{s.flowTitle}</h3>
             <p className="m-0 text-[16px] text-muted">{s.flowLead}</p>
           </div>
-          <div className="force-dark rounded-xl bg-[#050a14] p-3 text-fg sm:p-4"><HeroFlow /></div>
+          <div className="force-dark rounded-xl bg-[#0a0a0b] p-3 text-fg sm:p-4"><HeroFlow /></div>
         </Reveal>
       </div>
     </section>

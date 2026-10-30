@@ -18,12 +18,12 @@ export function Footer() {
   ];
   const nav: [string, string][] = [['#services', t.nav.services], ['#projects', t.nav.projects], ['#journey', t.nav.journey], ['#faq', t.nav.faq], ['#contact', t.nav.contact]];
   return (
-    <footer className="force-dark border-t border-line bg-[#050a14] text-fg">
+    <footer className="force-dark border-t border-line bg-[#0a0a0b] text-fg">
       <div className="mx-auto grid max-w-[1200px] gap-12 px-4 pt-16 pb-10 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1.2fr_1.2fr] lg:gap-10">
         <div className="flex max-w-[360px] flex-col gap-5">
           <a href="#top" aria-label="Commit·AI"><Logo size={36} variant="dark" /></a>
           <p className="m-0 text-[15px] leading-relaxed text-muted">{f.tagline}</p>
-          <p className="m-0 inline-flex items-center gap-2.5 self-start rounded-md border border-line px-3 py-1.5 font-mono text-[12px] tracking-[0.08em] text-soft uppercase">
+          <p className="m-0 inline-flex items-center gap-2.5 self-start rounded-full border border-line px-3.5 py-1.5 text-[13px] font-medium text-soft">
             <span className="size-2 rounded-full bg-ok" />{t.hero.availability}
           </p>
         </div>
