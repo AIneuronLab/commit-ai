@@ -1,10 +1,12 @@
 import { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { motion, useInView, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { H2, Kicker } from '../components/ui';
 import { Portrait } from '../components/Portrait';
 import { Reveal } from '../motion';
 import { SITE, waLink } from '../data/site';
+import { useGithub } from '../lib/github';
+import { GitHubIcon } from '../components/BrandIcons';
 import { useApp } from '../i18n';
 
 /** A wide photo of Dakar in the brand blue; the picture drifts a little as the page scrolls. */
@@ -33,23 +35,30 @@ function DakarStrip() {
 
 /** "Qui nous sommes": a short, factual story, the founder's photo and the career timeline. */
 export function Journey() {
-  const { t } = useApp();
+  const { t, lang } = useApp();
   const j = t.journey;
+  const host = useRef<HTMLElement>(null);
+  const near = useInView(host, { once: true, margin: '600px 0px' });
+  const { data } = useGithub(near);
   return (
-    <section id="journey" className="border-t border-line bg-bg-alt/70">
+    <section id="journey" ref={host} className="border-t border-line bg-bg-alt/70">
       <div className="mx-auto max-w-[1200px] px-4 pt-16 sm:px-6 lg:pt-24"><DakarStrip /></div>
       <div className="mx-auto grid max-w-[1200px] gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:py-24">
         <div className="flex min-w-0 flex-col gap-5">
-          <Kicker index="05">{j.kicker}</Kicker>
+          <Kicker index="04">{j.kicker}</Kicker>
           <H2>{j.title}</H2>
           {j.about.map((p) => <p key={p} className="m-0 max-w-[520px] text-[17px] leading-relaxed text-soft">{p}</p>)}
           <a href={waLink(t.contact.waText)} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex min-h-12 items-center gap-2 self-start rounded-md border border-line-strong px-5 font-medium transition hover:border-brand-azure">
             {t.contact.whatsapp} <ArrowUpRight className="size-4.5" />
           </a>
           <span className="sr-only">{SITE.whatsapp.display}</span>
-          <div className="mt-8 lg:mt-12"><Portrait /></div>
+          <a href={SITE.github.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 self-start text-[15px] text-muted transition-colors hover:text-accent">
+            <GitHubIcon className="size-4" /> <b className="font-semibold text-fg tabular-nums">{data.contributions.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US')}</b> {j.github}
+          </a>
         </div>
-        <ol className="m-0 flex min-w-0 list-none flex-col p-0">
+        <div className="min-w-0">
+          <Portrait />
+          <ol className="m-0 flex min-w-0 list-none flex-col p-0">
           {j.timeline.map(([p, r, o], i) => (
             <li key={r + p}>
               <Reveal delay={i * 0.05} className="flex gap-5">
@@ -63,6 +72,7 @@ export function Journey() {
             </li>
           ))}
         </ol>
+        </div>
       </div>
     </section>
   );

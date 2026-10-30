@@ -14,8 +14,8 @@ export const H2 = ({ children, className = '' }: { children: ReactNode; classNam
   <h2 className={`m-0 font-display text-[32px] leading-[1.04] font-semibold tracking-[-0.03em] text-balance sm:text-[40px] lg:text-[48px] ${className}`}>{typeof children === 'string' ? <RevealText parts={[{ text: children }]} /> : children}</h2>
 );
 
-export const SectionHead = ({ index, kicker, title, lead }: { index: string; kicker: string; title: string; lead: string }) => (
-  <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+export const SectionHead = ({ index, kicker, title, lead, stacked = false }: { index: string; kicker: string; title: string; lead: string; stacked?: boolean }) => (
+  <div className={`flex flex-col gap-5 ${stacked ? '' : 'md:flex-row md:items-end md:justify-between'}`}>
     <div className="flex max-w-[640px] flex-col gap-4"><Kicker index={index}>{kicker}</Kicker><H2>{title}</H2></div>
     <p className="m-0 max-w-[400px] text-[17px] text-muted">{lead}</p>
   </div>

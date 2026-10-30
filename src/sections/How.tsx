@@ -10,7 +10,7 @@ export function How() {
   return (
     <section className="border-t border-line bg-bg-alt/70">
       <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-4 py-16 sm:px-6 lg:gap-12 lg:py-24">
-        <SectionHead index="01" kicker={t.how.kicker} title={t.how.title} lead={t.how.lead} />
+        <SectionHead index="02" kicker={t.how.kicker} title={t.how.title} lead={t.how.lead} />
         <ol className="relative m-0 grid list-none gap-10 p-0 md:grid-cols-3 md:gap-8">
           <motion.span
             aria-hidden="true"

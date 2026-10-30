@@ -1,51 +1,53 @@
 import { Check, Globe, Server, Smartphone, Workflow } from 'lucide-react';
+import { HeroFlow } from '../components/HeroFlow';
 import { SectionHead } from '../components/ui';
 import { Reveal } from '../motion';
 import { useApp } from '../i18n';
 
 const ICONS = [Workflow, Globe, Smartphone, Server];
-const PHOTOS = [
-  { src: '/svc-automation.webp', pos: 'object-[50%_22%]' },
-  { src: '/svc-web.webp', pos: 'object-[50%_22%]' },
-  { src: '/svc-mobile.webp', pos: 'object-[50%_42%]' },
-  { src: '/svc-backend.webp', pos: 'object-[50%_50%]' },
-];
-/** Bento: the first and last cards are wide on large screens. */
-const SPAN = ['lg:col-span-4', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-4'];
 
+/** Four services as equal cards (what it solves, what you receive), then the diagram of how everything connects. */
 export function Services() {
   const { t } = useApp();
+  const s = t.services;
   return (
     <section id="services" className="border-t border-line">
       <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-4 py-16 sm:px-6 lg:gap-12 lg:py-24">
-        <SectionHead index="02" kicker={t.services.kicker} title={t.services.title} lead={t.services.lead} />
-        <ul className="m-0 grid list-none gap-4 p-0 md:grid-cols-2 lg:grid-cols-6">
-          {t.services.items.map((s, i) => {
+        <SectionHead index="01" kicker={s.kicker} title={s.title} lead={s.lead} />
+        <ul className="m-0 grid list-none gap-4 p-0 md:grid-cols-2">
+          {s.items.map((it, i) => {
             const Icon = ICONS[i];
             return (
-              <li key={s.title} className={`flex ${SPAN[i]}`}>
+              <li key={it.title} className="flex">
                 <Reveal delay={(i % 2) * 0.07} className="flex w-full">
-                  <article className="group flex w-full flex-col overflow-hidden rounded-lg border border-line bg-card transition-colors hover:border-brand-azure">
-                    <div className="relative h-44 shrink-0 overflow-hidden">
-                      <img src={PHOTOS[i].src} alt="" aria-hidden="true" width={1000} height={600} loading="lazy" className={`size-full object-cover transition-transform duration-700 group-hover:scale-105 ${PHOTOS[i].pos}`} />
-                      <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-card via-card/10 to-transparent" />
-                      <span className="absolute bottom-3 left-5 flex size-11 items-center justify-center rounded-md bg-brand-deep text-white shadow-lg sm:left-6"><Icon className="size-5.5" aria-hidden="true" /></span>
-                      <span className="absolute right-5 bottom-4 font-mono text-[12px] tracking-[0.14em] text-muted sm:right-6">{String(i + 1).padStart(2, '0')}</span>
+                  <article className="flex w-full flex-col gap-5 rounded-xl border border-line bg-card p-6 transition-colors hover:border-line-strong sm:p-8">
+                    <div className="flex items-center gap-4">
+                      <span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-brand-deep text-white"><Icon className="size-6" aria-hidden="true" /></span>
+                      <h3 className="m-0 font-display text-[22px] leading-tight font-semibold tracking-tight sm:text-[24px]">{it.title}</h3>
                     </div>
-                    <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
-                    <h3 className="m-0 font-display text-[24px] leading-tight font-semibold tracking-tight sm:text-[28px]">{s.title}</h3>
-                    <p className="m-0 max-w-[560px] text-[16px] leading-relaxed text-soft">{s.desc}</p>
-                    <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
-                      {s.tags.map((tag) => <li key={tag} className="rounded-md border border-line px-2.5 py-1 font-mono text-[12px] text-soft">{tag}</li>)}
+                    <p className="m-0 text-[17px] leading-relaxed text-soft">{it.desc}</p>
+                    <div>
+                      <p className="m-0 mb-3 text-[13px] font-medium text-muted">{s.deliver}</p>
+                      <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
+                        {it.deliver.map((d) => <li key={d} className="flex items-start gap-2.5 text-[15px] text-fg"><Check className="mt-0.5 size-4.5 shrink-0 text-accent" aria-hidden="true" />{d}</li>)}
+                      </ul>
+                    </div>
+                    <ul className="m-0 mt-auto flex list-none flex-wrap gap-2 border-t border-line p-0 pt-5">
+                      {it.tags.map((tag) => <li key={tag} className="rounded-md bg-accent-soft px-2.5 py-1 font-mono text-[12px] text-accent">{tag}</li>)}
                     </ul>
-                    <p className="m-0 mt-auto flex items-start gap-2 border-t border-line pt-4 text-[15px] text-muted"><Check className="mt-0.5 size-4.5 shrink-0 text-ok" aria-hidden="true" />{s.proof}</p>
-                    </div>
                   </article>
                 </Reveal>
               </li>
             );
           })}
         </ul>
+        <Reveal className="mt-4 flex flex-col gap-6">
+          <div className="flex max-w-[640px] flex-col gap-2">
+            <h3 className="m-0 font-display text-[24px] font-semibold tracking-tight sm:text-[28px]">{s.flowTitle}</h3>
+            <p className="m-0 text-[16px] text-muted">{s.flowLead}</p>
+          </div>
+          <div className="force-dark rounded-xl bg-[#050a14] p-3 text-fg sm:p-4"><HeroFlow /></div>
+        </Reveal>
       </div>
     </section>
   );

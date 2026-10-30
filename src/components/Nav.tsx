@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { motion, useScroll } from 'motion/react';
 import { Magnetic } from './Magnetic';
-import { FolderKanban, GitBranch, House, Layers, MessageCircle, Moon, Sun } from 'lucide-react';
+import { FolderKanban, House, Layers, MessageCircle, Moon, Sun, UserRound } from 'lucide-react';
 import { Logo } from '../brand/Logo';
 import { useApp } from '../i18n';
 
-const SECTIONS = ['top', 'services', 'projects', 'lab', 'contact'] as const;
+const SECTIONS = ['top', 'services', 'projects', 'journey', 'contact'] as const;
 type Section = (typeof SECTIONS)[number];
 
 /** Which section is currently under the top third of the screen. */
@@ -28,7 +28,7 @@ const buzz = () => { try { navigator.vibrate?.(8); } catch { /* not supported */
 export function TopBar({ onStart }: { onStart: () => void }) {
   const { t, lang, mode, toggleLang, toggleMode } = useApp();
   const { scrollYProgress } = useScroll();
-  const links: [string, string][] = [['#services', t.nav.services], ['#projects', t.nav.projects], ['#lab', t.nav.lab], ['#journey', t.nav.journey], ['#contact', t.nav.contact]];
+  const links: [string, string][] = [['#services', t.nav.services], ['#projects', t.nav.projects], ['#journey', t.nav.journey], ['#faq', t.nav.faq], ['#contact', t.nav.contact]];
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-nav pt-[env(safe-area-inset-top,0px)] backdrop-blur-xl">
       <nav className="mx-auto flex max-w-[1200px] items-center justify-between gap-3 px-4 py-2.5 sm:px-6" aria-label={t.a11y.menu}>
@@ -51,11 +51,11 @@ export function TopBar({ onStart }: { onStart: () => void }) {
   );
 }
 
-const TABS: { id: Section; icon: typeof House; key: 'home' | 'services' | 'projects' | 'lab' | 'contact' }[] = [
+const TABS: { id: Section; icon: typeof House; key: 'home' | 'services' | 'projects' | 'journey' | 'contact' }[] = [
   { id: 'top', icon: House, key: 'home' },
   { id: 'services', icon: Layers, key: 'services' },
   { id: 'projects', icon: FolderKanban, key: 'projects' },
-  { id: 'lab', icon: GitBranch, key: 'lab' },
+  { id: 'journey', icon: UserRound, key: 'journey' },
   { id: 'contact', icon: MessageCircle, key: 'contact' },
 ];
 

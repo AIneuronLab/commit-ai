@@ -16,7 +16,7 @@ export function Footer() {
     { label: 'LinkedIn', href: SITE.linkedin.url, Icon: LinkedInIcon },
     { label: 'GitHub', href: SITE.github.url, Icon: GitHubIcon },
   ];
-  const nav: [string, string][] = [['#services', t.nav.services], ['#projects', t.nav.projects], ['#lab', t.nav.lab], ['#journey', t.nav.journey], ['#contact', t.nav.contact]];
+  const nav: [string, string][] = [['#services', t.nav.services], ['#projects', t.nav.projects], ['#journey', t.nav.journey], ['#faq', t.nav.faq], ['#contact', t.nav.contact]];
   return (
     <footer className="force-dark border-t border-line bg-[#050a14] text-fg">
       <div className="mx-auto grid max-w-[1200px] gap-12 px-4 pt-16 pb-10 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1.2fr_1.2fr] lg:gap-10">
