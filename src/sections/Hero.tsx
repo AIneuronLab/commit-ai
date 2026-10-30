@@ -6,7 +6,7 @@ import { Showcase } from '../components/Showcase';
 import { EASE_OUT } from '../motion';
 import { useApp } from '../i18n';
 
-const CLIENTS = ['Ashia Group', 'SOTILMA', 'ActivityConnect'];
+const CLIENTS = ['SOTILMA', 'ActivityConnect'];
 
 /** One screen: the promise, two ways to act, who already trusts us, and real work on the right. Always dark. */
 export function Hero({ onStart }: { onStart: () => void }) {

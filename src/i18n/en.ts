@@ -20,7 +20,7 @@ export const en: Dict = {
     showcaseAlt: 'ActivityConnect booking website, built by Commit·AI',
     statValue: '≈ 60',
     statUnit: 'tenders / day',
-    statLabel: 'sorted automatically · Ashia Group',
+    statLabel: 'sorted automatically · tender monitoring',
     chip: 'HR chatbot · answer + source page',
     flow: {
       label: 'Diagram: WhatsApp, emails, documents, forms and payments go into Commit·AI and come out as a website, a mobile app, an API or automatic reports.',
@@ -60,6 +60,7 @@ export const en: Dict = {
     kicker: 'Work',
     title: 'Results, not mock-ups',
     lead: 'Four delivered projects in daily use.',
+    builtAt: 'Built at',
     problem: 'The need',
     solution: 'What we built',
     result: 'The result',

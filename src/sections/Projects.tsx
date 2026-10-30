@@ -38,7 +38,7 @@ function Visual({ id }: { id: ClientProjectId }) {
 export function Projects() {
   const { t } = useApp();
   const p = t.projects;
-  const meta = Object.fromEntries(CLIENT_PROJECTS.map((c) => [c.id, `${c.client} · ${c.year}`])) as Record<ClientProjectId, string>;
+  const meta = Object.fromEntries(CLIENT_PROJECTS.map((c) => [c.id, `${c.relation === 'employer' ? `${p.builtAt} ` : ''}${c.client} · ${c.year}`])) as Record<ClientProjectId, string>;
   return (
     <section id="projects" className="border-t border-line bg-bg-alt/70">
       <div className="mx-auto flex max-w-[1200px] flex-col gap-12 px-4 py-16 sm:px-6 lg:gap-20 lg:py-24">

@@ -7,9 +7,10 @@
  */
 export type ClientProjectId = 'tenders' | 'hrbot' | 'baykat' | 'activity';
 
-export const CLIENT_PROJECTS: { id: ClientProjectId; client: string; year: string }[] = [
-  { id: 'tenders', client: 'Ashia Group', year: '2026' },
-  { id: 'hrbot', client: 'Ashia Group', year: '2026' },
+/** `employer`: built while working there (shown as "Réalisé chez …"), not a client reference. */
+export const CLIENT_PROJECTS: { id: ClientProjectId; client: string; year: string; relation?: 'employer' }[] = [
+  { id: 'tenders', client: 'Ashia Group', year: '2026', relation: 'employer' },
+  { id: 'hrbot', client: 'Ashia Group', year: '2026', relation: 'employer' },
   { id: 'baykat', client: 'SOTILMA', year: '2026' },
   { id: 'activity', client: 'ActivityConnect', year: '2026' },
 ];

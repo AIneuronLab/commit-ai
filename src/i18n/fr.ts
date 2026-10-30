@@ -18,7 +18,7 @@ export const fr = {
     showcaseAlt: 'Site de réservation ActivityConnect, réalisé par Commit·AI',
     statValue: '≈ 60',
     statUnit: 'offres / jour',
-    statLabel: 'triées automatiquement · Veille Ashia Group',
+    statLabel: 'triées automatiquement · veille d’appels d’offres',
     chip: 'Chatbot RH · réponse + page source',
     flow: {
       label: 'Schéma : WhatsApp, e-mails, documents, formulaires et paiements entrent dans Commit·AI et ressortent en site web, application mobile, API ou rapports automatiques.',
@@ -58,6 +58,7 @@ export const fr = {
     kicker: 'Réalisations',
     title: 'Des résultats, pas des maquettes',
     lead: 'Quatre projets livrés et utilisés au quotidien.',
+    builtAt: 'Réalisé chez',
     problem: 'Le besoin',
     solution: 'Ce que nous avons fait',
     result: 'Le résultat',
