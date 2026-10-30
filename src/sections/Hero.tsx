@@ -6,8 +6,6 @@ import { Showcase } from '../components/Showcase';
 import { EASE_OUT } from '../motion';
 import { useApp } from '../i18n';
 
-const CLIENTS = ['SOTILMA', 'ActivityConnect'];
-
 /** One screen: the promise, two ways to act, who already trusts us, and real work on the right. Always dark. */
 export function Hero({ onStart }: { onStart: () => void }) {
   const { t } = useApp();
@@ -46,8 +44,8 @@ export function Hero({ onStart }: { onStart: () => void }) {
           </motion.ul>
           <div className="mt-2 flex flex-col gap-3 border-t border-line pt-6">
             <span className="text-[13px] text-muted">{t.hero.trusted}</span>
-            <ul className="m-0 flex list-none flex-wrap items-center gap-x-8 gap-y-2 p-0">
-              {CLIENTS.map((n) => <li key={n} className="font-display text-[19px] font-semibold tracking-tight text-soft">{n}</li>)}
+            <ul className="m-0 flex list-none flex-wrap items-center gap-x-6 gap-y-2 p-0">
+              {t.hero.delivered.map((n) => <li key={n} className="font-display text-[17px] font-semibold tracking-tight text-soft">{n}</li>)}
             </ul>
           </div>
         </div>
