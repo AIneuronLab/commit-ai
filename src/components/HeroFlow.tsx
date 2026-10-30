@@ -1,5 +1,4 @@
 import { useReducedMotion } from 'motion/react';
-import { Ticks } from './ui';
 import { useApp } from '../i18n';
 
 const W = 1000;
@@ -29,8 +28,6 @@ export function HeroFlow() {
 
   return (
     <figure role="img" aria-label={f.label} className="relative m-0 rounded-lg border border-line bg-card/60 p-4 backdrop-blur-sm sm:p-6">
-      <Ticks />
-
       {/* wide screens */}
       <svg viewBox={`0 0 ${W} ${H}`} className="hidden h-auto w-full md:block" aria-hidden="true">
         <g className="font-mono" fontSize="11" letterSpacing="1.6">
@@ -62,7 +59,6 @@ export function HeroFlow() {
           </g>
         ))}
 
-        <rect x={HUB.x - 10} y={HUB.y - 10} width={HUB.w + 20} height={HUB.h + 20} rx="14" fill="none" className="stroke-brand/40" strokeDasharray="2 5" />
         <rect x={HUB.x} y={HUB.y} width={HUB.w} height={HUB.h} rx="10" className="fill-brand-deep stroke-brand-azure" strokeWidth="1.25" />
         <text x={HUB.x + HUB.w / 2} y={CY - 2} textAnchor="middle" fontSize="22" fontWeight="600" fill="#fff">{f.hub}</text>
         <text x={HUB.x + HUB.w / 2} y={CY + 22} textAnchor="middle" fontSize="11.5" letterSpacing="1.2" fill="#e8f4ff" className="font-mono">{f.hubSub.toUpperCase()}</text>
@@ -103,7 +99,7 @@ export function HeroFlow() {
 function Link({ delay }: { delay: number }) {
   return (
     <span className="relative mx-auto my-1 block h-9 w-px bg-line-strong">
-      <i className="flow-packet absolute -left-[2.5px] block size-[6px] rounded-full bg-brand-azure shadow-[0_0_8px_2px_rgba(79,195,247,.6)]" style={{ animationDelay: `${delay}s` }} />
+      <i className="flow-packet absolute -left-[2.5px] block size-[6px] rounded-full bg-brand-azure" style={{ animationDelay: `${delay}s` }} />
     </span>
   );
 }

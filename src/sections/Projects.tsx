@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowUpRight, Check } from 'lucide-react';
-import { H2, Kicker, SectionHead, Ticks } from '../components/ui';
+import { H2, Kicker, SectionHead } from '../components/ui';
 import { Flow } from '../components/Flow';
 import { BayKatDemo } from '../mockups/BayKatDemo';
 import { BrowserFrame } from '../mockups/Mockups';
@@ -33,7 +33,6 @@ function Text({ id, kicker }: { id: ClientProjectId; kicker: string }) {
 function Card({ id, kicker, children }: { id: ClientProjectId; kicker: string; children: ReactNode }) {
   return (
     <article className="relative flex w-[90%] shrink-0 flex-col gap-7 rounded-lg border border-line bg-card/80 p-6 sm:w-[78%] sm:p-9 lg:grid lg:h-[min(520px,calc(100vh-10rem))] lg:w-[min(820px,66vw)] lg:grid-cols-[280px_1fr] lg:items-center lg:gap-8 lg:p-8">
-      <Ticks />
       <Text id={id} kicker={kicker} />
       <div className="flex shrink-0 items-center justify-center lg:min-h-0 lg:shrink">{children}</div>
     </article>

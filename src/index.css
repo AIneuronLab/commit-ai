@@ -44,7 +44,8 @@
   --ease-loop: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-:root {
+:root,
+.force-dark {
   /* dark: graphite with a blue bias; text is light, never grey-on-grey */
   --ca-bg: #070b12;
   --ca-bg-alt: #0b111b;
@@ -66,23 +67,43 @@
 }
 
 .light {
-  --ca-bg: #ffffff;
-  --ca-bg-alt: #f3f7fc;
-  --ca-card: #ffffff;
-  --ca-card-alt: #f6f9fd;
-  --ca-line: #d5e0ee;
-  --ca-line-strong: #86b3e6;
+  --ca-bg: #e8eef6;
+  --ca-bg-alt: #dde6f1;
+  --ca-card: #f6f9fd;
+  --ca-card-alt: #eef3fa;
+  --ca-line: #c3d0e2;
+  --ca-line-strong: #7ba7dc;
   --ca-fg: #0b1730;
   --ca-soft: #26385a;
-  --ca-muted: #475873;
-  --ca-accent: #1565c0;
-  --ca-accent-soft: #e2effc;
-  --ca-ok: #047857;
+  --ca-muted: #425470;
+  --ca-accent: #1258a8;
+  --ca-accent-soft: #d3e4f8;
+  --ca-ok: #045f44;
   --ca-warn: #9a4a06;
   --ca-glass: rgb(255 255 255 / 0.8);
   --ca-nav: rgb(255 255 255 / 0.86);
   --ca-hero-glow: rgb(33 150 243 / 0.14);
   color-scheme: light;
+}
+
+/* A block that stays dark in the light theme (the hero). The theme colours are re-pointed here because
+   Tailwind's --color-* variables are resolved on <html> and would otherwise keep the light values. */
+.force-dark {
+  --color-bg: var(--ca-bg);
+  --color-bg-alt: var(--ca-bg-alt);
+  --color-card: var(--ca-card);
+  --color-card-alt: var(--ca-card-alt);
+  --color-line: var(--ca-line);
+  --color-line-strong: var(--ca-line-strong);
+  --color-fg: var(--ca-fg);
+  --color-soft: var(--ca-soft);
+  --color-muted: var(--ca-muted);
+  --color-accent: var(--ca-accent);
+  --color-accent-soft: var(--ca-accent-soft);
+  --color-ok: var(--ca-ok);
+  --color-warn: var(--ca-warn);
+  --color-glass: var(--ca-glass);
+  --color-nav: var(--ca-nav);
 }
 
 @layer base {
@@ -179,34 +200,12 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: linear-gradient(rgb(255 255 255 / 0.028) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.028) 1px, transparent 1px);
+  background-image: linear-gradient(rgb(255 255 255 / 0.022) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.022) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 .light body::before {
-  background-image: linear-gradient(rgb(11 23 48 / 0.045) 1px, transparent 1px), linear-gradient(90deg, rgb(11 23 48 / 0.045) 1px, transparent 1px);
+  background-image: linear-gradient(rgb(11 23 48 / 0.04) 1px, transparent 1px), linear-gradient(90deg, rgb(11 23 48 / 0.04) 1px, transparent 1px);
 }
-
-/* the hero grid lights up around the pointer (desktop with a mouse; --px/--py are set from JS) */
-.grid-glow {
-  background-image: linear-gradient(var(--ca-accent) 1px, transparent 1px), linear-gradient(90deg, var(--ca-accent) 1px, transparent 1px);
-  background-size: 64px 64px;
-  opacity: 0.5;
-  -webkit-mask-image: radial-gradient(240px circle at var(--px, -999px) var(--py, -999px), #000, transparent 70%);
-  mask-image: radial-gradient(240px circle at var(--px, -999px) var(--py, -999px), #000, transparent 70%);
-}
-
-/* card spotlight that follows the pointer (--mx/--my are set from JS on hover) */
-.spot { position: relative; overflow: hidden; }
-.spot::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.25s;
-  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--color-brand) 16%, transparent), transparent 70%);
-}
-.spot:hover::before { opacity: 1; }
 
 /* data packets travelling along the pipeline lines */
 @keyframes ca-dash { to { stroke-dashoffset: -24; } }

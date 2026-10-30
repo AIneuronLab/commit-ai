@@ -33,7 +33,7 @@ export function TopBar({ onStart }: { onStart: () => void }) {
     <header className="sticky top-0 z-30 border-b border-line bg-nav pt-[env(safe-area-inset-top,0px)] backdrop-blur-xl">
       <nav className="mx-auto flex max-w-[1200px] items-center justify-between gap-3 px-4 py-2.5 sm:px-6" aria-label={t.a11y.menu}>
         <a href="#top" aria-label="Commit·AI"><Logo size={34} variant={mode} /></a>
-        <div className="hidden items-center gap-5 font-mono text-[11.5px] tracking-[0.08em] whitespace-nowrap uppercase md:flex lg:gap-7 lg:text-[12.5px]">
+        <div className="hidden items-center gap-5 text-[14px] whitespace-nowrap md:flex lg:gap-7 lg:text-[15px]">
           {links.map(([h, l]) => <a key={h} href={h} className="text-soft transition-colors hover:text-accent">{l}</a>)}
         </div>
         <div className="flex items-center gap-2">

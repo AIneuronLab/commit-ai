@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
-import { H2, Kicker, Ticks } from '../components/ui';
+import { H2, Kicker } from '../components/ui';
 import { Portrait } from '../components/Portrait';
 import { Reveal } from '../motion';
 import { SITE, waLink } from '../data/site';
@@ -26,7 +26,6 @@ function DakarStrip() {
         style={reduce ? undefined : { y }}
       />
       <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-bg/80 via-transparent to-transparent" />
-      <Ticks className="border-brand-azure" />
       <figcaption className="absolute bottom-3 left-4 font-mono text-[11px] tracking-[0.12em] text-white uppercase sm:bottom-4 sm:left-6">{t.journey.strip}</figcaption>
     </figure>
   );

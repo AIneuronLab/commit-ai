@@ -1,5 +1,5 @@
 import { Check, Globe, Server, Smartphone, Workflow } from 'lucide-react';
-import { SectionHead, Ticks, spotProps } from '../components/ui';
+import { SectionHead } from '../components/ui';
 import { Reveal } from '../motion';
 import { useApp } from '../i18n';
 
@@ -19,8 +19,7 @@ export function Services() {
             return (
               <li key={s.title} className={`flex ${SPAN[i]}`}>
                 <Reveal delay={(i % 2) * 0.07} className="flex w-full">
-                  <article {...spotProps} className="spot group relative flex w-full flex-col gap-4 rounded-lg border border-line bg-card/70 p-6 transition-colors hover:border-line-strong sm:p-7">
-                    <Ticks />
+                  <article className="flex w-full flex-col gap-4 rounded-lg border border-line bg-card/70 p-6 transition-colors hover:border-line-strong sm:p-7">
                     <div className="flex items-start justify-between gap-4">
                       <span className="flex size-12 items-center justify-center rounded-md border border-line-strong bg-accent-soft text-accent"><Icon className="size-6" aria-hidden="true" /></span>
                       <span className="font-mono text-[12px] tracking-[0.14em] text-muted">{String(i + 1).padStart(2, '0')}</span>

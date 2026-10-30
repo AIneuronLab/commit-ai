@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 
 const css = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
 const block = (re) => Object.fromEntries([...css.match(re)[1].matchAll(/--ca-([\w-]+):\s*(#[0-9a-f]{6})/gi)].map(([, k, v]) => [k, v]));
-const themes = { dark: block(/:root\s*\{([^}]*)\}/), light: block(/\.light\s*\{([^}]*)\}/) };
+const themes = { dark: block(/:root,\s*\.force-dark\s*\{([^}]*)\}/), light: block(/\.light\s*\{([^}]*)\}/) };
 const brand = { brand: '#2196f3', 'brand-deep': '#1565c0', white: '#ffffff' };
 
 const lum = (hex) => {
