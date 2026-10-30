@@ -18,10 +18,7 @@ export const en: Dict = {
     trusted: 'Trusted by',
     facts: ['Free 30-min call', 'Fixed quote within 48 h', 'You own the code'],
     showcaseAlt: 'ActivityConnect booking website, built by Commit·AI',
-    statValue: '≈ 60',
-    statUnit: 'tenders / day',
-    statLabel: 'sorted automatically · tender monitoring',
-    chip: 'HR chatbot · answer + source page',
+    showcaseCaption: 'online booking website, in production',
     flow: {
       label: 'Diagram: WhatsApp, emails, documents, forms and payments go into Commit·AI and come out as a website, a mobile app, an API or automatic reports.',
       inLabel: 'What goes in',

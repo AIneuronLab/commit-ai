@@ -16,10 +16,7 @@ export const fr = {
     trusted: 'Ils nous font confiance',
     facts: ['Appel gratuit de 30 min', 'Devis ferme sous 48 h', 'Code à vous à la livraison'],
     showcaseAlt: 'Site de réservation ActivityConnect, réalisé par Commit·AI',
-    statValue: '≈ 60',
-    statUnit: 'offres / jour',
-    statLabel: 'triées automatiquement · veille d’appels d’offres',
-    chip: 'Chatbot RH · réponse + page source',
+    showcaseCaption: 'site de réservation en ligne, en production',
     flow: {
       label: 'Schéma : WhatsApp, e-mails, documents, formulaires et paiements entrent dans Commit·AI et ressortent en site web, application mobile, API ou rapports automatiques.',
       inLabel: 'Ce qui entre',
