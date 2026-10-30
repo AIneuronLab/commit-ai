@@ -88,12 +88,12 @@ export const en: Dict = {
     title: 'Before you write to us',
     lead: 'Answers to the questions clients ask us most.',
     items: [
-      ['Is the first call free?', 'Yes. The 30-minute call is free and without commitment. If we can help, a fixed quote follows within 48 hours.'],
-      ['How does payment work?', 'In three parts: 40% at signing, 30% when the mock-up is approved, 30% at go-live. By mobile money, bank transfer or cash, with invoice and receipt.'],
-      ['Do I own the website or app?', 'Yes. The code, the content and the domain name are in your name once the balance is paid.'],
-      ['What if I add something along the way?', 'Any addition is priced before it is built. Nothing reaches the invoice without your written agreement.'],
+      ['Where do we start?', 'With a 30-minute call. You tell us what costs you time, and we tell you honestly whether we can help.'],
+      ['How long does a project take?', 'It depends on its size. The quote sets the schedule in writing, and you follow progress every week with a test link.'],
+      ['Do I own the website or app?', 'Yes. The code, the content and the domain name are in your name at delivery.'],
+      ['How does the AI use my documents?', 'The chatbot answers only from the documents you give it, and cites the source page so every answer can be checked.'],
+      ['Do you work remotely?', 'Yes. We are based in Dakar and work with teams elsewhere: calls, WhatsApp and a weekly check-in.'],
       ['What happens after go-live?', 'The solution stays yours. You can hand us the maintenance (hosting, domain, fixes) or run it yourself.'],
-      ['Is AI expensive every month?', 'AI usage depends on how much you use it. It is passed on at cost, with no margin.'],
     ],
   },
   journey: {

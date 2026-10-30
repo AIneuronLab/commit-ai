@@ -86,12 +86,12 @@ export const fr = {
     title: 'Avant de nous écrire',
     lead: 'Les réponses aux questions que nos clients posent le plus souvent.',
     items: [
-      ['Le premier appel est-il payant ?', 'Non. L’appel de 30 minutes est gratuit et sans engagement. Si nous pouvons vous aider, un devis ferme suit sous 48 h.'],
-      ['Comment se passe le paiement ?', 'En trois fois : 40 % à la signature, 30 % à la validation de la maquette, 30 % à la mise en ligne. Par mobile money, virement ou en espèces, avec facture et reçu.'],
-      ['Le site ou l’application m’appartient-il ?', 'Oui. Le code, les contenus et le nom de domaine sont à votre nom dès le paiement du solde.'],
-      ['Et si j’ajoute quelque chose en cours de route ?', 'L’ajout est chiffré avant d’être fait. Rien n’arrive sur la facture sans votre accord écrit.'],
+      ['Par où commence-t-on ?', 'Par un appel de 30 minutes. Vous nous décrivez ce qui vous fait perdre du temps, et nous vous disons franchement si nous pouvons aider.'],
+      ['Combien de temps dure un projet ?', 'Cela dépend de son ampleur. Le devis fixe le planning par écrit, et vous suivez l’avancement chaque semaine avec un lien de test.'],
+      ['Le site ou l’application m’appartient-il ?', 'Oui. Le code, les contenus et le nom de domaine sont à votre nom à la livraison.'],
+      ['Comment l’IA utilise-t-elle mes documents ?', 'Le chatbot répond uniquement à partir des documents que vous lui confiez, et cite la page source pour que chaque réponse puisse être vérifiée.'],
+      ['Travaillez-vous à distance ?', 'Oui. Nous sommes à Dakar et travaillons avec des équipes ailleurs : appels, WhatsApp et un point chaque semaine.'],
       ['Que se passe-t-il après la mise en ligne ?', 'Votre solution reste à vous. Vous pouvez nous confier la maintenance (hébergement, domaine, corrections) ou la gérer vous-même.'],
-      ['L’IA coûte-t-elle cher chaque mois ?', 'La consommation des services d’IA dépend de l’usage. Elle vous est refacturée au prix réel, sans marge.'],
     ],
   },
   journey: {
