@@ -59,6 +59,15 @@ export function HeroFlow() {
           </g>
         ))}
 
+        {!reduce && (
+          <rect x={HUB.x} y={HUB.y} width={HUB.w} height={HUB.h} rx="10" fill="none" className="stroke-brand-azure" strokeWidth="1.25" opacity="0">
+            <animate attributeName="x" values={`${HUB.x};${HUB.x - 16}`} dur="2.4s" repeatCount="indefinite" />
+            <animate attributeName="y" values={`${HUB.y};${HUB.y - 16}`} dur="2.4s" repeatCount="indefinite" />
+            <animate attributeName="width" values={`${HUB.w};${HUB.w + 32}`} dur="2.4s" repeatCount="indefinite" />
+            <animate attributeName="height" values={`${HUB.h};${HUB.h + 32}`} dur="2.4s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.55;0" dur="2.4s" repeatCount="indefinite" />
+          </rect>
+        )}
         <rect x={HUB.x} y={HUB.y} width={HUB.w} height={HUB.h} rx="10" className="fill-brand-deep stroke-brand-azure" strokeWidth="1.25" />
         <text x={HUB.x + HUB.w / 2} y={CY - 2} textAnchor="middle" fontSize="22" fontWeight="600" fill="#fff">{f.hub}</text>
         <text x={HUB.x + HUB.w / 2} y={CY + 22} textAnchor="middle" fontSize="11.5" letterSpacing="1.2" fill="#e8f4ff" className="font-mono">{f.hubSub.toUpperCase()}</text>

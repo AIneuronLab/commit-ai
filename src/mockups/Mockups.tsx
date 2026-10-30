@@ -1,6 +1,4 @@
-/**
- * Frames that wrap the project visuals: a browser window and a phone body.
- */
+/** Browser window that wraps a project screenshot. */
 import type { ReactNode } from 'react';
 import { Lock } from 'lucide-react';
 
@@ -16,17 +14,6 @@ export function BrowserFrame({ url, children, className = '' }: { url: string; c
         </span>
       </div>
       <div className="relative min-h-0 flex-1">{children}</div>
-    </div>
-  );
-}
-
-export function PhoneFrame({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return (
-    <div className={`aspect-[250/520] w-full max-w-[250px] rounded-[42px] grad-phone p-2.5 shadow-[0_40px_80px_-30px_rgba(0,0,0,.6)] ${className}`}>
-      <div className="relative h-full overflow-hidden rounded-[33px] bg-bg">
-        <span className="absolute top-2 left-1/2 z-10 h-5.5 w-21 -translate-x-1/2 rounded-xl bg-black" />
-        {children}
-      </div>
     </div>
   );
 }

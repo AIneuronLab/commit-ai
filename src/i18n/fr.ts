@@ -13,16 +13,18 @@ export const fr = {
     stackTitle: 'Technologies',
     primary: 'Démarrer un projet',
     secondary: 'Voir les réalisations',
+    trusted: 'Références',
     flow: {
       label: 'Schéma : WhatsApp, e-mails, documents, formulaires et paiements entrent dans Commit·AI et ressortent en site web, application mobile, API ou rapports automatiques.',
       inLabel: 'Ce qui entre',
       outLabel: 'Ce qui sort',
-      inputs: ['WhatsApp', 'E-mails', 'Documents', 'Formulaires', 'Paiements Wave'],
+      inputs: ['WhatsApp', 'E-mails', 'Documents', 'Formulaires', 'Paiements'],
       hub: 'Commit·AI',
       hubSub: 'automatisation · IA',
       outputs: ['Site web', 'Application mobile', 'API', 'Rapports automatiques'],
     },
   },
+  cta: { title: 'Un projet en tête ? Parlons-en.', text: 'Un appel de 30 minutes suffit pour savoir si nous pouvons vous aider. Devis ferme sous 48 h, sans engagement.', primary: 'Démarrer un projet' },
   stats: { prod: 'projets en production', frameworks: 'frameworks backend', countries: 'pays d’expérience', efficiency: 'd’efficacité data', quote: 'pour un devis ferme', call: 'd’appel gratuit' },
   how: {
     kicker: 'Méthode',
@@ -40,7 +42,7 @@ export const fr = {
     lead: 'Quatre métiers, une seule équipe : du premier script à l’application en ligne.',
     items: [
       { title: 'Automatisation & IA', desc: 'Collecte de données, workflows qui suppriment les tâches répétitives, chatbots qui répondent à partir de vos documents, modèles de vision et de prédiction intégrés à vos outils.', tags: ['n8n', 'Python', 'RAG', 'LLM'], proof: 'En production : veille d’appels d’offres automatisée et chatbot RH chez Ashia Group.' },
-      { title: 'Sites & applications web', desc: 'Des interfaces rapides, connectées à votre backend et à vos paiements : site vitrine, réservation en ligne, espace client.', tags: ['React', 'Wave', 'SEO'], proof: 'ActivityConnect : réservation en ligne et paiement Wave.' },
+      { title: 'Sites & applications web', desc: 'Des interfaces rapides, connectées à votre backend et à vos paiements : site vitrine, réservation en ligne, espace client.', tags: ['React', 'SEO', 'Paiement en ligne'], proof: 'ActivityConnect : réservation en ligne pour un organisateur d’activités.' },
       { title: 'Applications mobiles', desc: 'Des applications pour iOS et Android qui servent sur le terrain, même avec une connexion limitée.', tags: ['iOS', 'Android'], proof: 'BayKat : diagnostic par photo, sur web et mobile.' },
       { title: 'Backend & API', desc: 'API REST sécurisées (JWT, CORS), documentées avec Swagger, qui relient vos outils entre eux et tiennent la charge en production.', tags: ['FastAPI', 'NestJS', 'Spring Boot', 'Swagger'], proof: 'Des API NestJS et FastAPI tournent en production.' },
     ],
@@ -51,30 +53,19 @@ export const fr = {
     lead: 'Des projets livrés et utilisés au quotidien, à Dakar et ailleurs.',
     disclaimer: 'Interfaces illustrées à partir des projets livrés ; les données affichées sont des exemples.',
     visit: 'Voir le site en ligne',
+    baykatAlt: 'Agricultrices dans un champ de légumes verts, au coucher du soleil',
     activityAlt: 'Capture du site ActivityConnect : une soirée jeux et la prochaine date à réserver',
     flows: {
       tenders: [['Source', 'Portails d’appels d’offres publics'], ['IA', 'Tri et résumé des offres'], ['Sortie', 'Alerte chaque matin à l’équipe']],
+      baykat: [['Source', 'Photo de la feuille, prise au champ'], ['Vision IA', 'Détection de la maladie'], ['Sortie', 'Diagnostic et conseil d’irrigation']],
       hrbot: [['Source', 'Guide RH de 88 pages'], ['RAG', 'Recherche dans le texte'], ['Sortie', 'Réponse avec la page source']],
     },
     items: {
       tenders: { title: 'Veille des appels d’offres', desc: 'Les offres publiques sont collectées chaque jour, triées par l’IA et envoyées à l’équipe commerciale.', result: 'En production depuis avril 2026', note: '' },
       hrbot: { title: 'Chatbot RH sur documents', desc: 'Les équipes posent leurs questions et reçoivent une réponse avec la page source.', result: 'Guide RH de 88 pages interrogeable', note: '' },
       baykat: { title: 'BayKat, l’agronome dans la poche', desc: 'Une photo de la feuille suffit : diagnostic de la maladie et conseil d’irrigation.', result: 'Sur web et mobile', note: 'Présenté avec l’accord de SOTILMA.' },
-      activity: { title: 'ActivityConnect', desc: 'Site web de réservation d’activités en ligne : le client choisit son créneau et paie par Wave.', result: 'Réservation en ligne et paiement Wave', note: '' },
+      activity: { title: 'ActivityConnect', desc: 'Site web de réservation d’activités en ligne : le client choisit son créneau et paie par Wave.', result: 'Réservation en ligne en production', note: '' },
     },
-  },
-  baykat: {
-    online: 'IA en ligne',
-    aim: 'Cadrez la feuille',
-    detected: '3 zones détectées',
-    analysing: 'Analyse en cours…',
-    diagnosis: 'Diagnostic',
-    disease: 'Mildiou détecté sur la feuille',
-    advice: 'Traitement conseillé : cuivre, sous 48 h.',
-    irrigation: 'Irrigation prévue',
-    irrigationValue: 'Demain 6\u00a0h · 12\u00a0L/m²',
-    steps: ['Photo', 'Diagnostic', 'Action'],
-    label: 'Démonstration animée : photo d’une feuille, diagnostic puis conseil d’irrigation',
   },
   lab: {
     kicker: 'Labo GitHub',
@@ -124,7 +115,7 @@ export const fr = {
     form: { title: 'Ou laissez un message', name: 'Votre nom', email: 'Votre email', message: 'Votre besoin en quelques lignes', send: 'Envoyer', sending: 'Envoi…', mailto: 'Votre application de messagerie s’ouvre : envoyez le message pour terminer.', sent: 'Merci ! Votre message est bien parti, nous vous répondons rapidement.', error: 'Envoi impossible pour le moment. Écrivez-nous sur WhatsApp ou par email.' },
     sheet: { title: 'Démarrer un projet', lead: 'Choisissez le moyen le plus simple pour vous.', form: 'Laisser un message' },
   },
-  footer: { photos: 'Photos : Eyelit Studio, Bamby Diagne et Denny Müller, via Unsplash.', copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Conçu à Dakar', top: 'Haut de page' },
+  footer: { photos: 'Photos via Unsplash : Eyelit Studio, Bamby Diagne, Denny Müller, Homa Appliances, Yoco Photography, Steward Masweneng, Caspar Camille Rubin, Richard Nyoni.', copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Conçu à Dakar', top: 'Haut de page' },
 };
 
 export type Dict = typeof fr;

@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowUpRight, Check } from 'lucide-react';
 import { H2, Kicker, SectionHead } from '../components/ui';
 import { Flow } from '../components/Flow';
-import { BayKatDemo } from '../mockups/BayKatDemo';
 import { BrowserFrame } from '../mockups/Mockups';
 import { CLIENT_PROJECTS, type ClientProjectId } from '../data/projects';
 import { DESKTOP_MOTION, useMedia } from '../lib/useMedia';
@@ -50,7 +49,10 @@ function useCards() {
       <Flow nodes={t.projects.flows.hrbot} label={t.projects.items.hrbot.title} />
     </Card>,
     <Card key="baykat" id="baykat" kicker={meta.baykat}>
-      <BayKatDemo />
+      <div className="flex w-full max-w-[340px] flex-col gap-3">
+        <img src="/baykat-farm.webp" alt={t.projects.baykatAlt} width={900} height={600} loading="lazy" className="h-36 w-full rounded-lg border border-line object-cover object-[50%_35%]" />
+        <Flow nodes={t.projects.flows.baykat} label={t.projects.items.baykat.title} />
+      </div>
     </Card>,
     <Card key="activity" id="activity" kicker={meta.activity}>
       <a href={SITE_ACTIVITY.url} target="_blank" rel="noopener noreferrer" aria-label={`${t.projects.items.activity.title} — ${t.projects.visit}`} className="block w-full">

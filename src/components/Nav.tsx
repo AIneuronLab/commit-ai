@@ -43,7 +43,7 @@ export function TopBar({ onStart }: { onStart: () => void }) {
           <button onClick={toggleMode} aria-label={mode === 'dark' ? t.a11y.toLight : t.a11y.toDark} className="flex size-11 items-center justify-center rounded-md border border-line text-soft transition hover:border-line-strong">
             {mode === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
           </button>
-          <div className="hidden lg:block"><Magnetic className="inline-flex"><button onClick={onStart} className="min-h-11 rounded-md bg-brand-deep px-5 text-[14px] font-medium whitespace-nowrap text-white transition hover:bg-brand">{t.nav.cta}</button></Magnetic></div>
+          <div className="hidden lg:block"><Magnetic className="inline-flex"><button onClick={onStart} className="btn-primary min-h-11 rounded-md px-5 text-[14px] font-medium whitespace-nowrap text-white transition">{t.nav.cta}</button></Magnetic></div>
         </div>
       </nav>
       <motion.span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[2px] origin-left bg-accent" style={{ scaleX: scrollYProgress }} />

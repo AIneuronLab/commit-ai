@@ -13,6 +13,7 @@ import { Lab } from './sections/Lab';
 import { Journey } from './sections/Journey';
 import { Testimonials } from './sections/Testimonials';
 import { Contact, ContactSheet } from './sections/Contact';
+import { CtaBand } from './sections/CtaBand';
 
 function Shell() {
   const { t } = useApp();
@@ -33,6 +34,7 @@ function Shell() {
         <Testimonials />
         <Lab />
         <Journey />
+        <CtaBand onStart={open} />
         <Contact />
       </main>
       <TabBar />
