@@ -22,7 +22,7 @@ function DakarStrip() {
         width={1400}
         height={800}
         loading="lazy"
-        className="absolute inset-0 size-full scale-125 object-cover object-[50%_58%] mix-blend-luminosity opacity-60"
+        className="absolute inset-0 size-full scale-110 object-cover object-[50%_18%] mix-blend-luminosity opacity-60"
         style={reduce ? undefined : { y }}
       />
       <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-bg/80 via-transparent to-transparent" />

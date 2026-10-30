@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from 'motion/react';
+import { useRef } from 'react';
+import { motion, useInView, useReducedMotion } from 'motion/react';
 import { EASE_OUT } from '../motion';
 
 type Part = { text: string; className?: string };
@@ -10,6 +11,9 @@ type Part = { text: string; className?: string };
  */
 export function RevealText({ parts, immediate = false, delay = 0 }: { parts: Part[]; immediate?: boolean; delay?: number }) {
   const reduce = useReducedMotion();
+  // watch the (unclipped) wrapper: the words sit translated out of their clipping boxes, so they never count as visible themselves
+  const box = useRef<HTMLSpanElement>(null);
+  const seen = useInView(box, { once: true, margin: '-8% 0px' });
   const label = parts.map((p) => p.text).join(' ').replace(/\s+/g, ' ').trim();
   if (reduce) return <>{parts.map((p, i) => <span key={i} className={p.className}>{i > 0 ? ' ' : ''}{p.text}</span>)}</>;
 
@@ -17,13 +21,11 @@ export function RevealText({ parts, immediate = false, delay = 0 }: { parts: Par
   return (
     <>
       <span className="sr-only">{label}</span>
-      <span aria-hidden="true">
+      <span ref={box} aria-hidden="true">
       {parts.map((p, pi) =>
         p.text.trim().split(/\s+/).map((w, wi) => {
           const i = n++;
-          const motionProps = immediate
-            ? { animate: { y: 0 } }
-            : { whileInView: { y: 0 }, viewport: { once: true, margin: '-8% 0px' } };
+          const motionProps = { animate: immediate || seen ? { y: 0 } : { y: '115%' } };
           return (
             <span key={`${pi}-${wi}`} className={p.className}>
               <span className="inline-block overflow-hidden pb-[0.14em] align-bottom -mb-[0.14em]">
