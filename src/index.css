@@ -180,13 +180,6 @@
   .marquee-track ul[aria-hidden] { display: none; }
 }
 
-/* swipeable row of cards (phones, tablets) */
-.hrow {
-  display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
-  overscroll-behavior-x: contain; margin-inline: -1rem; padding-inline: 1rem; scroll-padding-inline: 1rem;
-}
-.hrow::-webkit-scrollbar { display: none; }
-.hrow > * { scroll-snap-align: start; flex: none; }
 
 
 /* ---- "Système" look: blueprint grid, hairlines, square corners ---- */

@@ -53,15 +53,9 @@ export const en: Dict = {
     kicker: 'Work',
     title: 'Solutions already running',
     lead: 'Delivered projects used every day, in Dakar and beyond.',
-    disclaimer: 'Interfaces illustrated from delivered projects; the data shown are examples.',
     visit: 'Visit the live site',
     baykatAlt: 'Women farmers in a field of green vegetables at sunset',
     activityAlt: 'Screenshot of the ActivityConnect website: a game night and the next date to book',
-    flows: {
-      tenders: [['Source', 'Public tender portals'], ['AI', 'Sorting and summaries'], ['Output', 'Alert to the team every morning']],
-      baykat: [['Source', 'Photo of the leaf, taken in the field'], ['Vision AI', 'Disease detection'], ['Output', 'Diagnosis and irrigation advice']],
-      hrbot: [['Source', '88-page HR guide'], ['RAG', 'Search through the text'], ['Output', 'Answer with the source page']],
-    },
     items: {
       tenders: { title: 'Tender monitoring', desc: 'Public tenders are collected daily, sorted by AI and sent to the sales team.', result: 'In production since April 2026', note: '' },
       hrbot: { title: 'HR chatbot on documents', desc: 'Teams ask their questions and get an answer with the source page.', result: '88-page HR guide you can query', note: '' },
@@ -90,9 +84,9 @@ export const en: Dict = {
     stripAlt: 'Footbridge at sunset in Dakar',
     role: 'Founder',
     portraitAlt: 'Portrait of Anthony Mboumba Ikapi, founder of Commit·AI',
-    title: 'A studio in Dakar, a path across three countries',
+    title: 'Based in Dakar, a path across three countries',
     about: [
-      'Commit·AI is the studio of Anthony Mboumba Ikapi, an AI and backend engineer based in Dakar. He started in mechatronics in Kigali, moved to data in Libreville, then built APIs and chatbots for companies in Senegal.',
+      'We are based in Dakar. Anthony Mboumba Ikapi, an AI and backend engineer, started in mechatronics in Kigali, moved to data in Libreville, then built APIs and chatbots for companies in Senegal.',
       'You talk directly to the person who builds: no intermediary, and answers on WhatsApp.',
     ],
     timeline: [

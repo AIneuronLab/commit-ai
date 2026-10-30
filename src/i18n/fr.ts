@@ -51,15 +51,9 @@ export const fr = {
     kicker: 'Réalisations',
     title: 'Des solutions qui tournent déjà',
     lead: 'Des projets livrés et utilisés au quotidien, à Dakar et ailleurs.',
-    disclaimer: 'Interfaces illustrées à partir des projets livrés ; les données affichées sont des exemples.',
     visit: 'Voir le site en ligne',
     baykatAlt: 'Agricultrices dans un champ de légumes verts, au coucher du soleil',
     activityAlt: 'Capture du site ActivityConnect : une soirée jeux et la prochaine date à réserver',
-    flows: {
-      tenders: [['Source', 'Portails d’appels d’offres publics'], ['IA', 'Tri et résumé des offres'], ['Sortie', 'Alerte chaque matin à l’équipe']],
-      baykat: [['Source', 'Photo de la feuille, prise au champ'], ['Vision IA', 'Détection de la maladie'], ['Sortie', 'Diagnostic et conseil d’irrigation']],
-      hrbot: [['Source', 'Guide RH de 88 pages'], ['RAG', 'Recherche dans le texte'], ['Sortie', 'Réponse avec la page source']],
-    },
     items: {
       tenders: { title: 'Veille des appels d’offres', desc: 'Les offres publiques sont collectées chaque jour, triées par l’IA et envoyées à l’équipe commerciale.', result: 'En production depuis avril 2026', note: '' },
       hrbot: { title: 'Chatbot RH sur documents', desc: 'Les équipes posent leurs questions et reçoivent une réponse avec la page source.', result: 'Guide RH de 88 pages interrogeable', note: '' },
@@ -88,9 +82,9 @@ export const fr = {
     stripAlt: 'Passerelle piétonne au coucher du soleil à Dakar',
     role: 'Fondateur',
     portraitAlt: 'Portrait d’Anthony Mboumba Ikapi, fondateur de Commit·AI',
-    title: 'Un studio à Dakar, un parcours entre trois pays',
+    title: 'Basés à Dakar, un parcours entre trois pays',
     about: [
-      'Commit·AI est le studio d’Anthony Mboumba Ikapi, ingénieur IA et backend installé à Dakar. Il a commencé par la mécatronique à Kigali, puis la data à Libreville, avant de construire des API et des chatbots pour des entreprises sénégalaises.',
+      'Nous sommes basés à Dakar. Anthony Mboumba Ikapi, ingénieur IA et backend, a commencé par la mécatronique à Kigali, puis la data à Libreville, avant de construire des API et des chatbots pour des entreprises sénégalaises.',
       'Vous parlez directement à la personne qui construit : pas d’intermédiaire, et une réponse sur WhatsApp.',
     ],
     timeline: [
