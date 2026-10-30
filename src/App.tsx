@@ -14,6 +14,8 @@ import { Journey } from './sections/Journey';
 import { Testimonials } from './sections/Testimonials';
 import { Contact, ContactSheet } from './sections/Contact';
 import { CtaBand } from './sections/CtaBand';
+import { Footer } from './sections/Footer';
+import { WhatsAppFab } from './components/WhatsAppFab';
 
 function Shell() {
   const { t } = useApp();
@@ -37,6 +39,8 @@ function Shell() {
         <CtaBand onStart={open} />
         <Contact />
       </main>
+      <Footer />
+      <WhatsAppFab />
       <TabBar />
       <Cursor />
       <ContactSheet open={sheet} onClose={close} />

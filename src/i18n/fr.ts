@@ -109,7 +109,7 @@ export const fr = {
     form: { title: 'Ou laissez un message', name: 'Votre nom', email: 'Votre email', message: 'Votre besoin en quelques lignes', send: 'Envoyer', sending: 'Envoi…', mailto: 'Votre application de messagerie s’ouvre : envoyez le message pour terminer.', sent: 'Merci ! Votre message est bien parti, nous vous répondons rapidement.', error: 'Envoi impossible pour le moment. Écrivez-nous sur WhatsApp ou par email.' },
     sheet: { title: 'Démarrer un projet', lead: 'Choisissez le moyen le plus simple pour vous.', form: 'Laisser un message' },
   },
-  footer: { photos: 'Photos via Unsplash : Eyelit Studio, Bamby Diagne, Denny Müller, Homa Appliances, Caspar Camille Rubin, Richard Nyoni, Daniel Korpai, Balázs Kétyi.', copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Conçu à Dakar', top: 'Haut de page' },
+  footer: { tagline: 'Automatisation, web, mobile et IA, du premier appel à la mise en ligne.', explore: 'Explorer', offer: 'Services', reach: 'Contact', location: 'Dakar, Sénégal', photos: 'Photos via Unsplash : Eyelit Studio, Bamby Diagne, Denny Müller, Homa Appliances, Caspar Camille Rubin, Richard Nyoni, Daniel Korpai, Balázs Kétyi.', copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Conçu à Dakar', top: 'Haut de page' },
 };
 
 export type Dict = typeof fr;

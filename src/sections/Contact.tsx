@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from 'react';
 import { ArrowUpRight, BriefcaseBusiness, Check, Code2, Mail, MessageCircle, PenLine } from 'lucide-react';
-import { Logo } from '../brand/Logo';
 import { Sheet } from '../components/Sheet';
 import { H2, Kicker } from '../components/ui';
 import { Reveal } from '../motion';
@@ -87,7 +86,7 @@ export function useContactRows() {
 }
 
 export function Contact() {
-  const { t, mode } = useApp();
+  const { t } = useApp();
   const rows = useContactRows();
   return (
     <>
@@ -123,12 +122,6 @@ export function Contact() {
           <Reveal><Form /></Reveal>
         </div>
       </section>
-      <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-3 px-4 py-7 text-[13px] text-muted sm:flex-row sm:items-center sm:px-6">
-          <Logo size={26} variant={mode} />
-          <span className="flex flex-col gap-1 sm:items-end"><span>{t.footer.copy}</span><span className="text-[12px]">{t.footer.photos}</span></span>
-        </div>
-      </footer>
     </>
   );
 }

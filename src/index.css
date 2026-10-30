@@ -117,11 +117,6 @@
     @apply bg-bg font-sans text-fg antialiased;
     font-feature-settings: 'ss01', 'cv11';
     overflow-x: clip;
-    /* room for the bottom tab bar on phones */
-    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
-  }
-  @media (min-width: 768px) {
-    body { padding-bottom: 0; }
   }
   :focus-visible { outline: 2px solid var(--color-brand-azure); outline-offset: 3px; border-radius: 6px; }
   ::selection { background: var(--color-brand); color: #fff; }
