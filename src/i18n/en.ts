@@ -6,6 +6,9 @@ export const en: Dict = {
   nav: { services: 'Services', projects: 'Work', journey: 'About us', faq: 'FAQ', contact: 'Contact', cta: 'Start a project' },
   tabs: { home: 'Home', services: 'Services', projects: 'Work', journey: 'About', contact: 'Contact' },
   hero: {
+    eyebrow: 'Commit·AI — Dakar, Senegal',
+    lineA: 'Software,',
+    lineB: 'made to measure.',
     availability: 'Taking on new projects',
     titleA: 'We',
     words: ['automate', 'build', 'ship'],
@@ -29,6 +32,11 @@ export const en: Dict = {
       hubSub: 'automation · AI',
       outputs: ['Website', 'Mobile app', 'API', 'Automatic reports'],
     },
+  },
+  intro: {
+    kicker: 'Our approach',
+    text: 'We build simple, solid tools. They automate what repeats, connect what is scattered and answer from your documents.',
+    sign: 'One point of contact, from the first call to go-live.',
   },
   how: {
     kicker: 'Method',
@@ -59,6 +67,9 @@ export const en: Dict = {
     title: 'Results, not mock-ups',
     lead: 'Four delivered projects in daily use.',
     builtAt: 'Built at',
+    client: 'Client',
+    indexTitle: 'Project index',
+    cols: ['Year', 'Project', 'Context', 'Result'],
     problem: 'The need',
     solution: 'What we built',
     result: 'The result',
@@ -116,8 +127,9 @@ export const en: Dict = {
     linkedin: 'LinkedIn',
     github: 'GitHub',
     waText: 'Hello, I would like to discuss a project with Commit·AI.',
+    or: 'or',
     form: { title: 'Or leave a message', name: 'Your name', email: 'Your email', message: 'Your need in a few lines', send: 'Send', sending: 'Sending…', mailto: 'Your email app is opening: send the message to finish.', sent: 'Thank you! Your message is on its way, we will reply quickly.', error: 'Could not send right now. Message us on WhatsApp or by email.' },
     sheet: { title: 'Start a project', lead: 'Pick whichever way is easiest for you.', form: 'Leave a message' },
   },
-  footer: { tagline: 'Automation, web, mobile and AI, from the first call to go-live.', explore: 'Explore', offer: 'Services', reach: 'Contact', location: 'Dakar, Senegal', photos: 'Photos via Unsplash: Eyelit Studio, Richard Nyoni.', copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Built in Dakar', top: 'Back to top' },
+  footer: { tagline: 'Automation, web, mobile and AI, from the first call to go-live.', explore: 'Explore', offer: 'Services', reach: 'Contact', location: 'Dakar, Senegal', photos: 'Photos via Unsplash: Richard Nyoni.', copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Built in Dakar', top: 'Back to top' },
 };

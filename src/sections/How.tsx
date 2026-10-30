@@ -1,31 +1,21 @@
-import { motion, useReducedMotion } from 'motion/react';
 import { SectionHead } from '../components/ui';
-import { Reveal, EASE_OUT } from '../motion';
+import { Reveal } from '../motion';
 import { useApp } from '../i18n';
 
-/** Three steps on a line that draws itself when the section comes into view. */
+/** Three steps side by side, each under a large serif numeral and a gold rule. */
 export function How() {
   const { t } = useApp();
-  const reduce = useReducedMotion();
   return (
     <section className="border-t border-line bg-bg-alt/70">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-4 py-16 sm:px-6 lg:gap-12 lg:py-24">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-14 px-4 py-20 sm:px-6 lg:py-32">
         <SectionHead index="02" kicker={t.how.kicker} title={t.how.title} lead={t.how.lead} />
-        <ol className="relative m-0 grid list-none gap-10 p-0 md:grid-cols-3 md:gap-8">
-          <motion.span
-            aria-hidden="true"
-            className="absolute top-[7px] right-0 left-0 hidden h-px origin-left bg-line-strong md:block"
-            initial={reduce ? false : { scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, margin: '-15% 0px' }}
-            transition={{ duration: 1.4, ease: EASE_OUT }}
-          />
+        <ol className="m-0 grid list-none gap-12 p-0 md:grid-cols-3 md:gap-10">
           {t.how.steps.map((s, i) => (
-            <li key={s.t} className="relative">
-              <Reveal delay={i * 0.12} className="flex h-full flex-col gap-3 md:pt-9">
-                <span aria-hidden="true" className="absolute top-0 left-0 hidden size-[15px] rounded-[3px] border border-brand-azure bg-bg md:block"><i className="absolute inset-[3px] rounded-[1px] bg-brand-azure" /></span>
-                <span className="font-mono text-[12px] tracking-[0.14em] text-accent uppercase">{String(i + 1).padStart(2, '0')} · {s.tag}</span>
-                <h3 className="m-0 font-display text-[22px] leading-snug font-semibold tracking-tight">{s.t}</h3>
+            <li key={s.t}>
+              <Reveal delay={i * 0.12} className="flex flex-col gap-4 border-t border-brand/60 pt-8">
+                <span className="font-serif text-[64px] leading-none text-accent italic">{String(i + 1).padStart(2, '0')}</span>
+                <span className="text-[12px] font-medium tracking-[0.2em] text-muted uppercase">{s.tag}</span>
+                <h3 className="m-0 font-serif text-[28px] leading-tight font-normal">{s.t}</h3>
                 <p className="m-0 text-[16px] leading-relaxed text-muted">{s.d}</p>
               </Reveal>
             </li>

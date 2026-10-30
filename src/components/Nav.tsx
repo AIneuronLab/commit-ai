@@ -33,7 +33,7 @@ export function TopBar({ onStart }: { onStart: () => void }) {
     <header className="sticky top-0 z-30 border-b border-line bg-nav pt-[env(safe-area-inset-top,0px)] backdrop-blur-xl">
       <nav className="mx-auto flex max-w-[1200px] items-center justify-between gap-3 px-4 py-2.5 sm:px-6" aria-label={t.a11y.menu}>
         <a href="#top" aria-label="Commit·AI"><Logo size={34} variant={mode} /></a>
-        <div className="hidden items-center gap-5 text-[14px] whitespace-nowrap md:flex lg:gap-7 lg:text-[15px]">
+        <div className="hidden items-center gap-6 text-[12px] font-medium tracking-[0.16em] whitespace-nowrap uppercase md:flex lg:gap-9">
           {links.map(([h, l]) => <a key={h} href={h} className="text-soft transition-colors hover:text-accent">{l}</a>)}
         </div>
         <div className="flex items-center gap-2">
@@ -43,7 +43,7 @@ export function TopBar({ onStart }: { onStart: () => void }) {
           <button onClick={toggleMode} aria-label={mode === 'dark' ? t.a11y.toLight : t.a11y.toDark} className="flex size-11 items-center justify-center rounded-md border border-line text-soft transition hover:border-line-strong">
             {mode === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
           </button>
-          <div className="hidden lg:block"><Magnetic className="inline-flex"><button onClick={onStart} className="btn-primary min-h-11 rounded-md px-5 text-[14px] font-medium whitespace-nowrap transition">{t.nav.cta}</button></Magnetic></div>
+          <div className="hidden lg:block"><Magnetic className="inline-flex"><button onClick={onStart} className="btn-primary min-h-11 rounded-full px-6 text-[14px] font-medium whitespace-nowrap transition">{t.nav.cta}</button></Magnetic></div>
         </div>
       </nav>
       <motion.span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[2px] origin-left bg-accent" style={{ scaleX: scrollYProgress }} />

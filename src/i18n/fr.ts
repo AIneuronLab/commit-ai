@@ -4,6 +4,9 @@ export const fr = {
   nav: { services: 'Services', projects: 'Réalisations', journey: 'Qui nous sommes', faq: 'FAQ', contact: 'Contact', cta: 'Démarrer un projet' },
   tabs: { home: 'Accueil', services: 'Services', projects: 'Projets', journey: 'À propos', contact: 'Contact' },
   hero: {
+    eyebrow: 'Commit·AI — Dakar, Sénégal',
+    lineA: 'Le logiciel,',
+    lineB: 'sur mesure.',
     availability: 'Disponible pour de nouveaux projets',
     titleA: 'Nous',
     words: ['automatisons', 'développons', 'déployons'],
@@ -27,6 +30,11 @@ export const fr = {
       hubSub: 'automatisation · IA',
       outputs: ['Site web', 'Application mobile', 'API', 'Rapports automatiques'],
     },
+  },
+  intro: {
+    kicker: 'Notre approche',
+    text: 'Nous construisons des outils simples et solides. Ils automatisent ce qui se répète, relient ce qui est éparpillé et répondent à partir de vos documents.',
+    sign: 'Un seul interlocuteur, du premier appel à la mise en ligne.',
   },
   how: {
     kicker: 'Méthode',
@@ -57,6 +65,9 @@ export const fr = {
     title: 'Des résultats, pas des maquettes',
     lead: 'Quatre projets livrés et utilisés au quotidien.',
     builtAt: 'Réalisé chez',
+    client: 'Client',
+    indexTitle: 'Index des projets',
+    cols: ['Année', 'Projet', 'Contexte', 'Résultat'],
     problem: 'Le besoin',
     solution: 'Ce que nous avons fait',
     result: 'Le résultat',
@@ -114,10 +125,11 @@ export const fr = {
     linkedin: 'LinkedIn',
     github: 'GitHub',
     waText: 'Bonjour, j’aimerais discuter d’un projet avec Commit·AI.',
+    or: 'ou',
     form: { title: 'Ou laissez un message', name: 'Votre nom', email: 'Votre email', message: 'Votre besoin en quelques lignes', send: 'Envoyer', sending: 'Envoi…', mailto: 'Votre application de messagerie s’ouvre : envoyez le message pour terminer.', sent: 'Merci ! Votre message est bien parti, nous vous répondons rapidement.', error: 'Envoi impossible pour le moment. Écrivez-nous sur WhatsApp ou par email.' },
     sheet: { title: 'Démarrer un projet', lead: 'Choisissez le moyen le plus simple pour vous.', form: 'Laisser un message' },
   },
-  footer: { tagline: 'Automatisation, web, mobile et IA, du premier appel à la mise en ligne.', explore: 'Explorer', offer: 'Services', reach: 'Contact', location: 'Dakar, Sénégal', photos: 'Photos via Unsplash : Eyelit Studio, Richard Nyoni.', copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Conçu à Dakar', top: 'Haut de page' },
+  footer: { tagline: 'Automatisation, web, mobile et IA, du premier appel à la mise en ligne.', explore: 'Explorer', offer: 'Services', reach: 'Contact', location: 'Dakar, Sénégal', photos: 'Photos via Unsplash : Richard Nyoni.', copy: '© 2026 Commit·AI — Anthony Mboumba Ikapi · Conçu à Dakar', top: 'Haut de page' },
 };
 
 export type Dict = typeof fr;

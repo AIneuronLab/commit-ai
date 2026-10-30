@@ -4,83 +4,74 @@ import { Reveal } from '../motion';
 import { CLIENT_PROJECTS, SITE_ACTIVITY, type ClientProjectId } from '../data/projects';
 import { useApp } from '../i18n';
 
-/** Display order: strongest proof first. */
-const ORDER: ClientProjectId[] = ['tenders', 'activity', 'hrbot', 'baykat'];
+const FEATURED: { id: ClientProjectId; src: string; w: number; h: number; pos: string }[] = [
+  { id: 'activity', src: '/activityconnect.webp', w: 765, h: 575, pos: 'object-[30%_30%]' },
+  { id: 'baykat', src: '/baykat-farm.webp', w: 900, h: 600, pos: 'object-[50%_35%]' },
+];
 
-/** The picture of a case, when we have a real one (screenshot or photo). */
-const HAS_VISUAL: ClientProjectId[] = ['activity', 'baykat'];
-
-function Visual({ id }: { id: ClientProjectId }) {
-  const { t } = useApp();
-  const p = t.projects;
-  const item = p.items[id];
-  if (id === 'activity') {
-    return (
-      <a href={SITE_ACTIVITY.url} target="_blank" rel="noopener noreferrer" aria-label={`${item.title} — ${p.visit}`} className="group block overflow-hidden rounded-xl border border-line bg-card">
-        <img src="/activityconnect.webp" alt={p.activityAlt} width={765} height={575} loading="lazy" className="block aspect-[4/3] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]" />
-      </a>
-    );
-  }
-  if (id === 'baykat') {
-    return <img src="/baykat-farm.webp" alt={p.baykatAlt} width={900} height={600} loading="lazy" className="block aspect-[4/3] w-full rounded-xl border border-line object-cover" />;
-  }
-  return null;
-}
-
-/** Four delivered projects told as short case studies: the need, what we built, the result. */
+/** Two featured projects as large picture panels, then every project in a quiet index table. */
 export function Projects() {
   const { t } = useApp();
   const p = t.projects;
-  const meta = Object.fromEntries(CLIENT_PROJECTS.map((c) => [c.id, `${c.relation === 'employer' ? `${p.builtAt} ` : ''}${c.client} · ${c.year}`])) as Record<ClientProjectId, string>;
+  const byId = Object.fromEntries(CLIENT_PROJECTS.map((c) => [c.id, c])) as Record<ClientProjectId, (typeof CLIENT_PROJECTS)[number]>;
+  const context = (id: ClientProjectId) => (byId[id].relation === 'employer' ? `${p.builtAt} ${byId[id].client}` : `${p.client} · ${byId[id].client}`);
+  const alt = (id: ClientProjectId) => (id === 'activity' ? p.activityAlt : p.baykatAlt);
+
   return (
-    <section id="projects" className="border-t border-line bg-bg-alt/70">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-12 px-4 py-16 sm:px-6 lg:gap-20 lg:py-24">
+    <section id="projects" className="border-t border-line">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-14 px-4 py-20 sm:px-6 lg:py-32">
         <SectionHead index="03" kicker={p.kicker} title={p.title} lead={p.lead} />
-        {ORDER.map((id, i) => {
-          const item = p.items[id];
-          const visual = HAS_VISUAL.includes(id);
-          const head = (
-            <div className="flex flex-col gap-2">
-              <span className="font-mono text-[12px] tracking-[0.12em] text-accent uppercase">{meta[id]}</span>
-              <h3 className="m-0 font-serif text-[34px] leading-[1.05] font-normal sm:text-[44px]">{item.title}</h3>
-            </div>
-          );
-          const blocks = [
-            <div key="p"><dt className="mb-1 text-[13px] font-medium text-muted">{p.problem}</dt><dd className="m-0 text-[16px] leading-relaxed text-soft">{item.problem}</dd></div>,
-            <div key="s"><dt className="mb-1 text-[13px] font-medium text-muted">{p.solution}</dt><dd className="m-0 text-[16px] leading-relaxed text-soft">{item.solution}</dd></div>,
-            <div key="r">
-              <dt className="mb-2 text-[13px] font-medium text-muted">{p.result}</dt>
-              <dd className="m-0">
-                <ul className="m-0 flex list-none flex-col gap-2 p-0">
-                  {item.results.map((r) => <li key={r} className="flex items-start gap-2.5 text-[16px] font-medium text-fg"><span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-brand" />{r}</li>)}
-                </ul>
-              </dd>
-            </div>,
-          ];
-          return (
-            <Reveal key={id}>
-              {visual ? (
-                <article className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
-                  <div className={id === 'baykat' ? 'lg:order-2' : ''}><Visual id={id} /></div>
-                  <div className="flex flex-col gap-6">
-                    {head}
-                    <dl className="m-0 grid gap-5">{blocks}</dl>
-                    {id === 'activity' && (
-                      <a href={SITE_ACTIVITY.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 self-start text-[15px] font-medium text-accent hover:underline">
-                        {p.visit} <ArrowUpRight className="size-4" />
-                      </a>
-                    )}
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          {FEATURED.map((f, i) => {
+            const item = p.items[f.id];
+            const live = f.id === 'activity';
+            const Tag = live ? 'a' : 'div';
+            return (
+              <Reveal key={f.id} delay={i * 0.1}>
+                <Tag
+                  {...(live ? { href: SITE_ACTIVITY.url, target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  className="force-dark group relative block aspect-[4/5] overflow-hidden bg-[#0a0a0b] text-fg sm:aspect-[4/3] lg:aspect-[5/6]"
+                >
+                  <img src={f.src} alt={alt(f.id)} width={f.w} height={f.h} loading="lazy" className={`absolute inset-0 size-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04] ${f.pos}`} />
+                  <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#0a0a0b] via-[#0a0a0b]/40 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 p-7 sm:p-9">
+                    <span className="text-[11px] font-medium tracking-[0.22em] text-accent uppercase">{context(f.id)} · {byId[f.id].year}</span>
+                    <h3 className="m-0 font-serif text-[34px] leading-[1.04] font-normal sm:text-[44px]">{item.title}</h3>
+                    <p className="m-0 max-w-[460px] text-[16px] leading-relaxed text-soft">{item.solution}</p>
+                    {live && <span className="mt-1 inline-flex items-center gap-1.5 text-[14px] font-medium text-accent">{p.visit} <ArrowUpRight className="size-4" /></span>}
                   </div>
+                  <span aria-hidden="true" className="pointer-events-none absolute inset-3 border border-brand/0 transition-colors duration-500 group-hover:border-brand/40" />
+                </Tag>
+              </Reveal>
+            );
+          })}
+        </div>
+
+        <Reveal className="flex flex-col gap-6">
+          <h3 className="m-0 text-[12px] font-medium tracking-[0.22em] text-muted uppercase">{p.indexTitle}</h3>
+          <div className="border-t border-line">
+            <div className="hidden grid-cols-[90px_1.3fr_1fr_1.4fr] gap-8 border-b border-line py-3 text-[11px] tracking-[0.2em] text-muted uppercase md:grid">
+              {p.cols.map((c) => <span key={c}>{c}</span>)}
+            </div>
+            {(['tenders', 'hrbot', 'baykat', 'activity'] as ClientProjectId[]).map((id) => {
+              const item = p.items[id];
+              return (
+                <article key={id} className="grid gap-2 border-b border-line py-7 md:grid-cols-[90px_1.3fr_1fr_1.4fr] md:items-baseline md:gap-8">
+                  <span className="font-serif text-[18px] text-muted italic">{byId[id].year}</span>
+                  <div className="flex flex-col gap-1.5">
+                    <span className="font-serif text-[26px] leading-tight">{item.title}</span>
+                    <span className="text-[15px] leading-relaxed text-muted">{item.problem}</span>
+                  </div>
+                  <span className="text-[14px] text-accent">{context(id)}</span>
+                  <ul className="m-0 flex list-none flex-col gap-1.5 p-0">
+                    {item.results.map((r) => <li key={r} className="text-[15px] leading-relaxed text-soft">{r}</li>)}
+                  </ul>
                 </article>
-              ) : (
-                <article className="flex flex-col gap-8 rounded-xl border border-line bg-card p-6 sm:p-10">
-                  {head}
-                  <dl className="m-0 grid gap-6 md:grid-cols-3 md:gap-10">{blocks}</dl>
-                </article>
-              )}
-            </Reveal>
-          );
-        })}
+              );
+            })}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

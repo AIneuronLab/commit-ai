@@ -2,9 +2,9 @@ import { useCallback, useState } from 'react';
 import { MotionConfig } from 'motion/react';
 import { AppProvider, useApp } from './i18n';
 import { TabBar, TopBar } from './components/Nav';
-import { Marquee } from './components/Marquee';
 import { useSmoothScroll } from './lib/useSmoothScroll';
 import { Hero } from './sections/Hero';
+import { Intro } from './sections/Intro';
 import { How } from './sections/How';
 import { Services } from './sections/Services';
 import { Projects } from './sections/Projects';
@@ -27,7 +27,7 @@ function Shell() {
       <TopBar onStart={open} />
       <main id="main">
         <Hero onStart={open} />
-        <Marquee label={t.hero.stackLabel} title={t.hero.stackTitle} />
+        <Intro />
         <Services />
         <How />
         <Projects />
