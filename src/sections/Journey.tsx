@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 import { useInView } from 'motion/react';
 import { GitHubIcon } from '../components/BrandIcons';
-import { H2, Kicker, UnderLink } from '../components/ui';
+import { Container, Eyebrow, TwoTone } from '../components/ui';
 import { Reveal } from '../motion';
-import { SITE, waLink } from '../data/site';
+import { SITE } from '../data/site';
 import { useGithub } from '../lib/github';
 import { useApp } from '../i18n';
 
-/** "Qui nous sommes": the founder's portrait large, the story beside it, then the career as a quiet list. */
+/** About: the founder's photo and short bio, then the career as a table. */
 export function Journey() {
   const { t, lang } = useApp();
   const j = t.journey;
@@ -15,35 +15,36 @@ export function Journey() {
   const near = useInView(host, { once: true, margin: '600px 0px' });
   const { data } = useGithub(near);
   return (
-    <section id="journey" ref={host} className="border-t border-line">
-      <div className="mx-auto grid max-w-[1200px] gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 lg:py-28">
-        <Reveal className="relative mx-auto w-full max-w-[460px] lg:mx-0">
-          <img src="/portrait.jpg" alt={j.portraitAlt} width={540} height={660} loading="lazy" className="block aspect-[4/5] w-full rounded-xl border border-line object-cover object-[50%_15%]" />
-          <p className="m-0 mt-5 flex flex-col gap-0.5">
-            <span className="text-[18px] font-semibold">{SITE.owner}</span>
-            <span className="text-[14px] text-muted">{j.role} · Commit<span className="text-accent">·AI</span> · {t.footer.location}</span>
-          </p>
+    <section id="journey" ref={host} className="scroll-mt-16 border-t border-line bg-bg-alt">
+      <Container className="grid gap-12 py-20 lg:grid-cols-[360px_1fr] lg:gap-20 lg:py-28">
+        <Reveal className="flex flex-col gap-4">
+          <img src="/portrait.jpg" alt={j.portraitAlt} width={540} height={660} loading="lazy" className="block aspect-[4/5] w-full max-w-[360px] rounded-2xl border border-line object-cover object-[50%_15%]" />
+          <div>
+            <p className="m-0 text-[17px] font-semibold text-fg">{SITE.owner}</p>
+            <p className="m-0 text-[14px] text-muted">{j.role}</p>
+          </div>
         </Reveal>
         <div className="flex min-w-0 flex-col gap-6">
-          <Kicker index="04">{j.kicker}</Kicker>
-          <H2>{j.title}</H2>
-          {j.about.map((para) => <p key={para} className="m-0 max-w-[560px] text-[17px] leading-relaxed text-soft">{para}</p>)}
-          <div className="flex flex-wrap items-center gap-x-10 gap-y-4">
-            <UnderLink href={waLink(t.contact.waText)} external>{t.contact.whatsapp}</UnderLink>
-            <a href={SITE.github.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[15px] text-muted transition-colors hover:text-accent">
-              <GitHubIcon className="size-4" /> <b className="font-semibold text-fg tabular-nums">{data.contributions.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US')}</b> {j.github}
-            </a>
+          <Eyebrow>{j.kicker}</Eyebrow>
+          <TwoTone a={j.title} className="text-[30px] leading-[1.15] sm:text-[38px] lg:text-[44px]" />
+          {j.about.map((para) => <p key={para} className="m-0 max-w-[620px] text-[17px] leading-relaxed text-soft">{para}</p>)}
+          <a href={SITE.github.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 self-start text-[15px] text-muted transition-colors hover:text-accent">
+            <GitHubIcon className="size-4" /> <b className="font-semibold text-fg tabular-nums">{data.contributions.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US')}</b> {j.github}
+          </a>
+          <div className="mt-4">
+            <h3 className="m-0 mb-3 text-[14px] font-medium text-fg">{j.timelineTitle}</h3>
+            <ol className="m-0 list-none overflow-hidden rounded-xl border border-line bg-card p-0">
+              {j.timeline.map(([period, role, org]) => (
+                <li key={role + period} className="grid gap-1 border-b border-line px-5 py-4 last:border-b-0 sm:grid-cols-[130px_1fr_auto] sm:items-baseline sm:gap-6">
+                  <span className="font-mono text-[12.5px] text-muted">{period}</span>
+                  <span className="text-[15px] font-medium text-fg">{role}</span>
+                  <span className="text-[14px] text-muted">{org}</span>
+                </li>
+              ))}
+            </ol>
           </div>
-          <ol className="m-0 mt-6 list-none border-t border-line p-0">
-            {j.timeline.map(([period, role, org]) => (
-              <li key={role + period} className="grid gap-1 border-b border-line py-4 sm:grid-cols-[150px_1fr] sm:gap-6">
-                <span className="text-[14px] text-muted tabular-nums">{period}</span>
-                <span className="text-[16px] text-fg"><b className="font-semibold">{role}</b> <span className="text-muted">· {org}</span></span>
-              </li>
-            ))}
-          </ol>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

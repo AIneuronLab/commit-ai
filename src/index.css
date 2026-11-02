@@ -10,7 +10,7 @@
 @theme {
   --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --font-serif: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-logo: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
 
@@ -68,22 +68,22 @@
 }
 
 .light {
-  /* light: white pages, navy ink, one blue */
+  /* light: white pages, slate ink, one blue */
   --ca-bg: #ffffff;
-  --ca-bg-alt: #f5f7fb;
+  --ca-bg-alt: #f6f8fb;
   --ca-card: #ffffff;
-  --ca-card-alt: #f7f9fc;
-  --ca-line: #e3e8f0;
-  --ca-line-strong: #c4cfde;
-  --ca-fg: #0b1526;
-  --ca-soft: #283548;
-  --ca-muted: #556275;
+  --ca-card-alt: #f8fafc;
+  --ca-line: #e5e9f0;
+  --ca-line-strong: #cbd3df;
+  --ca-fg: #0a1628;
+  --ca-soft: #334155;
+  --ca-muted: #5b6678;
   --ca-accent: #1a5bcb;
-  --ca-accent-soft: #eaf1fd;
+  --ca-accent-soft: #eef4fe;
   --ca-ok: #127044;
   --ca-warn: #8a4b06;
   --ca-glass: rgb(255 255 255 / 0.85);
-  --ca-nav: rgb(255 255 255 / 0.9);
+  --ca-nav: rgb(255 255 255 / 0.82);
   --ca-hero-glow: rgb(29 99 216 / 0.08);
   color-scheme: light;
 }
@@ -116,7 +116,9 @@
   }
   body {
     @apply bg-bg font-sans text-fg antialiased;
-    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    font-feature-settings: 'cv11', 'ss03';
+    font-optical-sizing: auto;
+    letter-spacing: -0.006em;
     overflow-x: clip;
   }
   :focus-visible { outline: 2px solid var(--color-brand-azure); outline-offset: 3px; border-radius: 6px; }
@@ -174,3 +176,12 @@
 /* primary buttons: one solid blue, white text */
 .btn-primary { color: #fff; background: var(--color-brand); }
 .btn-primary:hover { background: var(--color-brand-deep); }
+
+/* hero backdrop: a faint grid that fades out, as on most product sites */
+.hero-grid {
+  background-image: linear-gradient(var(--ca-line) 1px, transparent 1px), linear-gradient(90deg, var(--ca-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+  opacity: 0.7;
+}

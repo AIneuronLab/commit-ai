@@ -1,41 +1,38 @@
-import { Check, Globe, Server, Smartphone, Workflow } from 'lucide-react';
-import { SectionHead } from '../components/ui';
+import { Container, SectionHead } from '../components/ui';
+import { AppCard, BookingCard, CodePanel, RunLog } from '../components/Vignettes';
 import { Reveal } from '../motion';
 import { useApp } from '../i18n';
 
-const ICONS = [Workflow, Globe, Smartphone, Server];
+const VISUAL = { automation: RunLog, web: BookingCard, mobile: AppCard, api: CodePanel } as const;
 
-/** Four services as equal cards: what it solves, what you receive, the tools we use. */
+/** Four services as a grid of panels, each with a small interface showing what we build. */
 export function Services() {
   const { t } = useApp();
   const s = t.services;
   return (
-    <section id="services" className="border-t border-line bg-bg-alt">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-12 px-4 py-20 sm:px-6 lg:py-28">
-        <SectionHead index="01" kicker={s.kicker} title={s.title} lead={s.lead} />
-        <ul className="m-0 grid list-none gap-5 p-0 md:grid-cols-2">
+    <section id="services" className="scroll-mt-16">
+      <Container className="flex flex-col gap-12 py-20 lg:gap-16 lg:py-28">
+        <SectionHead eyebrow={s.kicker} a={s.title} b={s.titleB} />
+        <div className="grid gap-4 md:grid-cols-2">
           {s.items.map((it, i) => {
-            const Icon = ICONS[i];
+            const Visual = VISUAL[it.id as keyof typeof VISUAL];
             return (
-              <li key={it.title} className="flex">
-                <Reveal delay={(i % 2) * 0.06} className="flex w-full">
-                  <article className="flex w-full flex-col gap-5 rounded-xl border border-line bg-card p-7 shadow-[0_1px_2px_rgba(11,21,38,.04)] transition hover:border-line-strong hover:shadow-[0_12px_30px_-16px_rgba(11,21,38,.25)] sm:p-8">
-                    <span className="flex size-11 items-center justify-center rounded-lg bg-accent-soft text-accent"><Icon className="size-5.5" aria-hidden="true" /></span>
-                    <div className="flex flex-col gap-2">
-                      <h3 className="m-0 text-[21px] leading-tight font-semibold tracking-[-0.015em]">{it.title}</h3>
-                      <p className="m-0 text-[16px] leading-relaxed text-muted">{it.desc}</p>
-                    </div>
-                    <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
-                      {it.deliver.map((d) => <li key={d} className="flex items-start gap-2.5 text-[15px] text-soft"><Check className="mt-0.5 size-4.5 shrink-0 text-accent" aria-hidden="true" />{d}</li>)}
-                    </ul>
-                    <p className="m-0 mt-auto border-t border-line pt-4 text-[13px] text-muted">{it.tags.join(' · ')}</p>
-                  </article>
-                </Reveal>
-              </li>
+              <Reveal key={it.id} delay={(i % 2) * 0.06} className="flex">
+                <article className="flex w-full flex-col overflow-hidden rounded-2xl border border-line bg-card">
+                  <div className="flex flex-col gap-2 p-7 sm:p-8 md:min-h-[190px]">
+                    <h3 className="m-0 text-[20px] font-semibold tracking-[-0.015em] text-fg">{it.title}</h3>
+                    <p className="m-0 max-w-[460px] text-[15.5px] leading-relaxed text-muted">{it.desc}</p>
+                    <p className="m-0 mt-2 font-mono text-[12px] text-muted">{it.tags.join('  ·  ')}</p>
+                  </div>
+                  <div className="mt-auto flex min-h-[290px] items-center justify-center border-t border-line bg-bg-alt px-6 py-8 sm:px-10">
+                    {it.id === 'mobile' ? <Visual /> : <Visual className="w-full max-w-[420px]" />}
+                  </div>
+                </article>
+              </Reveal>
             );
           })}
-        </ul>
-      </div>
+        </div>
+      </Container>
     </section>
   );
 }

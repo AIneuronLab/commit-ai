@@ -1,29 +1,26 @@
-import { SectionHead } from '../components/ui';
+import { Container, SectionHead } from '../components/ui';
 import { Reveal } from '../motion';
 import { useApp } from '../i18n';
 
-/** Three steps side by side, each with a numbered badge. */
+/** Three steps in one ruled row. */
 export function How() {
   const { t } = useApp();
   return (
-    <section className="border-t border-line">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-12 px-4 py-20 sm:px-6 lg:py-28">
-        <SectionHead index="02" kicker={t.how.kicker} title={t.how.title} lead={t.how.lead} />
-        <ol className="m-0 grid list-none gap-10 p-0 md:grid-cols-3 md:gap-8">
-          {t.how.steps.map((s, i) => (
-            <li key={s.t}>
-              <Reveal delay={i * 0.1} className="flex flex-col gap-3">
-                <div className="flex items-center gap-3">
-                  <span className="flex size-9 items-center justify-center rounded-full bg-brand text-[15px] font-semibold text-white tabular-nums">{i + 1}</span>
-                  <span className="text-[13px] font-semibold tracking-[0.06em] text-muted uppercase">{s.tag}</span>
-                </div>
-                <h3 className="m-0 mt-2 text-[20px] leading-snug font-semibold tracking-[-0.01em]">{s.t}</h3>
-                <p className="m-0 text-[16px] leading-relaxed text-muted">{s.d}</p>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
-      </div>
+    <section id="process" className="scroll-mt-16 border-t border-line">
+      <Container className="flex flex-col gap-12 py-20 lg:gap-16 lg:py-28">
+        <SectionHead eyebrow={t.how.kicker} a={t.how.title} b={t.how.titleB} />
+        <Reveal>
+          <ol className="m-0 grid list-none overflow-hidden rounded-2xl border border-line p-0 md:grid-cols-3">
+            {t.how.steps.map((s, i) => (
+              <li key={s.t} className={`flex flex-col gap-3 p-7 sm:p-8 ${i > 0 ? 'border-t border-line md:border-t-0 md:border-l' : ''}`}>
+                <span className="font-mono text-[12px] text-accent">{s.tag}</span>
+                <h3 className="m-0 text-[20px] font-semibold tracking-[-0.015em] text-fg">{s.t}</h3>
+                <p className="m-0 text-[15.5px] leading-relaxed text-muted">{s.d}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+      </Container>
     </section>
   );
 }

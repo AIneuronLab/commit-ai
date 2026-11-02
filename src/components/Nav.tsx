@@ -1,89 +1,56 @@
 import { useEffect, useState } from 'react';
-import { motion, useScroll } from 'motion/react';
-import { Magnetic } from './Magnetic';
-import { FolderKanban, House, Layers, MessageCircle, Moon, Sun, UserRound } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import { Logo } from '../brand/Logo';
 import { useApp } from '../i18n';
 
-const SECTIONS = ['top', 'services', 'projects', 'journey', 'contact'] as const;
-type Section = (typeof SECTIONS)[number];
-
-/** Which section is currently under the top third of the screen. */
-function useActiveSection(): Section {
-  const [active, setActive] = useState<Section>('top');
-  useEffect(() => {
-    const els = SECTIONS.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id as Section)),
-      { rootMargin: '-35% 0px -55% 0px' },
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-  return active;
-}
-
-const buzz = () => { try { navigator.vibrate?.(8); } catch { /* not supported */ } };
-
+/** Sticky top bar: logo, section links, language and theme, primary action. A drop-down menu on phones. */
 export function TopBar({ onStart }: { onStart: () => void }) {
   const { t, lang, mode, toggleLang, toggleMode } = useApp();
-  const { scrollYProgress } = useScroll();
-  const links: [string, string][] = [['#services', t.nav.services], ['#projects', t.nav.projects], ['#journey', t.nav.journey], ['#faq', t.nav.faq], ['#contact', t.nav.contact]];
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 8);
+    on();
+    window.addEventListener('scroll', on, { passive: true });
+    return () => window.removeEventListener('scroll', on);
+  }, []);
+  const links: [string, string][] = [['#services', t.nav.services], ['#projects', t.nav.projects], ['#process', t.nav.process], ['#journey', t.nav.journey], ['#faq', t.nav.faq]];
+  const iconBtn = 'flex size-9 items-center justify-center rounded-lg text-soft transition hover:bg-bg-alt hover:text-fg';
+
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-nav pt-[env(safe-area-inset-top,0px)] backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-[1200px] items-center justify-between gap-3 px-4 py-2.5 sm:px-6" aria-label={t.a11y.menu}>
-        <a href="#top" aria-label="Commit·AI"><Logo size={34} variant={mode} /></a>
-        <div className="hidden items-center gap-6 text-[15px] font-medium whitespace-nowrap md:flex lg:gap-8">
-          {links.map(([h, l]) => <a key={h} href={h} className="text-soft transition-colors hover:text-accent">{l}</a>)}
+    <header className={`sticky top-0 z-40 pt-[env(safe-area-inset-top,0px)] backdrop-blur-xl transition-colors ${scrolled || open ? 'border-b border-line bg-nav' : 'border-b border-transparent bg-transparent'}`}>
+      <nav className="mx-auto flex h-16 max-w-[1200px] items-center justify-between gap-6 px-5 sm:px-8" aria-label={t.a11y.menu}>
+        <a href="#top" aria-label="Commit·AI" onClick={() => setOpen(false)}><Logo size={30} variant={mode} /></a>
+        <div className="hidden items-center gap-1 lg:flex">
+          {links.map(([h, l]) => <a key={h} href={h} className="rounded-lg px-3 py-2 text-[14.5px] text-soft transition hover:bg-bg-alt hover:text-fg">{l}</a>)}
         </div>
-        <div className="flex items-center gap-2">
-          <button onClick={toggleLang} aria-label={t.a11y.switchLang} className="flex h-11 min-w-11 items-center justify-center rounded-md border border-line px-3 font-mono text-[13px] font-medium text-soft transition hover:border-line-strong">
-            {lang === 'fr' ? 'EN' : 'FR'}
-          </button>
-          <button onClick={toggleMode} aria-label={mode === 'dark' ? t.a11y.toLight : t.a11y.toDark} className="flex size-11 items-center justify-center rounded-md border border-line text-soft transition hover:border-line-strong">
-            {mode === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
-          </button>
-          <div className="hidden lg:block"><Magnetic className="inline-flex"><button onClick={onStart} className="btn-primary min-h-10 rounded-lg px-5 text-[14px] font-semibold whitespace-nowrap transition">{t.nav.cta}</button></Magnetic></div>
+        <div className="flex items-center gap-1.5">
+          <button onClick={toggleLang} aria-label={t.a11y.switchLang} className={`${iconBtn} w-auto px-2.5 text-[13px] font-medium`}>{lang === 'fr' ? 'EN' : 'FR'}</button>
+          <button onClick={toggleMode} aria-label={mode === 'dark' ? t.a11y.toLight : t.a11y.toDark} className={iconBtn}>{mode === 'dark' ? <Sun className="size-4.5" /> : <Moon className="size-4.5" />}</button>
+          <a href="#contact" className="ml-1 hidden rounded-lg px-3 py-2 text-[14.5px] text-soft transition hover:bg-bg-alt hover:text-fg sm:inline-block">{t.nav.contact}</a>
+          <button onClick={onStart} className="btn-primary ml-1 hidden h-9 items-center rounded-lg px-4 text-[14px] font-medium transition sm:inline-flex">{t.nav.cta}</button>
+          <button onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-label={open ? t.a11y.close : t.a11y.openMenu} className={`${iconBtn} lg:hidden`}>{open ? <X className="size-5" /> : <Menu className="size-5" />}</button>
         </div>
       </nav>
-      <motion.span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[2px] origin-left bg-accent" style={{ scaleX: scrollYProgress }} />
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden border-t border-line lg:hidden"
+          >
+            <div className="mx-auto flex max-w-[1200px] flex-col px-5 py-3 sm:px-8">
+              {[...links, ['#contact', t.nav.contact] as [string, string]].map(([h, l]) => (
+                <a key={h} href={h} onClick={() => setOpen(false)} className="border-b border-line py-3.5 text-[16px] text-fg last:border-b-0">{l}</a>
+              ))}
+              <button onClick={() => { setOpen(false); onStart(); }} className="btn-primary mt-3 mb-2 inline-flex h-11 items-center justify-center rounded-lg text-[15px] font-medium sm:hidden">{t.nav.cta}</button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
-  );
-}
-
-const TABS: { id: Section; icon: typeof House; key: 'home' | 'services' | 'projects' | 'journey' | 'contact' }[] = [
-  { id: 'top', icon: House, key: 'home' },
-  { id: 'services', icon: Layers, key: 'services' },
-  { id: 'projects', icon: FolderKanban, key: 'projects' },
-  { id: 'journey', icon: UserRound, key: 'journey' },
-  { id: 'contact', icon: MessageCircle, key: 'contact' },
-];
-
-/** App-style bottom tab bar, phones only. */
-export function TabBar() {
-  const { t } = useApp();
-  const active = useActiveSection();
-  return (
-    <nav aria-label={t.a11y.menu} className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 md:hidden">
-      <ul className="m-0 flex list-none items-center justify-between rounded-xl border border-line-strong bg-nav p-1.5 shadow-[0_20px_50px_-12px_rgba(0,0,0,.65)] backdrop-blur-xl">
-        {TABS.map(({ id, icon: Icon, key }) => {
-          const on = active === id;
-          return (
-            <li key={id} className="flex-1">
-              <a
-                href={`#${id}`}
-                onClick={buzz}
-                aria-current={on ? 'true' : undefined}
-                className={`relative flex min-h-14 flex-col items-center justify-center gap-0.5 rounded-lg text-[12px] font-medium transition-colors ${on ? 'text-white' : 'text-soft'}`}
-              >
-                {on && <motion.span layoutId="tab-pill" className="absolute inset-0 rounded-lg bg-brand" transition={{ type: 'spring', damping: 28, stiffness: 400 }} />}
-                <Icon className="relative size-5" aria-hidden="true" />
-                <span className="relative">{t.tabs[key]}</span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
   );
 }
