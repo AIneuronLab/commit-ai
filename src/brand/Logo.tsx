@@ -9,14 +9,14 @@ type MarkProps = {
   size?: number;
   /** 'dark' = for dark backgrounds, 'light' = for white backgrounds */
   variant?: Variant;
-  /** blocks assemble ring by ring + the core breathes */
+  /** blocks assemble ring by ring + the cyan core breathes */
   animated?: boolean;
   className?: string;
   title?: string;
 };
 
 /**
- * Commit·AI symbol — the gold blocks "C" with the glowing core.
+ * Commit·AI symbol — the blue blocks "C" with the glowing cyan core.
  * Pure SVG + React (no image file), animated with `motion`.
  */
 export function LogoMark({ size = 40, variant = 'dark', animated = false, className, title = 'Commit·AI' }: MarkProps) {
@@ -57,7 +57,7 @@ export function LogoMark({ size = 40, variant = 'dark', animated = false, classN
         ))}
       </defs>
 
-      {variant === 'dark' && <circle cx="100" cy="100" r="62" fill="#C9A24A" opacity={0.12} filter={`url(#${uid}h)`} />}
+      {variant === 'dark' && <circle cx="100" cy="100" r="62" fill="#2196F3" opacity={0.1} filter={`url(#${uid}h)`} />}
 
       {data.blocks.map(([x, y, w, rx], i) => {
         const ring = i < 14 ? 0 : i < 26 ? 1 : 2;
@@ -82,7 +82,7 @@ export function LogoMark({ size = 40, variant = 'dark', animated = false, classN
       {/* glowing core */}
       <motion.rect
         x="86.5" y="86.5" width="27" height="27" rx="6.9"
-        fill="#F2D27A"
+        fill="#67E8F9"
         filter={`url(#${uid}g)`}
         initial={{ opacity: variant === 'dark' ? 0.75 : 0.3 }}
         animate={anim ? { opacity: variant === 'dark' ? [0.45, 0.9, 0.45] : [0.2, 0.45, 0.2] } : undefined}
@@ -101,13 +101,13 @@ export function LogoMark({ size = 40, variant = 'dark', animated = false, classN
   );
 }
 
-/** Symbol + "Commit·AI" wordmark. "·AI" is always brand gold. */
+/** Symbol + "Commit·AI" wordmark. "·AI" is always brand blue #2196F3. */
 export function Logo({ size = 36, variant = 'dark', animated = false, className = '' }: MarkProps) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <LogoMark size={size} variant={variant} animated={animated} />
       <span
-        className={`font-logo font-bold tracking-tight ${variant === 'dark' ? 'text-[#f5f1e8]' : 'text-[#121110]'}`}
+        className={`font-logo font-bold tracking-tight ${variant === 'dark' ? 'text-white' : 'text-[#0b1526]'}`}
         style={{ fontSize: size * 0.56 }}
       >
         Commit<span className="text-brand">·AI</span>

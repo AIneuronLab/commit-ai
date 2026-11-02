@@ -5,8 +5,8 @@ export const fr = {
   tabs: { home: 'Accueil', services: 'Services', projects: 'Projets', journey: 'À propos', contact: 'Contact' },
   hero: {
     eyebrow: 'Commit·AI — Dakar, Sénégal',
-    lineA: 'Le logiciel,',
-    lineB: 'sur mesure.',
+    lineA: 'Le logiciel sur mesure',
+    lineB: 'qui fait gagner du temps.',
     availability: 'Disponible pour de nouveaux projets',
     titleA: 'Nous',
     words: ['automatisons', 'développons', 'déployons'],

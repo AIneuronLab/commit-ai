@@ -1,52 +1,57 @@
 import { motion, useReducedMotion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
-import { Magnetic } from '../components/Magnetic';
+import { ArrowRight, Check, Lock } from 'lucide-react';
 import { UnderLink } from '../components/ui';
 import { EASE_OUT } from '../motion';
+import { SITE_ACTIVITY } from '../data/projects';
 import { useApp } from '../i18n';
 
-/** A full-screen title page: one statement set large in serif, two actions, and the delivered projects along the bottom. */
+/** Opening screen: what we do in one sentence, two actions, our guarantees, and one real project on the right. */
 export function Hero({ onStart }: { onStart: () => void }) {
   const { t } = useApp();
   const h = t.hero;
   const reduce = useReducedMotion();
   /** Slides up but never starts invisible: the first paint must already show the text (speed). */
-  const rise = (delay: number) => ({ initial: reduce ? false : { y: 18 }, animate: { y: 0 }, transition: { duration: 0.9, delay, ease: EASE_OUT } } as const);
+  const rise = (delay: number) => ({ initial: reduce ? false : { y: 14 }, animate: { y: 0 }, transition: { duration: 0.7, delay, ease: EASE_OUT } } as const);
 
   return (
-    <section id="top" className="force-dark relative isolate flex min-h-[calc(100svh-4.5rem)] flex-col overflow-hidden bg-[#0a0a0b] text-fg">
-      <span aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_45%_at_50%_0%,rgba(201,162,74,.20),transparent_70%)]" />
-      <span aria-hidden="true" className="grain absolute inset-0 -z-10" />
-      <span aria-hidden="true" className="absolute inset-y-0 left-[max(1rem,calc((100vw-1200px)/2))] -z-10 hidden w-px bg-gradient-to-b from-transparent via-brand/25 to-transparent lg:block" />
-      <span aria-hidden="true" className="absolute inset-y-0 right-[max(1rem,calc((100vw-1200px)/2))] -z-10 hidden w-px bg-gradient-to-b from-transparent via-brand/25 to-transparent lg:block" />
-
-      <div className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col items-center justify-center px-4 py-20 text-center sm:px-6">
-        <motion.p {...rise(0)} className="m-0 text-[12px] font-medium tracking-[0.3em] text-accent uppercase">{h.eyebrow}</motion.p>
-        <motion.h1 {...rise(0.08)} className="m-0 mt-8 font-serif text-[64px] leading-[0.92] font-normal tracking-[-0.02em] sm:text-[104px] xl:text-[132px]">
-          <span className="block">{h.lineA}</span>
-          <span className="block text-accent italic">{h.lineB}</span>
-        </motion.h1>
-        <motion.p {...rise(0.18)} className="m-0 mt-8 max-w-[620px] text-[17px] leading-relaxed text-soft sm:text-[19px]">{h.lead}</motion.p>
-        <motion.div {...rise(0.28)} className="mt-10 flex flex-col items-center gap-6 sm:flex-row sm:gap-10">
-          <Magnetic>
-            <button onClick={onStart} className="group btn-primary inline-flex min-h-13 items-center justify-center gap-2.5 rounded-full px-8 font-medium whitespace-nowrap transition">
-              {h.primary} <ArrowRight className="size-5 transition group-hover:translate-x-1" />
+    <section id="top" className="relative overflow-hidden border-b border-line bg-[linear-gradient(180deg,var(--ca-bg-alt),var(--ca-bg))]">
+      <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-4 pt-14 pb-20 sm:px-6 lg:grid-cols-[1.05fr_.95fr] lg:gap-16 lg:pt-24 lg:pb-28">
+        <div className="flex min-w-0 flex-col gap-7">
+          <motion.p {...rise(0)} className="m-0 inline-flex items-center gap-2 self-start rounded-full border border-line bg-card px-3 py-1.5 text-[13px] font-medium text-soft">
+            <span className="size-2 rounded-full bg-ok" />{h.availability}
+          </motion.p>
+          <motion.h1 {...rise(0.05)} className="m-0 font-display text-[40px] leading-[1.06] font-bold tracking-[-0.035em] text-balance sm:text-[54px] xl:text-[62px]">
+            {h.lineA} <span className="text-accent">{h.lineB}</span>
+          </motion.h1>
+          <motion.p {...rise(0.12)} className="m-0 max-w-[560px] text-[18px] leading-relaxed text-muted">{h.lead}</motion.p>
+          <motion.div {...rise(0.2)} className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7">
+            <button onClick={onStart} className="group btn-primary inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-6 font-semibold whitespace-nowrap transition">
+              {h.primary} <ArrowRight className="size-4.5 transition group-hover:translate-x-0.5" />
             </button>
-          </Magnetic>
-          <UnderLink href="#projects">{h.secondary}</UnderLink>
-        </motion.div>
-        <motion.ul {...rise(0.38)} className="m-0 mt-10 flex list-none flex-col items-center justify-center gap-x-4 gap-y-2 p-0 text-[14px] text-muted sm:flex-row sm:flex-wrap">
-          {h.facts.map((f, i) => (
-            <li key={f} className="inline-flex items-center gap-4">{i > 0 && <span aria-hidden="true" className="hidden size-1 rounded-full bg-brand sm:inline-block" />}{f}</li>
-          ))}
-        </motion.ul>
+            <UnderLink href="#projects">{h.secondary}</UnderLink>
+          </motion.div>
+          <motion.ul {...rise(0.28)} className="m-0 flex list-none flex-col gap-2 p-0 text-[15px] text-soft sm:flex-row sm:flex-wrap sm:gap-x-6">
+            {h.facts.map((f) => <li key={f} className="inline-flex items-center gap-2"><Check className="size-4 text-accent" />{f}</li>)}
+          </motion.ul>
+        </div>
+
+        <motion.figure {...rise(0.15)} className="m-0">
+          <a href={SITE_ACTIVITY.url} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl border border-line bg-card shadow-[0_24px_60px_-24px_rgba(11,21,38,.35)]">
+            <div className="flex h-9 items-center gap-1.5 border-b border-line bg-card-alt px-3">
+              <span className="size-2.5 rounded-full bg-line-strong" /><span className="size-2.5 rounded-full bg-line-strong" /><span className="size-2.5 rounded-full bg-line-strong" />
+              <span className="ml-3 flex h-6 flex-1 items-center gap-1.5 truncate rounded-md border border-line bg-card px-2 text-[12px] text-muted"><Lock className="size-3 shrink-0" /> {SITE_ACTIVITY.host}</span>
+            </div>
+            <img src="/activityconnect.webp" alt={h.showcaseAlt} width={765} height={575} fetchPriority="high" className="block h-auto w-full" />
+          </a>
+          <figcaption className="mt-3 text-[14px] text-muted"><b className="font-semibold text-fg">ActivityConnect</b> · {h.showcaseCaption}</figcaption>
+        </motion.figure>
       </div>
 
-      <div className="border-t border-brand/20">
-        <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-3 px-4 py-6 sm:px-6 md:flex-row md:justify-between">
-          <span className="text-[11px] font-medium tracking-[0.24em] text-muted uppercase">{h.trusted}</span>
-          <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-x-8 gap-y-2 p-0">
-            {h.delivered.map((n) => <li key={n} className="font-serif text-[20px] text-soft italic">{n}</li>)}
+      <div className="border-t border-line bg-card">
+        <div className="mx-auto flex max-w-[1200px] flex-col gap-3 px-4 py-6 sm:px-6 md:flex-row md:items-center md:justify-between">
+          <span className="text-[13px] font-semibold tracking-[0.08em] text-muted uppercase">{h.trusted}</span>
+          <ul className="m-0 flex list-none flex-wrap items-center gap-x-8 gap-y-2 p-0">
+            {h.delivered.map((n) => <li key={n} className="text-[16px] font-semibold text-soft">{n}</li>)}
           </ul>
         </div>
       </div>

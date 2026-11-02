@@ -15,15 +15,12 @@ export function Journey() {
   const near = useInView(host, { once: true, margin: '600px 0px' });
   const { data } = useGithub(near);
   return (
-    <section id="journey" ref={host} className="border-t border-line bg-bg-alt/70">
-      <div className="mx-auto grid max-w-[1200px] gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:py-32">
+    <section id="journey" ref={host} className="border-t border-line">
+      <div className="mx-auto grid max-w-[1200px] gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 lg:py-28">
         <Reveal className="relative mx-auto w-full max-w-[460px] lg:mx-0">
-          <div className="relative">
-            <span aria-hidden="true" className="absolute -right-4 -bottom-4 left-4 top-4 border border-brand/50" />
-            <img src="/portrait.jpg" alt={j.portraitAlt} width={540} height={660} loading="lazy" className="relative block aspect-[4/5] w-full object-cover object-[50%_15%] grayscale-[35%]" />
-          </div>
-          <p className="relative m-0 mt-8 flex flex-col">
-            <span className="font-serif text-[26px]">{SITE.owner}</span>
+          <img src="/portrait.jpg" alt={j.portraitAlt} width={540} height={660} loading="lazy" className="block aspect-[4/5] w-full rounded-xl border border-line object-cover object-[50%_15%]" />
+          <p className="m-0 mt-5 flex flex-col gap-0.5">
+            <span className="text-[18px] font-semibold">{SITE.owner}</span>
             <span className="text-[14px] text-muted">{j.role} · Commit<span className="text-accent">·AI</span> · {t.footer.location}</span>
           </p>
         </Reveal>
@@ -40,8 +37,8 @@ export function Journey() {
           <ol className="m-0 mt-6 list-none border-t border-line p-0">
             {j.timeline.map(([period, role, org]) => (
               <li key={role + period} className="grid gap-1 border-b border-line py-4 sm:grid-cols-[150px_1fr] sm:gap-6">
-                <span className="font-serif text-[16px] text-muted italic">{period}</span>
-                <span className="text-[16px] text-fg">{role} <span className="text-accent">· {org}</span></span>
+                <span className="text-[14px] text-muted tabular-nums">{period}</span>
+                <span className="text-[16px] text-fg"><b className="font-semibold">{role}</b> <span className="text-muted">· {org}</span></span>
               </li>
             ))}
           </ol>

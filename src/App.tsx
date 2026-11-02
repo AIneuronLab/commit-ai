@@ -23,7 +23,7 @@ function Shell() {
   const close = useCallback(() => setSheet(false), []);
   return (
     <>
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-brand focus:text-[#0c0b09] focus:px-4 focus:py-2 focus:text-white">{t.a11y.skip}</a>
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-brand focus:text-white focus:px-4 focus:py-2 focus:text-white">{t.a11y.skip}</a>
       <TopBar onStart={open} />
       <main id="main">
         <Hero onStart={open} />

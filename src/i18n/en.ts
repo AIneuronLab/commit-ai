@@ -7,8 +7,8 @@ export const en: Dict = {
   tabs: { home: 'Home', services: 'Services', projects: 'Work', journey: 'About', contact: 'Contact' },
   hero: {
     eyebrow: 'Commit·AI — Dakar, Senegal',
-    lineA: 'Software,',
-    lineB: 'made to measure.',
+    lineA: 'Custom software',
+    lineB: 'that saves your team time.',
     availability: 'Taking on new projects',
     titleA: 'We',
     words: ['automate', 'build', 'ship'],

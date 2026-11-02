@@ -11,7 +11,7 @@ type Status = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
 /** Public by design (Web3Forms: it only maps to your email address). Set VITE_WEB3FORMS_KEY at build time. */
 const FORM_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
 
-const field = 'min-h-12 w-full border-0 border-b border-line-strong bg-transparent px-0 py-3 text-[17px] text-fg placeholder:text-muted outline-none transition focus:border-brand';
+const field = 'min-h-12 w-full rounded-lg border border-line-strong bg-card px-4 py-3 text-[16px] text-fg placeholder:text-muted outline-none transition focus:border-brand focus:ring-3 focus:ring-brand/15';
 
 function Form() {
   const { t } = useApp();
@@ -52,19 +52,19 @@ function Form() {
   }
 
   return (
-    <form id="message" onSubmit={onSubmit} className="flex flex-col gap-7">
-      <h3 className="m-0 font-serif text-[30px] font-normal">{f.title}</h3>
+    <form id="message" onSubmit={onSubmit} className="flex flex-col gap-5 rounded-xl border border-line bg-card p-6 sm:p-8">
+      <h3 className="m-0 text-[22px] font-semibold tracking-[-0.015em]">{f.title}</h3>
       <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
-      <label className="flex flex-col gap-1 text-[11px] font-medium tracking-[0.2em] text-muted uppercase">{f.name}
+      <label className="flex flex-col gap-1.5 text-[14px] font-medium text-soft">{f.name}
         <input name="name" required autoComplete="name" className={field} />
       </label>
-      <label className="flex flex-col gap-1 text-[11px] font-medium tracking-[0.2em] text-muted uppercase">{f.email}
+      <label className="flex flex-col gap-1.5 text-[14px] font-medium text-soft">{f.email}
         <input name="email" type="email" required autoComplete="email" inputMode="email" className={field} />
       </label>
-      <label className="flex flex-col gap-1 text-[11px] font-medium tracking-[0.2em] text-muted uppercase">{f.message}
+      <label className="flex flex-col gap-1.5 text-[14px] font-medium text-soft">{f.message}
         <textarea name="message" required rows={4} className={`${field} resize-y`} />
       </label>
-      <button disabled={status === 'sending'} className="mt-2 inline-flex min-h-13 items-center justify-center gap-2 self-start rounded-full btn-primary px-10 font-medium transition disabled:opacity-60">
+      <button disabled={status === 'sending'} className="mt-1 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg btn-primary px-8 font-semibold transition disabled:opacity-60">
         {status === 'sending' ? f.sending : f.send}
       </button>
       <p role="status" aria-live="polite" className={`m-0 min-h-6 text-[15px] ${status === 'error' ? 'text-warn' : 'text-ok'}`}>
@@ -86,14 +86,14 @@ export function Contact() {
   ];
   return (
     <section id="contact" className="border-t border-line">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-16 px-4 py-20 sm:px-6 lg:py-32">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-16 px-4 py-20 sm:px-6 lg:py-28">
         <div className="flex flex-col items-center gap-6 text-center">
           <Kicker index="06">{c.kicker}</Kicker>
-          <H2 className="lg:text-[84px]">{c.title}</H2>
+          <H2 className="lg:text-[52px]">{c.title}</H2>
           <p className="m-0 max-w-[520px] text-[17px] leading-relaxed text-muted">{c.lead}</p>
-          <a href={`mailto:${SITE.email}`} className="mt-4 font-serif text-[28px] text-accent italic underline decoration-brand/40 decoration-1 underline-offset-[10px] transition hover:decoration-brand sm:text-[44px]">{SITE.email}</a>
-          <p className="m-0 text-[13px] tracking-[0.2em] text-muted uppercase">{c.or}</p>
-          <a href={waLink(c.waText)} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex min-h-13 items-center gap-2.5 rounded-full px-8 font-medium transition">
+          <a href={`mailto:${SITE.email}`} className="mt-2 text-[24px] font-semibold tracking-[-0.02em] text-accent underline decoration-accent/30 decoration-2 underline-offset-8 transition hover:decoration-accent sm:text-[34px]">{SITE.email}</a>
+          <p className="m-0 text-[14px] text-muted">{c.or}</p>
+          <a href={waLink(c.waText)} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex min-h-12 items-center gap-2.5 rounded-lg px-7 font-semibold transition">
             <MessageCircle className="size-5" /> {c.whatsapp}
           </a>
         </div>
@@ -103,7 +103,7 @@ export function Contact() {
               <li key={l.label} className="border-b border-line">
                 <a href={l.href} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between gap-4 py-5">
                   <span className="flex flex-col">
-                    <span className="text-[11px] font-medium tracking-[0.2em] text-muted uppercase">{l.label}</span>
+                    <span className="text-[13px] font-medium text-muted">{l.label}</span>
                     <span className="mt-1 text-[17px] text-fg">{l.value}</span>
                   </span>
                   <ArrowUpRight className="size-5 text-accent transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -127,8 +127,8 @@ export function ContactSheet({ open, onClose }: { open: boolean; onClose: () => 
       <p className="m-0 mb-4 text-[16px] text-muted">{s.lead}</p>
       <div className="flex flex-col gap-3">
         <a href={waLink(t.contact.waText)} target="_blank" rel="noopener noreferrer" onClick={onClose} className="flex min-h-16 items-center gap-3.5 btn-primary rounded-lg px-4 py-3">
-          <span className="flex size-11 items-center justify-center rounded-xl bg-black/10"><MessageCircle className="size-5" /></span>
-          <span className="flex flex-col leading-tight"><b>{t.contact.whatsapp}</b><span className="text-[14px] text-black/70">{t.contact.whatsappHint}</span></span>
+          <span className="flex size-11 items-center justify-center rounded-xl bg-white/15"><MessageCircle className="size-5" /></span>
+          <span className="flex flex-col leading-tight"><b>{t.contact.whatsapp}</b><span className="text-[14px] text-white/85">{t.contact.whatsappHint}</span></span>
         </a>
         <a href={`mailto:${SITE.email}`} onClick={onClose} className="flex min-h-16 items-center gap-3.5 rounded-lg border border-line bg-card-alt px-4 py-3">
           <span className="flex size-11 items-center justify-center rounded-md bg-accent-soft text-accent"><Mail className="size-5" /></span>
