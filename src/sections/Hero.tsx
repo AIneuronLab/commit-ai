@@ -1,6 +1,7 @@
 import { ArrowRight, Lock } from 'lucide-react';
 import { Container, Eyebrow, TwoTone } from '../components/ui';
 import { RunLog } from '../components/Vignettes';
+import { NeuralBackdrop } from '../components/NeuralBackdrop';
 import { SITE_ACTIVITY } from '../data/projects';
 import { useApp } from '../i18n';
 
@@ -10,7 +11,7 @@ export function Hero({ onStart }: { onStart: () => void }) {
   const h = t.hero;
   return (
     <section id="top" className="relative overflow-hidden">
-      <span aria-hidden="true" className="hero-grid pointer-events-none absolute inset-x-0 top-0 h-[560px]" />
+      <NeuralBackdrop className="absolute inset-x-0 top-0 h-[560px] w-full [mask-image:radial-gradient(ellipse_75%_70%_at_70%_35%,#000_20%,transparent_75%)]" />
       <Container className="relative pt-16 pb-16 lg:pt-28 lg:pb-24">
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
