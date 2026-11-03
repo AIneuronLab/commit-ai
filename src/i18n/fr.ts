@@ -1,6 +1,10 @@
 export const fr = {
   lang: 'fr',
   a11y: { toLight: 'Passer en mode clair', toDark: 'Passer en mode sombre', switchLang: 'EN — Switch to English', menu: 'Navigation principale', openMenu: 'Ouvrir le menu', close: 'Fermer', skip: 'Aller au contenu' },
+  navSub: { services: 'Ce que nous construisons', projects: 'Des projets en production', process: 'Comment nous travaillons', journey: 'Qui construit', faq: 'Avant de commencer', contact: 'Écrivez-nous' },
+  ticker: ['Code écrit à la main.', 'Livré en production.', 'Un seul interlocuteur.', 'Joignable après la livraison.'],
+  welcome: { kicker: 'Bienvenue', aside: 'Dakar · Sénégal · à distance partout' },
+  photoCredit: 'Photo : Bamby Diagne / Unsplash',
   nav: { services: 'Services', projects: 'Réalisations', process: 'Méthode', journey: 'À propos', faq: 'FAQ', contact: 'Contact', cta: 'Démarrer un projet' },
   hero: {
     eyebrow: 'Studio logiciel · Dakar, Sénégal',
@@ -9,6 +13,9 @@ export const fr = {
     titleB: 'Automatisation, web, mobile, API et IA.',
     primary: 'Démarrer un projet',
     secondary: 'Voir les réalisations',
+    scroll: 'Défiler',
+    rotate: ['Vos idées. En production.', 'Écrit à Dakar. Utilisé partout.', 'Vous décrivez. Nous livrons.'],
+    by: 'Conçu et codé par',
     showcaseAlt: 'Site de réservation ActivityConnect, réalisé par Commit·AI',
     showcaseCaption: 'ActivityConnect — site de réservation en ligne, en production',
     run: {
@@ -25,6 +32,7 @@ export const fr = {
       next: 'Prochaine exécution : demain, 07:00',
     },
   },
+  metricsKicker: 'En chiffres',
   metrics: [
     { value: '10+', label: 'projets en production' },
     { value: '50–60', label: 'appels d’offres triés chaque jour' },
@@ -32,6 +40,7 @@ export const fr = {
     { value: '3', label: 'pays d’expérience' },
   ],
   statement: {
+    kicker: 'Pourquoi nous',
     a: 'Un seul interlocuteur, de l’appel à la mise en production.',
     b: 'Nous écrivons le code, le déployons et restons joignables après la livraison. Vous parlez à la personne qui construit.',
   },
@@ -39,6 +48,9 @@ export const fr = {
     kicker: 'Services',
     title: 'Quatre métiers, une seule équipe.',
     titleB: 'Du script qui supprime une tâche répétitive à l’application utilisée chaque jour.',
+    more: 'Un besoin qui ne rentre dans aucune case ?',
+    moreHint: 'Parlons-en',
+    detail: 'En détail',
     items: [
       { id: 'automation', title: 'Automatisation & IA', desc: 'Collecte et tri de données, workflows planifiés, chatbots qui répondent depuis vos documents en citant la source.', tags: ['n8n', 'Python', 'RAG', 'LLM'] },
       { id: 'web', title: 'Sites & applications web', desc: 'Sites rapides et bien référencés, réservation et paiement en ligne, espaces clients et back-offices.', tags: ['React', 'TypeScript', 'SEO'] },
@@ -57,6 +69,8 @@ export const fr = {
     builtAt: 'Réalisé chez',
     client: 'Client',
     visit: 'Voir le site en ligne',
+    file: 'Dossier',
+    hint: 'Continuez à défiler.',
     items: {
       tenders: { title: 'Veille des appels d’offres', result: '50 à 60 offres triées chaque jour', desc: 'Les offres publiques sont collectées chaque matin, triées et résumées par l’IA, puis envoyées dans la boîte mail de l’équipe commerciale. Environ 200 offres traitées en 3 jours.' },
       hrbot: { title: 'Chatbot RH sur documents', result: 'Un guide de 88 pages, interrogeable', desc: 'Les équipes posent leurs questions en langage naturel. Le chatbot cherche dans le guide RH et répond en citant la page source.' },

@@ -82,7 +82,7 @@ export function BookingCard({ className = '' }: { className?: string }) {
           <span className="flex items-center gap-2 text-soft"><Users className="size-4 text-muted" aria-hidden="true" />{b.seats}</span>
           <span className="font-medium text-ok">{b.left}</span>
         </p>
-        <span className="flex h-10 items-center justify-center rounded-lg bg-brand text-[14px] font-semibold text-white">{b.pay}</span>
+        <span className="btn-primary flex h-10 items-center justify-center rounded-full text-[13px] font-medium">{b.pay}</span>
       </div>
     </div>
   );
@@ -100,7 +100,7 @@ export function AppCard({ className = '' }: { className?: string }) {
         <p className="m-0 text-[16px] font-semibold text-fg">{a.disease}</p>
         <div>
           <p className="m-0 flex justify-between text-[12px] text-muted"><span>{a.confidence}</span><span className="font-medium text-fg tabular-nums">92 %</span></p>
-          <span className="mt-1.5 block h-1.5 overflow-hidden rounded-full bg-line"><i className="block h-full w-[92%] rounded-full bg-brand" /></span>
+          <span className="mt-1.5 block h-1.5 overflow-hidden rounded-full bg-line"><i className="block h-full w-[92%] rounded-full bg-accent" /></span>
         </div>
         <p className="m-0 rounded-lg border border-line bg-card px-3 py-2 text-[13px] text-soft">{a.advice}</p>
         <p className="m-0 flex items-center gap-1.5 text-[12px] text-muted"><WifiOff className="size-3.5" aria-hidden="true" />{a.offline}</p>

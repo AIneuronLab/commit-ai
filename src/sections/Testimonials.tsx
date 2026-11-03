@@ -10,12 +10,12 @@ export function Testimonials() {
   return (
     <section className="border-t border-line">
       <Container className="flex flex-col gap-12 py-20 lg:py-28">
-        <SectionHead eyebrow={t.testimonials.kicker} a={t.testimonials.title} />
+        <SectionHead title={t.testimonials.title} />
         <ul className="m-0 grid list-none gap-4 p-0 md:grid-cols-2">
           {TESTIMONIALS.map((q) => (
             <li key={q.name}>
               <Reveal>
-                <blockquote className="m-0 rounded-2xl border border-line bg-card p-8">
+                <blockquote className="m-0 rounded-[var(--radius-media)] border border-line bg-card-alt p-8">
                   <p className="m-0 text-[18px] leading-relaxed text-fg">« {q.quote[lang]} »</p>
                   <footer className="mt-4 text-[14px] text-muted"><b className="font-medium text-fg">{q.name}</b> · {q.role}</footer>
                 </blockquote>

@@ -24,12 +24,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<Mode>(() => {
     const q = new URLSearchParams(location.search).get('theme');
     const saved = q ?? read('ca-theme');
-    return saved === 'dark' ? 'dark' : 'light';
+    return saved === 'light' ? 'light' : 'dark';
   });
 
   useLayoutEffect(() => {
     document.documentElement.classList.toggle('light', mode === 'light');
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', mode === 'light' ? '#ffffff' : '#0a1120');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', mode === 'light' ? '#eef1f5' : '#070b12');
   }, [mode]);
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
 

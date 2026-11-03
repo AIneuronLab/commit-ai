@@ -4,7 +4,7 @@ import { AppProvider, useApp } from './i18n';
 import { TopBar } from './components/Nav';
 import { useSmoothScroll } from './lib/useSmoothScroll';
 import { Hero } from './sections/Hero';
-import { Proof } from './sections/Proof';
+import { Welcome } from './sections/Proof';
 import { How } from './sections/How';
 import { Services } from './sections/Services';
 import { Projects } from './sections/Projects';
@@ -27,9 +27,9 @@ function Shell() {
       <TopBar onStart={open} />
       <main id="main">
         <Hero onStart={open} />
-        <Proof />
-        <Services />
+        <Welcome />
         <Projects />
+        <Services onStart={open} />
         <How />
         <Testimonials />
         <Journey />

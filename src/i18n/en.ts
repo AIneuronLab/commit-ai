@@ -3,6 +3,10 @@ import type { Dict } from './fr';
 export const en: Dict = {
   lang: 'en',
   a11y: { toLight: 'Switch to light mode', toDark: 'Switch to dark mode', switchLang: 'FR — Passer en français', menu: 'Main navigation', openMenu: 'Open the menu', close: 'Close', skip: 'Skip to content' },
+  navSub: { services: 'What we build', projects: 'Projects in production', process: 'How we work', journey: 'Who builds it', faq: 'Before you start', contact: 'Write to us' },
+  ticker: ['Code written by hand.', 'Shipped to production.', 'One point of contact.', 'Reachable after launch.'],
+  welcome: { kicker: 'Welcome', aside: 'Dakar · Senegal · remote anywhere' },
+  photoCredit: 'Photo: Bamby Diagne / Unsplash',
   nav: { services: 'Services', projects: 'Work', process: 'Process', journey: 'About', faq: 'FAQ', contact: 'Contact', cta: 'Start a project' },
   hero: {
     eyebrow: 'Software studio · Dakar, Senegal',
@@ -11,6 +15,9 @@ export const en: Dict = {
     titleB: 'Automation, web, mobile, APIs and AI.',
     primary: 'Start a project',
     secondary: 'See our work',
+    scroll: 'Scroll',
+    rotate: ['Your ideas. In production.', 'Written in Dakar. Used everywhere.', 'You describe it. We ship it.'],
+    by: 'Designed and built by',
     showcaseAlt: 'ActivityConnect booking website, built by Commit·AI',
     showcaseCaption: 'ActivityConnect — online booking website, in production',
     run: {
@@ -27,6 +34,7 @@ export const en: Dict = {
       next: 'Next run: tomorrow, 07:00',
     },
   },
+  metricsKicker: 'In numbers',
   metrics: [
     { value: '10+', label: 'projects in production' },
     { value: '50–60', label: 'tenders sorted every day' },
@@ -34,6 +42,7 @@ export const en: Dict = {
     { value: '3', label: 'countries of experience' },
   ],
   statement: {
+    kicker: 'Why us',
     a: 'One point of contact, from the first call to production.',
     b: 'We write the code, deploy it and stay reachable after delivery. You talk to the person who builds.',
   },
@@ -41,6 +50,9 @@ export const en: Dict = {
     kicker: 'Services',
     title: 'Four crafts, one team.',
     titleB: 'From the script that removes a repetitive task to the app people use every day.',
+    more: 'A need that fits no box?',
+    moreHint: 'Let’s talk',
+    detail: 'In detail',
     items: [
       { id: 'automation', title: 'Automation & AI', desc: 'Data collection and sorting, scheduled workflows, chatbots that answer from your documents and cite the source.', tags: ['n8n', 'Python', 'RAG', 'LLM'] },
       { id: 'web', title: 'Websites & web apps', desc: 'Fast, well-ranked sites, online booking and payment, customer areas and back offices.', tags: ['React', 'TypeScript', 'SEO'] },
@@ -59,6 +71,8 @@ export const en: Dict = {
     builtAt: 'Built at',
     client: 'Client',
     visit: 'Visit the live site',
+    file: 'Case file',
+    hint: 'Keep scrolling.',
     items: {
       tenders: { title: 'Tender monitoring', result: '50 to 60 tenders sorted every day', desc: 'Public tenders are collected every morning, sorted and summarised by AI, then sent to the sales team’s inbox. About 200 tenders processed in 3 days.' },
       hrbot: { title: 'HR chatbot on documents', result: 'An 88-page guide, searchable', desc: 'Teams ask questions in plain language. The chatbot searches the HR guide and answers with the source page.' },

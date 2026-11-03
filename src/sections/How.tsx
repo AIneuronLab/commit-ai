@@ -1,25 +1,25 @@
-import { Container, SectionHead } from '../components/ui';
+import { Container, Measure, SectionHead } from '../components/ui';
 import { Reveal } from '../motion';
 import { useApp } from '../i18n';
 
-/** Three steps in one ruled row. */
+/** 04 / Process: three numbered steps under a giant title, each with its duration. */
 export function How() {
   const { t } = useApp();
   return (
-    <section id="process" className="scroll-mt-16 border-t border-line">
-      <Container className="flex flex-col gap-12 py-20 lg:gap-16 lg:py-28">
-        <SectionHead eyebrow={t.how.kicker} a={t.how.title} b={t.how.titleB} />
-        <Reveal>
-          <ol className="m-0 grid list-none overflow-hidden rounded-2xl border border-line p-0 md:grid-cols-3">
-            {t.how.steps.map((s, i) => (
-              <li key={s.t} className={`flex flex-col gap-3 p-7 sm:p-8 ${i > 0 ? 'border-t border-line md:border-t-0 md:border-l' : ''}`}>
-                <span className="font-mono text-[12px] text-accent">{s.tag}</span>
-                <h3 className="m-0 text-[20px] font-semibold tracking-[-0.015em] text-fg">{s.t}</h3>
-                <p className="m-0 text-[15.5px] leading-relaxed text-muted">{s.d}</p>
+    <section id="process" className="scroll-mt-20 py-24 lg:py-36">
+      <Container className="flex flex-col gap-16 lg:gap-20">
+        <SectionHead index="04" kicker={t.how.kicker} aside={t.navSub.process} title={t.how.title} lead={t.how.titleB} />
+        <ol className="m-0 grid list-none gap-x-10 gap-y-12 p-0 md:grid-cols-3">
+          {t.how.steps.map((s, i) => (
+            <Reveal key={s.t} delay={i * 0.08} className="flex">
+              <li className="flex w-full flex-col gap-4 border-t border-line pt-5">
+                <Measure>0{i + 1} / {s.tag}</Measure>
+                <h3 className="display-3 m-0 text-fg">{s.t}</h3>
+                <p className="m-0 max-w-[360px] text-[16.5px] leading-[1.6] text-muted">{s.d}</p>
               </li>
-            ))}
-          </ol>
-        </Reveal>
+            </Reveal>
+          ))}
+        </ol>
       </Container>
     </section>
   );
