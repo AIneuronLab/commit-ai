@@ -99,7 +99,7 @@ export function Contact({ onStart }: { onStart: () => void }) {
         <div aria-hidden="true" className="fog fog-2" />
         <Container className="relative flex flex-col gap-10 py-28 lg:py-40">
           <div className="flex items-baseline justify-between gap-6 border-t border-bone/15 pt-4">
-            <Measure className="text-bone/70">07 / {c.kicker}</Measure>
+            <Measure className="text-bone/70">06 / {c.kicker}</Measure>
             <Measure className="hidden text-right text-bone/70 sm:inline">{t.navSub.contact}</Measure>
           </div>
           <Kinetic text={t.cta.title} className="display-2 max-w-[760px] text-bone" />

@@ -9,7 +9,7 @@ const link = 'text-[15px] text-bone/85 transition-colors hover:text-glow';
 export function Footer() {
   const { t } = useApp();
   const f = t.footer;
-  const ids = ['services', 'projects', 'process', 'journey', 'faq', 'contact'] as const;
+  const ids = ['services', 'process', 'journey', 'faq', 'contact'] as const;
   const social: [string, string][] = [['LinkedIn', SITE.linkedin.url], ['GitHub', SITE.github.url], ['WhatsApp', waLink(t.contact.waText)]];
   return (
     <footer className="force-dark border-t border-line bg-night text-bone">

@@ -10,7 +10,7 @@ export function Faq() {
     <section id="faq" className="scroll-mt-20 py-24 lg:py-36">
       <Container className="flex flex-col gap-14">
         <div className="flex items-baseline justify-between gap-6 border-t border-line pt-4">
-          <Measure>06 / {f.kicker}</Measure>
+          <Measure>05 / {f.kicker}</Measure>
           <Measure className="hidden text-right sm:inline">{t.navSub.faq}</Measure>
         </div>
         <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-20">

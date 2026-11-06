@@ -1,11 +1,11 @@
 export const fr = {
   lang: 'fr',
   a11y: { toLight: 'Passer en mode clair', toDark: 'Passer en mode sombre', switchLang: 'EN — Switch to English', menu: 'Navigation principale', openMenu: 'Ouvrir le menu', close: 'Fermer', skip: 'Aller au contenu' },
-  navSub: { services: 'Ce que nous construisons', projects: 'Des projets en production', process: 'Comment nous travaillons', journey: 'Qui construit', faq: 'Avant de commencer', contact: 'Écrivez-nous' },
+  navSub: { services: 'Ce que nous construisons', process: 'Comment nous travaillons', journey: 'Qui construit', faq: 'Avant de commencer', contact: 'Écrivez-nous' },
   ticker: ['Code écrit à la main.', 'Livré en production.', 'Un seul interlocuteur.', 'Joignable après la livraison.'],
   welcome: { kicker: 'Bienvenue', aside: 'Dakar · Sénégal · à distance partout' },
   photoCredit: 'Photo : Bamby Diagne / Unsplash',
-  nav: { services: 'Services', projects: 'Réalisations', process: 'Méthode', journey: 'À propos', faq: 'FAQ', contact: 'Contact', cta: 'Démarrer un projet' },
+  nav: { services: 'Services', process: 'Méthode', journey: 'À propos', faq: 'FAQ', contact: 'Contact', cta: 'Démarrer un projet' },
   hero: {
     eyebrow: 'Studio logiciel · Dakar, Sénégal',
     availability: 'Disponible pour de nouveaux projets',
@@ -62,22 +62,6 @@ export const fr = {
       app: { title: 'Diagnostic', disease: 'Mildiou détecté', confidence: 'Confiance', advice: 'Traitement conseillé sous 48 h', offline: 'Fonctionne hors connexion' },
     },
   },
-  projects: {
-    kicker: 'Réalisations',
-    title: 'Des projets livrés, utilisés chaque jour.',
-    titleB: 'Une partie a été réalisée chez nos employeurs, une autre pour nos clients.',
-    builtAt: 'Réalisé chez',
-    client: 'Client',
-    visit: 'Voir le site en ligne',
-    file: 'Dossier',
-    hint: 'Continuez à défiler.',
-    items: {
-      tenders: { title: 'Veille des appels d’offres', result: '50 à 60 offres triées chaque jour', desc: 'Les offres publiques sont collectées chaque matin, triées et résumées par l’IA, puis envoyées dans la boîte mail de l’équipe commerciale. Environ 200 offres traitées en 3 jours.' },
-      hrbot: { title: 'Chatbot RH sur documents', result: 'Un guide de 88 pages, interrogeable', desc: 'Les équipes posent leurs questions en langage naturel. Le chatbot cherche dans le guide RH et répond en citant la page source.' },
-      baykat: { title: 'BayKat', result: 'Diagnostic des cultures par photo', desc: 'L’agriculteur photographie une feuille : la vision IA détecte la maladie et l’application conseille traitement et irrigation. Web et mobile, présenté avec l’accord de SOTILMA.' },
-      activity: { title: 'ActivityConnect', result: 'Réservation en ligne, en production', desc: 'Un organisateur de sorties à Dakar voulait que ses clients réservent en ligne. Le client choisit une date, réserve sa place et paie par Wave. La dirigeante est satisfaite du résultat.' },
-    },
-  },
   how: {
     kicker: 'Méthode',
     title: 'Un processus simple et transparent.',
@@ -99,6 +83,8 @@ export const fr = {
       'Vous parlez directement à la personne qui construit, sans intermédiaire.',
     ],
     timelineTitle: 'Parcours',
+    globeHint: 'Survolez un poste : le globe vous emmène là où il s’est passé.',
+    globeHintTouch: 'Faites défiler ou touchez un poste : le globe vous emmène là où il s’est passé.',
     timeline: [
       ['2026 — auj.', 'Développeur Backend & IA', 'Ashia Group · Dakar'],
       ['2026', 'Développeur Backend & IA', 'SOTILMA · Dakar'],
@@ -106,6 +92,15 @@ export const fr = {
       ['2023 — 2024', 'Data Scientist / Data Analyst', 'DIV SOLUTION · Libreville'],
       ['2022 — 2023', 'Assistant mécatronique', 'Rwanda Plastic Industry · Kigali'],
     ],
+  },
+  stack: {
+    title: 'Stack',
+    lead: 'Les outils avec lesquels nous concevons, construisons et livrons.',
+    filter: 'Filtrer par catégorie',
+    all: 'Tout',
+    groups: { ai: 'IA & données', backend: 'Backend', web: 'Web', automation: 'Automatisation', deploy: 'Déploiement', tools: 'Outils' },
+    levels: ['', 'Apprentissage', 'À l’aise', 'Confirmé', 'Avancé', 'Expert'],
+    level: 'Niveau',
   },
   faq: {
     kicker: 'FAQ',

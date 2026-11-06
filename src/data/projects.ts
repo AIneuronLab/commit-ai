@@ -1,20 +1,9 @@
 /**
  * Projects shown on the site.
- *  - CLIENT_PROJECTS are hand-written: they are private/client work, so nothing is ever read from private repos.
  *  - FEATURED_REPOS is a whitelist of PUBLIC GitHub repos; live details (language, stars, description) are
  *    read from the GitHub API in the visitor's browser, with `fallback` used if the API is unreachable.
  *    Edit this list to choose what the "Labo GitHub" section shows.
  */
-export type ClientProjectId = 'tenders' | 'hrbot' | 'baykat' | 'activity';
-
-/** `employer`: built while working there (shown as "Réalisé chez …"), not a client reference. */
-export const CLIENT_PROJECTS: { id: ClientProjectId; client: string; year: string; relation?: 'employer' }[] = [
-  { id: 'tenders', client: 'Ashia Group', year: '2026', relation: 'employer' },
-  { id: 'hrbot', client: 'Ashia Group', year: '2026', relation: 'employer' },
-  { id: 'baykat', client: 'SOTILMA', year: '2026', relation: 'employer' },
-  { id: 'activity', client: 'ActivityConnect', year: '2026' },
-];
-
 /** The live ActivityConnect booking site, linked from its card. */
 export const SITE_ACTIVITY = { host: 'activityconnect.commitai.dev', url: 'https://activityconnect.commitai.dev' };
 

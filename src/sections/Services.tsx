@@ -46,7 +46,7 @@ export function Services({ onStart }: { onStart: () => void }) {
   return (
     <section id="services" className="scroll-mt-20 py-24 lg:py-36">
       <Container className="flex flex-col gap-12 lg:gap-16">
-        <SectionHead index="03" kicker={s.kicker} aside={t.navSub.services} title={s.title} lead={s.titleB} />
+        <SectionHead index="02" kicker={s.kicker} aside={t.navSub.services} title={s.title} lead={s.titleB} />
         <Reveal>
           <ul className="m-0 flex list-none flex-col gap-2 p-0 md:h-[34rem] md:flex-row">
             {panels.map((p, i) => {
