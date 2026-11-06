@@ -26,7 +26,7 @@ export function TopBar({ onStart }: { onStart: () => void }) {
     document.addEventListener('keydown', esc);
     return () => document.removeEventListener('keydown', esc);
   }, [open]);
-  const ids = ['services', 'projects', 'process', 'journey', 'faq', 'contact'] as const;
+  const ids = ['services', 'process', 'journey', 'faq', 'contact'] as const;
   const icon = 'flex size-9 items-center justify-center text-bone/80 transition hover:text-bone sm:size-10';
 
   return (

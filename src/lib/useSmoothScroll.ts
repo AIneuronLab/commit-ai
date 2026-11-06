@@ -24,7 +24,9 @@ export function useSmoothScroll() {
       const el = document.querySelector(id) as HTMLElement | null;
       if (!el) return;
       e.preventDefault();
-      lenis.scrollTo(el, { offset: id === '#top' ? 0 : -64, duration: 1.4 });
+      // an anchor can ask for its own offset (the pinned work section's markers must land exactly on their panel)
+      const own = el.dataset.scrollOffset;
+      lenis.scrollTo(el, { offset: own !== undefined ? Number(own) : id === '#top' ? 0 : -64, duration: 1.4 });
     };
     document.addEventListener('click', onClick);
     return () => { document.removeEventListener('click', onClick); cancelAnimationFrame(raf); lenis.destroy(); root.style.scrollBehavior = prevBehavior; };

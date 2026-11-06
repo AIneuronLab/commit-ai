@@ -65,7 +65,7 @@ export function Hero({ onStart }: { onStart: () => void }) {
 
   return (
     <>
-      <section id="top" ref={host} className="force-dark grain relative h-[100svh] min-h-[620px] overflow-hidden bg-night text-bone">
+      <section id="hero" ref={host} className="force-dark grain relative h-[100svh] min-h-[620px] overflow-hidden bg-night text-bone">
         <motion.picture style={{ scale }} className="absolute inset-0 block">
           <source media="(max-width: 767px)" srcSet="/dakar-hero-portrait.webp" />
           <img src="/dakar-hero-1920.webp" srcSet="/dakar-hero-1920.webp 1920w, /dakar-hero-4k.webp 3840w" sizes="100vw" alt="" fetchPriority="high" className="size-full object-cover object-[50%_40%]" />

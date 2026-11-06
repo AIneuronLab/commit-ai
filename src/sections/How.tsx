@@ -8,7 +8,7 @@ export function How() {
   return (
     <section id="process" className="scroll-mt-20 py-24 lg:py-36">
       <Container className="flex flex-col gap-16 lg:gap-20">
-        <SectionHead index="04" kicker={t.how.kicker} aside={t.navSub.process} title={t.how.title} lead={t.how.titleB} />
+        <SectionHead index="03" kicker={t.how.kicker} aside={t.navSub.process} title={t.how.title} lead={t.how.titleB} />
         <ol className="m-0 grid list-none gap-x-10 gap-y-12 p-0 md:grid-cols-3">
           {t.how.steps.map((s, i) => (
             <Reveal key={s.t} delay={i * 0.08} className="flex">

@@ -202,3 +202,33 @@
 .btn-primary:hover { background: var(--color-glow-light); }
 .pill-ink { background: var(--ca-fg); color: var(--ca-bg); }
 }
+
+/* "scroll" hint under the 3D logo: a mouse with a rolling wheel, shown once the logo has assembled */
+.logo-hint { position: absolute; left: 50%; bottom: calc(28px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--ca-muted); font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; pointer-events: none; opacity: 0; transition: opacity .6s; }
+.logo-hint.on { opacity: 1; }
+.logo-hint i { width: 22px; height: 34px; border: 1.5px solid currentColor; border-radius: 12px; position: relative; }
+.logo-hint i::after { content: ''; position: absolute; left: 50%; top: 7px; width: 3px; height: 7px; margin-left: -1.5px; border-radius: 2px; background: currentColor; animation: logo-wheel 1.8s ease-in-out infinite; }
+@keyframes logo-wheel { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(10px); opacity: 0; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .logo-hint i::after { animation: none; } }
+
+/* experience globe: the chosen role's card lights up blue; the city label is a pill with a green pin */
+.globe-card.on { border-color: var(--color-glow); background: var(--ca-card-alt); box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-glow) 35%, transparent), 0 12px 40px color-mix(in srgb, var(--color-glow) 18%, transparent); }
+.globe-label { position: absolute; left: 0; top: 0; padding: 7px 12px 7px 26px; border-radius: 999px; background: rgb(7 11 18 / 0.9); border: 1px solid #22e39a; box-shadow: 0 0 18px rgb(34 227 154 / 0.35); color: #fff; font-size: 13px; font-weight: 500; white-space: nowrap; opacity: 0; transition: opacity .35s; will-change: transform; }
+.globe-label::before { content: ''; position: absolute; left: 11px; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 2px; background: #22e39a; box-shadow: 0 0 8px #22e39a; }
+@media (prefers-reduced-motion: reduce) { .globe-card { transition: none; } }
+
+/* stack cards: tilt toward the pointer (--rx / --ry), a light that follows it (--mx / --my), a few blocks in the corner */
+.stack-card { --mx: 50%; --my: 50%; --rx: 0deg; --ry: 0deg; position: relative; height: 100%; display: flex; flex-direction: column; gap: 14px; padding: 20px; border-radius: 18px; background: var(--ca-card); border: 1px solid var(--ca-line); overflow: hidden; outline: none; transform: rotateX(var(--rx)) rotateY(var(--ry)); transform-style: preserve-3d; transition: transform .25s ease, border-color .3s, background-color .3s, box-shadow .3s; }
+.stack-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(260px circle at var(--mx) var(--my), color-mix(in srgb, var(--color-glow) 22%, transparent), transparent 60%); opacity: 0; transition: opacity .3s; pointer-events: none; }
+.stack-card::after { content: ''; position: absolute; right: -18px; bottom: -18px; width: 84px; height: 84px; opacity: .55; pointer-events: none; transition: opacity .3s;
+  background: linear-gradient(var(--ca-line), var(--ca-line)) 0 0/14px 14px no-repeat, linear-gradient(var(--ca-line), var(--ca-line)) 22px 0/14px 14px no-repeat,
+    linear-gradient(var(--ca-line), var(--ca-line)) 44px 8px/10px 10px no-repeat, linear-gradient(var(--ca-line), var(--ca-line)) 0 22px/14px 14px no-repeat,
+    linear-gradient(var(--ca-line), var(--ca-line)) 24px 26px/10px 10px no-repeat, linear-gradient(var(--ca-line), var(--ca-line)) 4px 46px/10px 10px no-repeat; }
+.stack-card:hover, .stack-card:focus-visible { border-color: var(--color-glow); background: var(--ca-card-alt); box-shadow: 0 18px 50px color-mix(in srgb, var(--color-glow) 18%, transparent); }
+.stack-card:hover::before { opacity: 1; }
+.stack-card:hover::after { opacity: .9; }
+.stack-logo { width: 56px; height: 56px; flex: none; border-radius: 14px; background: #f3f7fc; display: grid; place-items: center; box-shadow: 0 6px 18px rgb(0 0 0 / 0.25); transform: translateZ(30px); transition: transform .3s; }
+.stack-card:hover .stack-logo { transform: translateZ(46px) scale(1.06); }
+.stack-logo img { width: 34px; height: 34px; display: block; }
+.stack-logo span { font-weight: 700; font-size: 18px; color: #14304f; }
+@media (prefers-reduced-motion: reduce) { .stack-card, .stack-logo { transition: none; } }

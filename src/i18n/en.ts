@@ -3,11 +3,11 @@ import type { Dict } from './fr';
 export const en: Dict = {
   lang: 'en',
   a11y: { toLight: 'Switch to light mode', toDark: 'Switch to dark mode', switchLang: 'FR — Passer en français', menu: 'Main navigation', openMenu: 'Open the menu', close: 'Close', skip: 'Skip to content' },
-  navSub: { services: 'What we build', projects: 'Projects in production', process: 'How we work', journey: 'Who builds it', faq: 'Before you start', contact: 'Write to us' },
+  navSub: { services: 'What we build', process: 'How we work', journey: 'Who builds it', faq: 'Before you start', contact: 'Write to us' },
   ticker: ['Code written by hand.', 'Shipped to production.', 'One point of contact.', 'Reachable after launch.'],
   welcome: { kicker: 'Welcome', aside: 'Dakar · Senegal · remote anywhere' },
   photoCredit: 'Photo: Bamby Diagne / Unsplash',
-  nav: { services: 'Services', projects: 'Work', process: 'Process', journey: 'About', faq: 'FAQ', contact: 'Contact', cta: 'Start a project' },
+  nav: { services: 'Services', process: 'Process', journey: 'About', faq: 'FAQ', contact: 'Contact', cta: 'Start a project' },
   hero: {
     eyebrow: 'Software studio · Dakar, Senegal',
     availability: 'Taking on new projects',
@@ -64,22 +64,6 @@ export const en: Dict = {
       app: { title: 'Diagnosis', disease: 'Downy mildew detected', confidence: 'Confidence', advice: 'Treatment advised within 48 h', offline: 'Works offline' },
     },
   },
-  projects: {
-    kicker: 'Work',
-    title: 'Delivered projects, used every day.',
-    titleB: 'Some were built at our employers, others for our clients.',
-    builtAt: 'Built at',
-    client: 'Client',
-    visit: 'Visit the live site',
-    file: 'Case file',
-    hint: 'Keep scrolling.',
-    items: {
-      tenders: { title: 'Tender monitoring', result: '50 to 60 tenders sorted every day', desc: 'Public tenders are collected every morning, sorted and summarised by AI, then sent to the sales team’s inbox. About 200 tenders processed in 3 days.' },
-      hrbot: { title: 'HR chatbot on documents', result: 'An 88-page guide, searchable', desc: 'Teams ask questions in plain language. The chatbot searches the HR guide and answers with the source page.' },
-      baykat: { title: 'BayKat', result: 'Crop diagnosis from a photo', desc: 'The farmer photographs a leaf: vision AI detects the disease and the app advises treatment and irrigation. Web and mobile, shown with SOTILMA’s permission.' },
-      activity: { title: 'ActivityConnect', result: 'Online booking, in production', desc: 'An outings organiser in Dakar wanted customers to book online. Customers pick a date, reserve a seat and pay with Wave. The CEO is happy with the result.' },
-    },
-  },
   how: {
     kicker: 'Process',
     title: 'A simple, transparent process.',
@@ -101,6 +85,8 @@ export const en: Dict = {
       'You talk directly to the person who builds, with no intermediary.',
     ],
     timelineTitle: 'Experience',
+    globeHint: 'Hover over a role and the globe takes you to where it happened.',
+    globeHintTouch: 'Scroll or tap a role and the globe takes you to where it happened.',
     timeline: [
       ['2026 — now', 'Backend & AI Developer', 'Ashia Group · Dakar'],
       ['2026', 'Backend & AI Developer', 'SOTILMA · Dakar'],
@@ -108,6 +94,15 @@ export const en: Dict = {
       ['2023 — 2024', 'Data Scientist / Data Analyst', 'DIV SOLUTION · Libreville'],
       ['2022 — 2023', 'Mechatronics assistant', 'Rwanda Plastic Industry · Kigali'],
     ],
+  },
+  stack: {
+    title: 'Stack',
+    lead: 'The tools we use to design, build and ship.',
+    filter: 'Filter by category',
+    all: 'All',
+    groups: { ai: 'AI & data', backend: 'Backend', web: 'Web', automation: 'Automation', deploy: 'Deployment', tools: 'Tools' },
+    levels: ['', 'Learning', 'Comfortable', 'Proficient', 'Advanced', 'Expert'],
+    level: 'Level',
   },
   faq: {
     kicker: 'FAQ',
