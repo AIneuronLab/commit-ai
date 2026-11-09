@@ -15,10 +15,12 @@ import { Faq } from './sections/Faq';
 import { Footer } from './sections/Footer';
 import { WhatsAppFab } from './components/WhatsAppFab';
 import { LegalPage } from './sections/LegalPage';
-import { pageFor } from './lib/route';
+import { ServicePage } from './sections/ServicePage';
+import { pageFor, serviceFor } from './lib/route';
 
 // the page is chosen once from the address: links between pages are ordinary page loads
 const PAGE = pageFor(location.pathname);
+const SERVICE = serviceFor(location.pathname);
 
 function Shell() {
   const { t } = useApp();
@@ -48,7 +50,7 @@ function Shell() {
       ) : (
         <>
           <TopBar onStart={open} base="/" />
-          <LegalPage page={PAGE} />
+          {PAGE === 'service' ? SERVICE && <ServicePage id={SERVICE} onStart={open} /> : <LegalPage page={PAGE} />}
           <Footer base="/" />
         </>
       )}

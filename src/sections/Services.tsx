@@ -3,6 +3,8 @@ import { ArrowUpRight, Plus } from 'lucide-react';
 import { Container, Measure, SectionHead } from '../components/ui';
 import { CodePanel, RunLog } from '../components/Vignettes';
 import { Reveal } from '../motion';
+import { servicePath, type ServiceId } from '../lib/route';
+import { SERVICE_ORDER } from '../services/content';
 import { useApp } from '../i18n';
 
 type Panel = { id: string; title: string; desc: string; tags: string[]; visual: ReactNode; action?: ReactNode };
@@ -20,7 +22,7 @@ const Centered = ({ children }: { children: ReactNode }) => (
  * stack and open one at a time.
  */
 export function Services({ onStart }: { onStart: () => void }) {
-  const { t } = useApp();
+  const { t, lang } = useApp();
   const s = t.services;
   const [active, setActive] = useState(0);
 
@@ -30,11 +32,15 @@ export function Services({ onStart }: { onStart: () => void }) {
     automation: <Centered><RunLog className="w-[380px] max-w-full shadow-[0_30px_60px_-30px_rgb(18_18_20/0.45)]" /></Centered>,
     api: <Centered><CodePanel className="w-[380px] max-w-full shadow-[0_30px_60px_-30px_rgb(18_18_20/0.45)]" /></Centered>,
   };
-  const order = ['web', 'automation', 'mobile', 'api'];
+  const order = SERVICE_ORDER;
   const panels: Panel[] = [
     ...order.map((id) => {
       const it = s.items.find((x) => x.id === id)!;
-      return { id, title: it.title, desc: it.desc, tags: it.tags, visual: visuals[id] };
+      // each service panel leads to its own page
+      const action = SERVICE_ORDER.includes(id as ServiceId) && (
+        <a href={servicePath(id as ServiceId, lang)} className="btn btn-line mt-2 self-start">{t.serviceUi.more}<ArrowUpRight className="size-5" strokeWidth={1.5} aria-hidden="true" /></a>
+      );
+      return { id, title: it.title, desc: it.desc, tags: it.tags, visual: visuals[id], action };
     }),
     {
       id: 'more', title: s.moreHint, desc: s.more, tags: [],

@@ -24,3 +24,9 @@ export const STACK: { name: string; group: StackGroup; icon?: string; level: num
   { name: 'Linux', group: 'deploy', icon: 'linux-original', level: 2, use: { fr: 'Administration de serveurs : installation, accès SSH, mises à jour et sauvegardes.', en: 'Server administration: setup, SSH access, updates and backups.' } },
   { name: 'Git', group: 'tools', icon: 'git-original', level: 5, use: { fr: 'Versionnage et travail en équipe.', en: 'Version control and team workflows.' } },
 ];
+
+/** Two letters for a card without a logo: one from each of the first two words, or the first two of a single word. */
+export const stackInitials = (n: string) => {
+  const w = n.replace(/[^A-Za-z0-9 ]/g, '').split(/\s+/).filter(Boolean);
+  return (w.length > 1 ? w[0][0] + w[1][0] : w[0].slice(0, 2)).toUpperCase();
+};

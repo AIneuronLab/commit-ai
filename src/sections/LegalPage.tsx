@@ -3,7 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Container, Measure } from '../components/ui';
 import { LEGAL, PRIVACY, UPDATED, type Block } from '../legal/content';
 import { pathFor } from '../lib/route';
-import { SITE } from '../data/site';
+import { setPageMeta } from '../lib/meta';
 import { useApp } from '../i18n';
 
 /** The legal notice or the privacy policy: a title, the date of the last update, then numbered sections. */
@@ -11,18 +11,7 @@ export function LegalPage({ page }: { page: 'legal' | 'privacy' }) {
   const { t, lang } = useApp();
   const doc = (page === 'legal' ? LEGAL : PRIVACY)[lang];
 
-  // the address, title, description and canonical link follow the page and its language
-  // (index.html carries the home page's, and every path is served from it)
-  useEffect(() => {
-    const path = pathFor(page, lang);
-    if (location.pathname !== path) history.replaceState(null, '', path + location.search + location.hash);
-    document.title = `${doc.title} · ${SITE.brand}`;
-    document.querySelector('meta[name="description"]')?.setAttribute('content', doc.lead);
-    document.querySelector('link[rel="canonical"]')?.setAttribute('href', SITE.url + path);
-    document.querySelector('meta[property="og:url"]')?.setAttribute('content', SITE.url + path);
-    document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${doc.title} · ${SITE.brand}`);
-    document.querySelector('meta[property="og:description"]')?.setAttribute('content', doc.lead);
-  }, [page, lang, doc.title, doc.lead]);
+  useEffect(() => setPageMeta({ path: pathFor(page, lang), title: doc.title, description: doc.lead }), [page, lang, doc.title, doc.lead]);
 
   // `{privacy}` in a text becomes a link to the privacy policy
   const text = (s: string): ReactNode => {

@@ -1,15 +1,10 @@
 import { useState, type PointerEvent } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { Measure } from './ui';
-import { STACK, type StackGroup } from '../data/stack';
+import { STACK, stackInitials, type StackGroup } from '../data/stack';
 import { useMedia } from '../lib/useMedia';
 import { useApp } from '../i18n';
 
-/** Two letters for a card without a logo: one from each of the first two words, or the first two of a single word. */
-const initials = (n: string) => {
-  const w = n.replace(/[^A-Za-z0-9 ]/g, '').split(/\s+/).filter(Boolean);
-  return (w.length > 1 ? w[0][0] + w[1][0] : w[0].slice(0, 2)).toUpperCase();
-};
 
 /**
  * The stack as cards: a filter per category, then one card per tool with its logo, what it is used for and a
@@ -67,7 +62,7 @@ export function StackCards() {
               <article tabIndex={0} onPointerMove={move} onPointerLeave={leave} className="stack-card">
                 <div className="flex items-center justify-between gap-3">
                   <div className="stack-logo">
-                    {x.icon ? <img src={`/stack/${x.icon}.svg`} alt="" width={34} height={34} loading="lazy" /> : <span>{initials(x.name)}</span>}
+                    {x.icon ? <img src={`/stack/${x.icon}.svg`} alt="" width={34} height={34} loading="lazy" /> : <span>{stackInitials(x.name)}</span>}
                   </div>
                   <span className="rounded-full border border-line px-2.5 py-1 text-[12px] whitespace-nowrap text-accent">{s.groups[x.group]}</span>
                 </div>
