@@ -14,6 +14,11 @@ import { Contact, ContactSheet } from './sections/Contact';
 import { Faq } from './sections/Faq';
 import { Footer } from './sections/Footer';
 import { WhatsAppFab } from './components/WhatsAppFab';
+import { LegalPage } from './sections/LegalPage';
+import { pageFor } from './lib/route';
+
+// the page is chosen once from the address: links between pages are ordinary page loads
+const PAGE = pageFor(location.pathname);
 
 function Shell() {
   const { t } = useApp();
@@ -24,19 +29,29 @@ function Shell() {
   return (
     <>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-white">{t.a11y.skip}</a>
-      <TopBar onStart={open} />
-      <main id="main">
-        <LogoScene />
-        <Hero onStart={open} />
-        <Welcome />
-        <Services onStart={open} />
-        <How />
-        <Testimonials />
-        <Journey />
-        <Faq />
-        <Contact onStart={open} />
-      </main>
-      <Footer />
+      {PAGE === 'home' ? (
+        <>
+          <TopBar onStart={open} />
+          <main id="main">
+            <LogoScene />
+            <Hero onStart={open} />
+            <Welcome />
+            <Services onStart={open} />
+            <How />
+            <Testimonials />
+            <Journey />
+            <Faq />
+            <Contact onStart={open} />
+          </main>
+          <Footer />
+        </>
+      ) : (
+        <>
+          <TopBar onStart={open} base="/" />
+          <LegalPage page={PAGE} />
+          <Footer base="/" />
+        </>
+      )}
       <WhatsAppFab />
       <ContactSheet open={sheet} onClose={close} />
     </>

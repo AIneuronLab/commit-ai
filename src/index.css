@@ -186,6 +186,8 @@
 @keyframes ca-blink { 50% { opacity: 0; } }
 .caret { animation: ca-blink 1s steps(1) infinite; }
 @media (prefers-reduced-motion: reduce) { .caret, .grain::after, .fog, .marquee { animation: none; } }
+/* phones and tablets: grain and fog stay still (moving them makes the whole photo repaint every frame), and the fog is less blurred */
+@media (pointer: coarse), (max-width: 767px) { .grain::after, .fog { animation: none; } .fog { filter: blur(18px); } }
 
 /* buttons: square blue block with an arrow (the main action), and a line version. In the components layer so
    utilities like `hidden` or `self-start` still win over them. */

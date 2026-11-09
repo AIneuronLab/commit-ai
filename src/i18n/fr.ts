@@ -131,9 +131,10 @@ export const fr = {
     github: 'GitHub',
     location: 'Adresse',
     waText: 'Bonjour, j’aimerais discuter d’un projet avec Commit·AI.',
-    form: { title: 'Envoyer un message', name: 'Nom', email: 'E-mail', message: 'Votre besoin', placeholder: 'Quelques lignes sur votre projet', send: 'Envoyer le message', sending: 'Envoi…', mailto: 'Votre application de messagerie s’ouvre : envoyez le message pour terminer.', sent: 'Merci, votre message est bien parti. Nous vous répondons rapidement.', error: 'Envoi impossible pour le moment. Écrivez-nous sur WhatsApp ou par e-mail.' },
+    form: { title: 'Envoyer un message', name: 'Nom', email: 'E-mail', message: 'Votre besoin', placeholder: 'Quelques lignes sur votre projet', send: 'Envoyer le message', sending: 'Envoi…', mailto: 'Votre application de messagerie s’ouvre : envoyez le message pour terminer.', sent: 'Merci, votre message est bien parti. Nous vous répondons rapidement.', error: 'Envoi impossible pour le moment. Écrivez-nous sur WhatsApp ou par e-mail.', notice: 'Vos données servent uniquement à vous répondre. Voir la' },
     sheet: { title: 'Démarrer un projet', lead: 'Choisissez le moyen le plus simple pour vous.', form: 'Laisser un message' },
   },
+  legal: { back: 'Retour au site', updated: 'Dernière mise à jour', notice: 'Mentions légales', privacy: 'Confidentialité', privacyLink: 'politique de confidentialité' },
   footer: { tagline: 'Studio logiciel basé à Dakar. Automatisation, web, mobile, API et IA.', explore: 'Entreprise', offer: 'Services', reach: 'Contact', location: 'Dakar, Sénégal', copy: '© 2026 Commit·AI. Tous droits réservés.', top: 'Haut de page' },
 };
 

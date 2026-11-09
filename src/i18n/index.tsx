@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useState, type ReactNode } from 'react';
 import { fr, type Dict } from './fr';
 import { en } from './en';
+import { langFor } from '../lib/route';
 
 export type Lang = 'fr' | 'en';
 export type Mode = 'dark' | 'light';
@@ -18,7 +19,8 @@ const write = (key: string, value: string) => {
 export function AppProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>(() => {
     const q = new URLSearchParams(location.search).get('lang');
-    const saved = q ?? read('ca-lang');
+    // ?lang=…, then the language of the page's address (/privacy is English), then the saved preference
+    const saved = q ?? langFor(location.pathname) ?? read('ca-lang');
     return saved === 'en' ? 'en' : 'fr';
   });
   const [mode, setMode] = useState<Mode>(() => {

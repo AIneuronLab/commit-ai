@@ -6,6 +6,7 @@
  * function that stops everything.
  */
 import * as THREE from 'three';
+import { LITE_3D } from '../lib/useMedia';
 
 export function startLogoScene(host: HTMLElement, canvas: HTMLCanvasElement, hint: HTMLElement): () => void {
   const T = 2.4, INTRO_END = 4.6, LOOP_AT = 5.8, FOV = 32;
@@ -13,6 +14,7 @@ export function startLogoScene(host: HTMLElement, canvas: HTMLCanvasElement, hin
   const BG = 0x070b12, WORD = [0xffffff, 0x7f97b5], BLUE = [0x2196f3, 0x0f5da8];
   const CORE = [323, 300];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const lite = matchMedia(LITE_3D).matches; // fewer particles, thinner letters, lower resolution
 
   // the blocks of the mark: x, y, size, colour, ring (0 outer, 2 inner), in the logo's own pixel space
   const RAW: [number, number, number, string, number][] = [
@@ -40,8 +42,8 @@ export function startLogoScene(host: HTMLElement, canvas: HTMLCanvasElement, hin
   // a pulse that travels outward through the mark every few seconds once it has settled
   const bump = (lt: number, d: number) => { if (lt < 0) return 0; const l = ((((lt / P) - d / 700) % 1) + 1) % 1; return l < 0.4 ? Math.pow(Math.sin((Math.PI * l) / 0.4), 2) : 0; };
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !lite, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, lite ? 1.5 : 2));
   const scene = new THREE.Scene(); scene.background = new THREE.Color(BG);
   const fog = new THREE.Fog(BG, 1800, 4200); scene.fog = fog;
   const camera = new THREE.PerspectiveCamera(FOV, 1, 10, 9000);
@@ -55,7 +57,7 @@ export function startLogoScene(host: HTMLElement, canvas: HTMLCanvasElement, hin
     s.moveTo(-h + r, -h); s.lineTo(h - r, -h); s.quadraticCurveTo(h, -h, h, -h + r); s.lineTo(h, h - r);
     s.quadraticCurveTo(h, h, h - r, h); s.lineTo(-h + r, h); s.quadraticCurveTo(-h, h, -h, h - r);
     s.lineTo(-h, -h + r); s.quadraticCurveTo(-h, -h, -h + r, -h);
-    const g = new THREE.ExtrudeGeometry(s, { depth: 0.6, bevelEnabled: true, bevelThickness: 0.12, bevelSize: 0.1, bevelSegments: 3, curveSegments: 5 });
+    const g = new THREE.ExtrudeGeometry(s, { depth: 0.6, bevelEnabled: true, bevelThickness: 0.12, bevelSize: 0.1, bevelSegments: lite ? 1 : 3, curveSegments: lite ? 2 : 5 });
     g.center(); return g;
   })();
 
@@ -94,7 +96,7 @@ export function startLogoScene(host: HTMLElement, canvas: HTMLCanvasElement, hin
   // burst particles
   const BIT_COLORS = ['#6EE2FA', '#8BEAF8', '#4AA8EC', '#2196F3', '#2E86DE', '#B4F2FC'];
   const BITS: { mesh: THREE.Mesh; mat: THREE.MeshStandardMaterial; dir: THREE.Vector3; reach: number; delay: number; life: number; s: number; rot: number; spin: number }[] = [];
-  for (const [n, delay, reach, life] of [[70, 0, 780, 1.35], [40, 0.12, 460, 1.1]]) {
+  for (const [n, delay, reach, life] of lite ? [[36, 0, 780, 1.35], [18, 0.12, 460, 1.1]] : [[70, 0, 780, 1.35], [40, 0.12, 460, 1.1]]) {
     for (let i = 0; i < n; i++) {
       const yv = 1 - (2 * (i + 0.5)) / n, rr = Math.sqrt(1 - yv * yv), ph = i * 2.39996 + rnd() * 0.3;
       const c = BIT_COLORS[Math.floor(rnd() * BIT_COLORS.length)];
@@ -106,7 +108,7 @@ export function startLogoScene(host: HTMLElement, canvas: HTMLCanvasElement, hin
   }
 
   // floating background dust
-  const DUST_N = 170;
+  const DUST_N = lite ? 60 : 170;
   const dust = new THREE.InstancedMesh(cubeGeo, new THREE.MeshStandardMaterial({ roughness: 0.4, emissive: 0x0f2a4a, emissiveIntensity: 0.6 }), DUST_N);
   const DUST: { x: number; y: number; z: number; s: number; ph: number; sp: number; r: number }[] = [];
   const dm = new THREE.Object3D(), dcol = new THREE.Color();
@@ -117,7 +119,7 @@ export function startLogoScene(host: HTMLElement, canvas: HTMLCanvasElement, hin
   scene.add(dust);
 
   // extruded letters: each glyph is a stack of textured planes
-  const LAYERS = 14, GAP = 1.7, TEX = 3;
+  const LAYERS = lite ? 7 : 14, GAP = lite ? 3.4 : 1.7, TEX = lite ? 2 : 3;
   function makeGlyph(draw: (c: CanvasRenderingContext2D) => void, adv: number, colors: number[]) {
     const pad = 30, w = adv + pad * 2, h = 240;
     const cvs = document.createElement('canvas'); cvs.width = Math.ceil(w * TEX); cvs.height = h * TEX;
@@ -202,14 +204,19 @@ export function startLogoScene(host: HTMLElement, canvas: HTMLCanvasElement, hin
 
   const ray = new THREE.Raycaster(), plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0), hit = new THREE.Vector3(), local = new THREE.Vector3();
 
-  let t0 = performance.now(), last = t0, visible = true, raf = 0, stopped = false;
+  let t0 = performance.now(), last = t0, visible = true, raf = 0, stopped = false, scSmooth = 0;
   const now = () => (reduced ? 9 : (performance.now() - t0) / 1000);
 
   function render() {
     if (!L || !LY) return;
     const t = now(), tn = performance.now(), dt = Math.min(0.05, (tn - last) / 1000); last = tn;
     const r = host.getBoundingClientRect();
-    const sc = reduced ? 0 : clamp(-r.top / (r.height * 0.85));
+    // how far the scene has scrolled away (0 to 1), eased toward the real position rather than jumping to it:
+    // phones scroll faster than the scene redraws, and jumping makes the scatter stutter
+    const scTarget = reduced ? 0 : clamp(-r.top / (r.height * 0.85));
+    scSmooth += (scTarget - scSmooth) * (1 - Math.exp(-dt * 12));
+    if (Math.abs(scTarget - scSmooth) < 0.001) scSmooth = scTarget;
+    const sc = scSmooth;
     const interact = reduced ? 0 : clamp((t - INTRO_END) / 1);
     hint.classList.toggle('on', t > INTRO_END + 0.5 && sc < 0.04);
 
@@ -332,9 +339,28 @@ export function startLogoScene(host: HTMLElement, canvas: HTMLCanvasElement, hin
   const fontReady = document.fonts
     ? Promise.race([document.fonts.load('700 100px Inter'), new Promise((r) => setTimeout(r, 1500))]).catch(() => {})
     : Promise.resolve();
+  // warm-up: draw every part once, hidden, so the shaders compile and the letter textures upload before the clock
+  // starts; otherwise each part (flash, burst, letters) stalls the animation the first time it appears
+  function warmUp() {
+    if (!LY) return;
+    const parts: THREE.Object3D[] = [...SQ.map((q) => q.mesh), core, flash, ...BITS.map((b) => b.mesh), ...(L?.items.map((it) => it.g) ?? [])];
+    parts.forEach((o) => { o.visible = true; });
+    camera.position.set(0, 0, LY.D); camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+    parts.forEach((o) => { o.visible = false; });
+  }
+
   fontReady.finally(() => {
     if (stopped) return;
-    buildWord(); resize(); t0 = performance.now(); last = t0; raf = requestAnimationFrame(loop);
+    buildWord(); resize();
+    canvas.style.visibility = 'hidden';
+    warmUp();
+    // start on the next frame, once the warm-up has been paid for, so the animation's first second is smooth
+    raf = requestAnimationFrame(() => {
+      if (stopped) return;
+      canvas.style.visibility = '';
+      t0 = performance.now(); last = t0; loop();
+    });
   });
 
   return () => {

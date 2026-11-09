@@ -7,6 +7,7 @@
  */
 import * as THREE from 'three';
 import type { Place } from '../data/career';
+import { LITE_3D } from '../lib/useMedia';
 
 export type GlobeParts = {
   section: HTMLElement; stage: HTMLElement; glc: HTMLCanvasElement; fxc: HTMLCanvasElement;
@@ -19,6 +20,7 @@ const NARROW = '(max-width: 1023px)';
 export function startGlobe({ section, stage, glc, fxc, label, gap, cards, places, labels, spinSpeed }: GlobeParts): () => void {
   const fx = fxc.getContext('2d')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const lite = matchMedia(LITE_3D).matches; // simpler spheres, fewer stars, lower resolution
   const narrow = () => matchMedia(NARROW).matches;
 
   const R = 200, D2R = Math.PI / 180;
@@ -33,7 +35,7 @@ export function startGlobe({ section, stage, glc, fxc, label, gap, cards, places
   const faceQuat = (lat: number, lon: number) => new THREE.Quaternion().setFromEuler(new THREE.Euler(lat * D2R, Math.PI / 2 - (lon + 180) * D2R, 0, 'XYZ'));
 
   // drawn on the band's own night colour rather than a transparent canvas: the glows add light properly over it
-  const renderer = new THREE.WebGLRenderer({ canvas: glc, antialias: true });
+  const renderer = new THREE.WebGLRenderer({ canvas: glc, antialias: !lite });
   const scene = new THREE.Scene(); scene.background = new THREE.Color(0x070b12);
   const camera = new THREE.PerspectiveCamera(35, 1, 10, 6000);
   scene.add(new THREE.HemisphereLight(0xd8eeff, 0x0a1828, 0.55));
@@ -51,7 +53,7 @@ export function startGlobe({ section, stage, glc, fxc, label, gap, cards, places
   const VS = 'varying vec2 vUv; varying vec3 vN; varying vec3 vObj; void main(){ vUv = uv; vObj = normalize(position); vN = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }';
   const earthU = { dayMap: { value: tex('day') }, nightMap: { value: tex('lights') }, specMap: { value: tex('specular') }, sunDir: { value: SUN },
     pinDir: { value: new THREE.Vector3(0, 0, 1) }, pinOn: { value: 0 }, fade: { value: 0 } };
-  const earth = new THREE.Mesh(new THREE.SphereGeometry(R, 128, 96), new THREE.ShaderMaterial({ uniforms: earthU, vertexShader: VS, fragmentShader: `
+  const earth = new THREE.Mesh(new THREE.SphereGeometry(R, lite ? 72 : 128, lite ? 54 : 96), new THREE.ShaderMaterial({ uniforms: earthU, vertexShader: VS, fragmentShader: `
     uniform sampler2D dayMap, nightMap, specMap; uniform vec3 sunDir, pinDir; uniform float pinOn, fade;
     varying vec2 vUv; varying vec3 vN, vObj;
     void main(){
@@ -72,7 +74,7 @@ export function startGlobe({ section, stage, glc, fxc, label, gap, cards, places
     }` }));
   globe.add(earth);
   const cloudU = { cloudMap: { value: tex('clouds') }, sunDir: { value: SUN }, fade: { value: 0 } };
-  const clouds = new THREE.Mesh(new THREE.SphereGeometry(R * 1.012, 96, 72), new THREE.ShaderMaterial({ uniforms: cloudU, transparent: true, depthWrite: false, vertexShader: VS, fragmentShader: `
+  const clouds = new THREE.Mesh(new THREE.SphereGeometry(R * 1.012, lite ? 56 : 96, lite ? 42 : 72), new THREE.ShaderMaterial({ uniforms: cloudU, transparent: true, depthWrite: false, vertexShader: VS, fragmentShader: `
     uniform sampler2D cloudMap; uniform vec3 sunDir; uniform float fade;
     varying vec2 vUv; varying vec3 vN, vObj;
     void main(){
@@ -84,7 +86,7 @@ export function startGlobe({ section, stage, glc, fxc, label, gap, cards, places
   globe.add(clouds);
   // the atmosphere: a soft blue rim around the planet, fading in with it
   const atmoU = { fade: { value: 0 } };
-  scene.add(new THREE.Mesh(new THREE.SphereGeometry(R * 1.09, 64, 48), new THREE.ShaderMaterial({
+  scene.add(new THREE.Mesh(new THREE.SphereGeometry(R * 1.09, lite ? 40 : 64, lite ? 30 : 48), new THREE.ShaderMaterial({
     uniforms: atmoU, side: THREE.BackSide, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false,
     vertexShader: 'varying vec3 vN; void main(){ vN = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
     fragmentShader: 'uniform float fade; varying vec3 vN; void main(){ float i = pow(clamp(0.68 - dot(vN, vec3(0.0,0.0,1.0)), 0.0, 1.0), 3.2); gl_FragColor = vec4(0.30,0.62,1.0,1.0) * i * 0.8 * fade; }',
@@ -149,7 +151,7 @@ export function startGlobe({ section, stage, glc, fxc, label, gap, cards, places
 
   // stars
   const stars = (() => {
-    const n = 2200, pos = new Float32Array(n * 3), colr = new Float32Array(n * 3), c = new THREE.Color();
+    const n = lite ? 900 : 2200, pos = new Float32Array(n * 3), colr = new Float32Array(n * 3), c = new THREE.Color();
     for (let i = 0; i < n; i++) {
       const u = rnd() * 2 - 1, th = rnd() * Math.PI * 2, rr = 2400 + rnd() * 900, q = Math.sqrt(1 - u * u);
       pos.set([Math.cos(th) * q * rr, u * rr, -Math.abs(Math.sin(th) * q * rr) - 200], i * 3);
@@ -168,7 +170,7 @@ export function startGlobe({ section, stage, glc, fxc, label, gap, cards, places
   // layout: the globe sits in the middle column (wide screens) or the pinned strip (phones)
   let W = 1, H = 1, gx = 0, gy = 0, dpr = 1;
   function layout() {
-    dpr = Math.min(devicePixelRatio || 1, 2);
+    dpr = Math.min(devicePixelRatio || 1, lite ? 1.5 : 2);
     W = stage.clientWidth; H = stage.clientHeight;
     renderer.setPixelRatio(dpr); renderer.setSize(W, H, false);
     fxc.width = Math.round(W * dpr); fxc.height = Math.round(H * dpr);
@@ -265,7 +267,7 @@ export function startGlobe({ section, stage, glc, fxc, label, gap, cards, places
       const ph1 = reduced ? 0.35 : (t * 0.55) % 1, ph2 = reduced ? 0.75 : (t * 0.55 + 0.5) % 1;
       m.ring.forEach((c, j) => {
         const ph = j < 10 ? ph1 : ph2, an = ((j % 10) / 10) * Math.PI * 2 + t * 0.5, rr = 9 + ph * 30;
-        c.position.set(Math.cos(an) * rr, Math.sin(an) * rr, 3); c.rotation.z = an; c.scale.setScalar(2.6 * o + 0.001);
+        c.position.set(Math.cos(an) * rr, Math.sin(an) * rr, 3); c.rotation.z = an; c.scale.setScalar(2.6 * o + 0.001); c.visible = o > 0.01; // ripples of pins not in focus are skipped
       });
       m.ringMat.opacity = 0.55 * o * (1 - ph1); m.ringMat2.opacity = 0.55 * o * (1 - ph2);
       if (i === active) earthU.pinDir.value.copy(m.g.position).normalize();

@@ -10,7 +10,8 @@ import { useApp } from '../i18n';
  * top of the page, solid once scrolled. The menu covers the screen: numbered chapters with a line each, the
  * main action, and where we are.
  */
-export function TopBar({ onStart }: { onStart: () => void }) {
+/** `base` is '' on the home page and '/' elsewhere, so the section links lead back to the home page. */
+export function TopBar({ onStart, base = '' }: { onStart: () => void; base?: string }) {
   const { t, lang, mode, toggleLang, toggleMode } = useApp();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -30,9 +31,9 @@ export function TopBar({ onStart }: { onStart: () => void }) {
   const icon = 'flex size-9 items-center justify-center text-bone/80 transition hover:text-bone sm:size-10';
 
   return (
-    <header className={`force-dark fixed inset-x-0 top-0 z-40 pt-[env(safe-area-inset-top,0px)] text-bone transition-[background-color,backdrop-filter] duration-500 ${scrolled && !open ? 'bg-[rgb(7_11_18/0.8)] backdrop-blur-xl' : 'bg-transparent'}`}>
+    <header className={`force-dark fixed inset-x-0 top-0 z-40 pt-[env(safe-area-inset-top,0px)] text-bone transition-[background-color,backdrop-filter] duration-500 ${(scrolled || base) && !open ? 'bg-[rgb(7_11_18/0.8)] backdrop-blur-xl' : 'bg-transparent'}`}>
       <nav className={`mx-auto flex max-w-[1360px] items-center justify-between gap-3 px-5 transition-[height] duration-500 sm:px-10 ${scrolled ? 'h-18' : 'h-24'}`} aria-label={t.a11y.menu}>
-        <a href="#top" aria-label="Commit·AI" onClick={() => setOpen(false)} className="shrink-0"><Logo size={30} variant="dark" /></a>
+        <a href={base || '#top'} aria-label="Commit·AI" onClick={() => setOpen(false)} className="shrink-0"><Logo size={30} variant="dark" /></a>
         <div className="flex items-center gap-1 sm:gap-2">
           <button onClick={toggleLang} aria-label={t.a11y.switchLang} className={`${icon} w-auto px-2 font-mono text-[12px] tracking-[0.14em]`}>{lang === 'fr' ? 'EN' : 'FR'}</button>
           <button onClick={toggleMode} aria-label={mode === 'dark' ? t.a11y.toLight : t.a11y.toDark} className={icon}>{mode === 'dark' ? <Sun className="size-4.5" /> : <Moon className="size-4.5" />}</button>
@@ -62,7 +63,7 @@ export function TopBar({ onStart }: { onStart: () => void }) {
               <ol className="m-0 list-none p-0">
                 {ids.map((id, i) => (
                   <motion.li key={id} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 + i * 0.05, ease: [0.22, 1, 0.36, 1] }} className="border-b border-white/10">
-                    <a href={`#${id}`} onClick={() => setOpen(false)} className="group flex items-baseline gap-5 py-4 sm:gap-8">
+                    <a href={`${base}#${id}`} onClick={() => setOpen(false)} className="group flex items-baseline gap-5 py-4 sm:gap-8">
                       <span className="measure w-6">0{i + 1}</span>
                       <span className="flex flex-col">
                         <span className="display-3 text-bone transition-colors group-hover:text-glow">{t.nav[id]}</span>

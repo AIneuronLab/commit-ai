@@ -133,8 +133,9 @@ export const en: Dict = {
     github: 'GitHub',
     location: 'Location',
     waText: 'Hello, I would like to discuss a project with Commit·AI.',
-    form: { title: 'Send a message', name: 'Name', email: 'Email', message: 'Your need', placeholder: 'A few lines about your project', send: 'Send message', sending: 'Sending…', mailto: 'Your email app is opening: send the message to finish.', sent: 'Thank you, your message is on its way. We will reply soon.', error: 'Sending failed for now. Write to us on WhatsApp or by email.' },
+    form: { title: 'Send a message', name: 'Name', email: 'Email', message: 'Your need', placeholder: 'A few lines about your project', send: 'Send message', sending: 'Sending…', mailto: 'Your email app is opening: send the message to finish.', sent: 'Thank you, your message is on its way. We will reply soon.', error: 'Sending failed for now. Write to us on WhatsApp or by email.', notice: 'Your data is used only to answer you. See the' },
     sheet: { title: 'Start a project', lead: 'Pick the easiest way for you.', form: 'Leave a message' },
   },
+  legal: { back: 'Back to the site', updated: 'Last updated', notice: 'Legal notice', privacy: 'Privacy', privacyLink: 'privacy policy' },
   footer: { tagline: 'Software studio based in Dakar. Automation, web, mobile, APIs and AI.', explore: 'Company', offer: 'Services', reach: 'Contact', location: 'Dakar, Senegal', copy: '© 2026 Commit·AI. All rights reserved.', top: 'Back to top' },
 };

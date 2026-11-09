@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/github-snapshot.mjs",
     "build": "tsc -b && vite build",
+    "test": "node --test",
     "preview": "vite preview"
   },
   "dependencies": {

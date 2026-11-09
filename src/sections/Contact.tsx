@@ -5,6 +5,7 @@ import { Btn, Container, Kinetic, Measure } from '../components/ui';
 import { LinkedInIcon, WhatsAppIcon } from '../components/BrandIcons';
 import { Reveal } from '../motion';
 import { SITE, waLink } from '../data/site';
+import { pathFor } from '../lib/route';
 import { useApp } from '../i18n';
 
 type Status = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
@@ -16,7 +17,7 @@ const field = 'h-12 w-full border-0 border-b border-line-strong bg-transparent p
 const label = 'measure flex flex-col gap-1';
 
 function Form() {
-  const { t } = useApp();
+  const { t, lang } = useApp();
   const f = t.contact.form;
   const [status, setStatus] = useState<Status>('idle');
 
@@ -71,6 +72,7 @@ function Form() {
       <button disabled={status === 'sending'} className="btn btn-glow self-start disabled:opacity-60">
         {status === 'sending' ? f.sending : f.send}<ArrowUpRight className="size-5" strokeWidth={1.5} aria-hidden="true" />
       </button>
+      <p className="m-0 -mt-3 text-[13.5px] text-muted">{f.notice} <a href={pathFor('privacy', lang)} className="text-accent underline underline-offset-4">{t.legal.privacyLink}</a>.</p>
       <p role="status" aria-live="polite" className={`m-0 min-h-5 text-[14px] ${status === 'error' ? 'text-warn' : 'text-ok'}`}>
         {status === 'sent' && <span className="inline-flex items-start gap-2"><Check className="mt-0.5 size-4 shrink-0" />{f.sent}</span>}
         {status === 'mailto' && f.mailto}

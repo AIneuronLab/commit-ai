@@ -5,7 +5,8 @@ React 19 + Vite + Tailwind CSS v4 + `motion`. Mobile d'abord (barre d'onglets en
 ```bash
 npm install
 npm run dev          # http://localhost:5173  (?theme=light, ?lang=en pour forcer)
-npm run build        # types + build dans dist/
+npm run build        # chiffre GitHub, types + build dans dist/
+npm test             # tests (node --test, sans dépendance)
 node scripts/contrast.mjs   # vérifie le contraste (4,5:1) de tous les textes, sombre et clair
 ```
 
@@ -15,7 +16,9 @@ node scripts/contrast.mjs   # vérifie le contraste (4,5:1) de tous les textes, 
 |---|---|
 | Email, WhatsApp, LinkedIn, GitHub, chiffres du haut de page (« 10+ projets en production ») | `src/data/site.ts` |
 | Projets clients affichés (écrits à la main : rien n'est lu dans les dépôts privés) | `src/data/projects.ts` → `CLIENT_PROJECTS`, textes dans `src/i18n/` |
-| Dépôts GitHub publics du « Labo » | `src/data/projects.ts` → `FEATURED_REPOS` |
+| Mentions légales et politique de confidentialité (FR / EN) | `src/legal/content.ts` (mettre à jour `UPDATED`) |
+| Outils de la section Stack | `src/data/stack.ts` |
+| Villes du globe (parcours) | `src/data/career.ts` |
 | Citations de clients (la section n'apparaît que s'il y en a, avec leur accord) | `src/data/testimonials.ts` |
 | Tous les textes FR / EN | `src/i18n/fr.ts` et `src/i18n/en.ts` (l'anglais doit avoir la même forme que le français : TypeScript le vérifie) |
 | Couleurs | `src/index.css` (les jetons `--ca-*`), puis `node scripts/contrast.mjs` |
@@ -28,9 +31,18 @@ node scripts/contrast.mjs   # vérifie le contraste (4,5:1) de tous les textes, 
 - **« Réduire les animations »** activé dans le système : plus aucun mouvement (sphère figée, bande repliée, titres affichés d'un coup).
 - Le texte du haut de page n'est jamais invisible au premier affichage (vitesse). Objectif : Lighthouse mobile ≥ 90 ; mesuré à 100.
 
-## Données GitHub (sans coût Netlify)
+## Données GitHub
 
-`src/lib/github.ts` lit l'API GitHub publique **dans le navigateur du visiteur** quand la section « Labo » approche de l'écran, garde le résultat 1 h dans `localStorage`, et retombe sur les valeurs de `GITHUB_SNAPSHOT` si GitHub est injoignable. Le total de contributions (projets privés compris) et la carte d'activité viennent de `github-contributions-api.jogruber.de`, un service tiers : si vous préférez ne pas l'utiliser, retirez l'appel dans `fetchLive`.
+Le nombre de contributions GitHub affiché dans « À propos » est récupéré **au moment du build** par `scripts/github-snapshot.mjs` (lancé automatiquement avant `npm run build`) et enregistré dans `src/data/github.json`. Les navigateurs des visiteurs ne contactent donc aucun service tiers. Si le service est injoignable, le build garde la dernière valeur.
+
+## Vie privée et conformité
+
+Pas de cookies, pas de mesure d'audience, pas de bannière nécessaire : le navigateur ne garde que le thème et la langue (`localStorage`), et les polices sont servies par le site (`public/fonts`, `src/fonts.css`), sans appel à Google. Les pages `/mentions-legales` (`/legal-notice`) et `/confidentialite` (`/privacy`) sont liées en bas de page.
+
+À faire quand ce sera le cas :
+- **Entreprise immatriculée** : ajouter forme juridique, RCCM et NINEA dans la section « Éditeur » de `src/legal/content.ts`.
+- **Déclaration à la CDP** (Commission de Protection des Données Personnelles du Sénégal) : ajouter le numéro de déclaration dans la politique de confidentialité.
+- **Nouvel outil qui collecte des données** (mesure d'audience, chat, etc.) : mettre à jour la politique, et ajouter un consentement s'il dépose des cookies.
 
 ## Hébergement : Cloudflare Workers, fichiers statiques (gratuit)
 
