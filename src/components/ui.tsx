@@ -24,7 +24,9 @@ export function Kinetic({ text, as: Tag = 'h2', className = '', lines = false }:
   return (
     <Tag className={`m-0 ${lines ? '' : 'text-balance'} ${className}`}>
       <span className="sr-only">{text}</span>
-      <motion.span aria-hidden="true" initial={reduce ? false : 'hidden'} whileInView="shown" viewport={{ once: true, margin: '-40px' }}>
+      {/* keyed by the sentence: when the language changes, the letters start over together. Without it, letters that
+          move to another word are created after the title has played, and stay invisible. */}
+      <motion.span key={text} aria-hidden="true" initial={reduce ? false : 'hidden'} whileInView="shown" viewport={{ once: true, margin: '-40px' }}>
         {words.map((w, wi) => (
           <Fragment key={wi}>
             <span className={`${lines ? 'block' : 'inline-block'} whitespace-nowrap`}>

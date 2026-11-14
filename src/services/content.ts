@@ -59,7 +59,7 @@ export const SERVICES_TEXT: Record<'fr' | 'en', Record<ServiceId, ServiceText>> 
         { t: 'Lien avec vos outils', d: 'L’application parle à votre back-office et à vos API existantes.' },
       ],
       examples: [
-        { title: 'BayKat', client: 'Réalisé chez SOTILMA · 2026', result: 'Diagnostic des cultures par photo', desc: 'L’agriculteur photographie une feuille : la vision IA détecte la maladie et l’application conseille traitement et irrigation. Web et mobile, présenté avec l’accord de SOTILMA.' },
+        { title: 'BayKat', client: 'Réalisé chez SOTILMA · 2026', result: 'Agent IA de diagnostic des cultures', desc: 'L’agriculteur photographie une feuille : l’agent IA détecte la maladie et conseille traitement et irrigation. Web et mobile.' },
       ],
     },
     api: {
@@ -108,7 +108,7 @@ export const SERVICES_TEXT: Record<'fr' | 'en', Record<ServiceId, ServiceText>> 
         { t: 'Connected to your tools', d: 'The app talks to your back office and your existing APIs.' },
       ],
       examples: [
-        { title: 'BayKat', client: 'Built at SOTILMA · 2026', result: 'Crop diagnosis from a photo', desc: 'The farmer photographs a leaf: vision AI detects the disease and the app advises treatment and irrigation. Web and mobile, shown with SOTILMA’s permission.' },
+        { title: 'BayKat', client: 'Built at SOTILMA · 2026', result: 'AI agent for crop diagnosis', desc: 'The farmer photographs a leaf: the AI agent detects the disease and advises treatment and irrigation. Web and mobile.' },
       ],
     },
     api: {

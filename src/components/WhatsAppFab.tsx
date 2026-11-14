@@ -12,7 +12,7 @@ export function WhatsAppFab() {
       rel="noopener noreferrer"
       aria-label={t.contact.whatsapp}
       title={t.contact.whatsapp}
-      className="fixed right-4 bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] z-40 flex size-13 items-center justify-center rounded-full bg-[#1fa855] text-white shadow-[0_10px_28px_-8px_rgba(0,0,0,.45)] transition hover:-translate-y-0.5 hover:bg-[#25b862] md:right-6 md:bottom-6"
+      className="fixed right-4 bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] z-40 flex size-13 items-center justify-center rounded-full bg-glow text-night shadow-[0_10px_28px_-8px_rgba(0,0,0,.45)] transition hover:-translate-y-0.5 hover:bg-glow-light md:right-6 md:bottom-6"
     >
       <WhatsAppIcon className="size-6.5" />
     </a>
