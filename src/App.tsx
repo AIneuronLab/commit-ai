@@ -8,7 +8,7 @@ import { ContactSheet } from './sections/Contact';
 import { Footer } from './sections/Footer';
 import { WhatsAppFab } from './components/WhatsAppFab';
 import { LegalPage } from './sections/LegalPage';
-import { ServicePage } from './sections/ServicePage';
+import { ServicePage } from './home/ServicePage';
 import { pageFor, serviceFor } from './lib/route';
 
 // the page is chosen once from the address: links between pages are ordinary page loads
@@ -26,10 +26,12 @@ function Shell() {
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-white">{t.a11y.skip}</a>
       {PAGE === 'home' ? (
         <Home onStart={open} />
+      ) : PAGE === 'service' ? (
+        SERVICE && <ServicePage id={SERVICE} onStart={open} />
       ) : (
         <>
           <TopBar onStart={open} base="/" />
-          {PAGE === 'service' ? SERVICE && <ServicePage id={SERVICE} onStart={open} /> : <LegalPage page={PAGE} />}
+          <LegalPage page={PAGE} />
           <Footer base="/" />
         </>
       )}

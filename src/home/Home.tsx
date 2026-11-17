@@ -20,18 +20,18 @@ import './home.css';
 
 type Start = { onStart: () => void };
 
-const SERVICE_ICON: Record<ServiceId, typeof Check> = { web: MonitorSmartphone, automation: Workflow, mobile: Smartphone, api: ServerCog };
+export const SERVICE_ICON: Record<ServiceId, typeof Check> = { web: MonitorSmartphone, automation: Workflow, mobile: Smartphone, api: ServerCog };
 /** The short label of the header button on phones. */
 const START = { fr: 'Démarrer', en: 'Start' } as const;
 
 /** Under a row that swipes sideways on phones: tells the visitor there is more to the right. Hidden on wider screens. */
-function SwipeHint() {
+export function SwipeHint() {
   const { lang } = useApp();
   return <p aria-hidden="true" className="mt-2 inline-flex items-center gap-1.5 text-[13px] font-medium text-muted md:hidden">{lang === 'fr' ? 'Faites glisser pour voir la suite' : 'Swipe to see more'}<ArrowRight className="size-3.5" /></p>;
 }
 
 /** Section opening: a small blue label, the title, an optional line under it. */
-function Head({ kicker, title, lead }: { kicker: string; title: string; lead?: ReactNode }) {
+export function Head({ kicker, title, lead }: { kicker: string; title: string; lead?: ReactNode }) {
   return (
     <div className="mb-7 flex max-w-[680px] flex-col gap-2 lg:mb-9">
       <span className="c-kicker">{kicker}</span>
@@ -41,12 +41,13 @@ function Head({ kicker, title, lead }: { kicker: string; title: string; lead?: R
   );
 }
 
-function Header({ onStart }: Start) {
+/** `base` is '' on the home page and '/' elsewhere, so the logo and the section links lead back home. */
+export function Header({ onStart, base = '' }: Start & { base?: string }) {
   const { t, lang, toggleLang } = useApp();
   return (
     <header className="sticky top-0 z-40 bg-[var(--c-nav)] pt-[env(safe-area-inset-top,0px)] text-white">
       <div className="c-wrap flex h-16 items-center gap-2 lg:h-[72px] lg:gap-3">
-        <a href="#top" aria-label="Commit·AI" className="mr-auto shrink-0"><Logo size={30} variant="dark" /></a>
+        <a href={base || '#top'} aria-label="Commit·AI" className="mr-auto shrink-0"><Logo size={30} variant="dark" /></a>
         <button type="button" onClick={toggleLang} aria-label={t.a11y.switchLang} className="flex h-10 items-center rounded-lg px-2.5 text-[14px] font-semibold text-[var(--c-on-nav-2)] hover:bg-white/10 hover:text-white">{lang === 'fr' ? 'EN' : 'FR'}</button>
         <a href={waLink(t.contact.waText)} target="_blank" rel="noopener noreferrer" className="c-btn c-btn-onnav c-btn-sm max-md:hidden"><WhatsAppIcon className="size-4" />WhatsApp</a>
         <button type="button" onClick={onStart} className="c-btn c-btn-primary c-btn-sm">
@@ -175,7 +176,7 @@ function Metrics() {
  * One project as a card, words only: its service icon and who it was for, the title, the result in an amber
  * badge, what it does, and its links (the service page, the live site). `lead` is the first project, set larger.
  */
-function CaseCard({ c, lead = false }: { c: Case; lead?: boolean }) {
+export function CaseCard({ c, lead = false }: { c: Case; lead?: boolean }) {
   const { t, lang } = useApp();
   const Icon = SERVICE_ICON[c.service];
   return (
@@ -268,8 +269,19 @@ function Method() {
     <section id="process" className="scroll-mt-20">
       <div className="c-wrap py-12 lg:py-16">
         <Head kicker={h.kicker} title={h.title} lead={h.titleB} />
+        <Steps />
+      </div>
+    </section>
+  );
+}
+
+/** The three steps of working together, as cards (a row you swipe on phones). */
+export function Steps() {
+  const { t } = useApp();
+  return (
+    <>
         <ol className="c-swipe md:grid md:gap-4 lg:grid-cols-3">
-          {h.steps.map((s, i) => (
+          {t.how.steps.map((s, i) => (
             <li key={s.t} className="c-card flex flex-col gap-3 p-5 lg:p-6">
               <div className="flex items-center justify-between gap-3">
                 <span className="flex size-9 items-center justify-center rounded-full bg-[var(--c-amber)] font-logo text-[15px] font-bold text-[var(--c-nav)]" aria-hidden="true">{i + 1}</span>
@@ -281,8 +293,7 @@ function Method() {
           ))}
         </ol>
         <SwipeHint />
-      </div>
-    </section>
+    </>
   );
 }
 
@@ -443,7 +454,7 @@ function MessageForm() {
 }
 
 /** The contact block: on navy, the invitation and the direct ways to reach us on the left, the message form on the right. */
-function Cta() {
+export function Cta() {
   const { t } = useApp();
   const row = 'inline-flex items-center gap-2';
   return (
@@ -466,7 +477,7 @@ function Cta() {
   );
 }
 
-function Footer() {
+export function Footer({ base = '' }: { base?: string }) {
   const { t, lang } = useApp();
   const f = t.footer;
   const link = 'text-[14.5px] text-soft hover:text-fg hover:underline';
@@ -486,8 +497,8 @@ function Footer() {
         </nav>
         <nav aria-label={f.explore} className={col}>
           <span className={title}>{f.explore}</span>
-          <a href="#work" className={link}>{COPY[lang].work.kicker}</a>
-          {chapters.map((id) => <a key={id} href={`#${id}`} className={link}>{t.nav[id]}</a>)}
+          <a href={`${base}#work`} className={link}>{COPY[lang].work.kicker}</a>
+          {chapters.map((id) => <a key={id} href={`${base}#${id}`} className={link}>{t.nav[id]}</a>)}
         </nav>
         <div className={`${col} max-sm:col-span-2`}>
           <span className={title}>{f.reach}</span>
@@ -510,15 +521,21 @@ function Footer() {
   );
 }
 
-export function Home({ onStart }: Start) {
-  // this page is light only for now: the light theme is on while it is shown (so the contact sheet matches),
-  // and the visitor's own choice comes back when they leave it
+/**
+ * The home and service pages are light only for now: the light theme is on while one is shown (so the contact
+ * sheet matches), and the visitor's own choice comes back when they leave it.
+ */
+export function useLightTheme() {
   useEffect(() => {
     const el = document.documentElement;
     const had = el.classList.contains('light');
     el.classList.add('light');
     return () => { if (!had) el.classList.remove('light'); };
   }, []);
+}
+
+export function Home({ onStart }: Start) {
+  useLightTheme();
   return (
     <div id="top" className="clean font-sans">
       <Header onStart={onStart} />
