@@ -35,8 +35,7 @@ export const fr = {
   metricsKicker: 'En chiffres',
   metrics: [
     { value: '10+', label: 'projets en production' },
-    { value: '50–60', label: 'appels d’offres triés chaque jour' },
-    { value: '88', label: 'pages de guide RH interrogeables' },
+    { value: '4', label: 'métiers, une seule équipe' },
     { value: '3', label: 'pays d’expérience' },
   ],
   statement: {

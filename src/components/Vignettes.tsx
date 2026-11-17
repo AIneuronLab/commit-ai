@@ -88,7 +88,7 @@ export function BookingCard({ className = '' }: { className?: string }) {
   );
 }
 
-/** A mobile screen showing a diagnosis result, in the style of BayKat. */
+/** A mobile screen showing a diagnosis result, in the style of the crop-diagnosis agent. */
 export function AppCard({ className = '' }: { className?: string }) {
   const { t } = useApp();
   const a = t.services.ui.app;

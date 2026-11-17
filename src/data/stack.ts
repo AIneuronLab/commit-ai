@@ -9,6 +9,7 @@ export const STACK: { name: string; group: StackGroup; icon?: string; level: num
   { name: 'Python', group: 'ai', icon: 'python-original', level: 5, use: { fr: 'Modèles, pipelines de données et API.', en: 'Models, data pipelines and APIs.' } },
   { name: 'LLM & RAG', group: 'ai', level: 4, use: { fr: 'Chatbots qui répondent depuis vos documents, en citant la source.', en: 'Chatbots that answer from your documents and cite the source.' } },
   { name: 'LangChain', group: 'ai', icon: 'langchain', level: 4, use: { fr: 'Chaînes et agents LLM branchés sur vos données et vos outils.', en: 'LLM chains and agents wired to your data and tools.' } },
+  { name: 'LangGraph', group: 'ai', level: 3, use: { fr: 'Agents IA en plusieurs étapes, avec mémoire et reprise après une erreur.', en: 'Multi-step AI agents with memory that resume after an error.' } },
   { name: 'Mastra', group: 'ai', level: 3, use: { fr: 'Agents et workflows IA en TypeScript.', en: 'AI agents and workflows in TypeScript.' } },
   { name: 'CNN', group: 'ai', level: 4, use: { fr: 'Vision par ordinateur : reconnaître une maladie sur une photo de feuille.', en: 'Computer vision: spotting a disease in a photo of a leaf.' } },
   { name: 'Jupyter', group: 'ai', icon: 'jupyter-original', level: 4, use: { fr: 'Analyse, expériences et prototypes.', en: 'Analysis, experiments and prototypes.' } },
@@ -25,8 +26,13 @@ export const STACK: { name: string; group: StackGroup; icon?: string; level: num
   { name: 'Git', group: 'tools', icon: 'git-original', level: 5, use: { fr: 'Versionnage et travail en équipe.', en: 'Version control and team workflows.' } },
 ];
 
-/** Two letters for a card without a logo: one from each of the first two words, or the first two of a single word. */
+/**
+ * Two letters for a card without a logo: one from each of the first two words, the first two capitals of a
+ * single word written like LangGraph, or else its first two letters.
+ */
 export const stackInitials = (n: string) => {
   const w = n.replace(/[^A-Za-z0-9 ]/g, '').split(/\s+/).filter(Boolean);
-  return (w.length > 1 ? w[0][0] + w[1][0] : w[0].slice(0, 2)).toUpperCase();
+  const caps = w[0].match(/[A-Z]/g) ?? [];
+  if (w.length > 1) return (w[0][0] + w[1][0]).toUpperCase();
+  return (caps.length >= 2 && caps.length < w[0].length ? caps.slice(0, 2).join('') : w[0].slice(0, 2)).toUpperCase();
 };
