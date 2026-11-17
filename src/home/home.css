@@ -55,6 +55,9 @@
   line-height: 1.55;
 }
 
+/* in-page links land below the sticky header: once scrolled it is only the navy bar (64px, 72px on wide screens) */
+.clean [id] { scroll-margin-top: 88px; }
+
 /* phones: a long list becomes one row you swipe from right to left, the next card peeking in */
 @media (max-width: 767px) {
   .c-swipe { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; margin-inline: -16px; padding: 0 16px 8px; scroll-padding-inline: 16px; scrollbar-width: none; }

@@ -6,7 +6,7 @@
  */
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { sendMessage, type Status } from '../sections/Contact';
-import { ArrowRight, ArrowUpRight, BadgeCheck, CalendarClock, Check, ChevronDown, FileText, Layers, Mail, MapPin, MonitorSmartphone, PhoneCall, Rocket, ServerCog, Smartphone, Workflow } from 'lucide-react';
+import { Menu, X, ArrowRight, ArrowUpRight, BadgeCheck, CalendarClock, Check, ChevronDown, FileText, Layers, Mail, MapPin, MonitorSmartphone, PhoneCall, Rocket, ServerCog, Smartphone, Workflow } from 'lucide-react';
 import { Logo } from '../brand/Logo';
 import { GitHubIcon, WhatsAppIcon } from '../components/BrandIcons';
 import { SITE, waLink } from '../data/site';
@@ -41,27 +41,10 @@ export function Head({ kicker, title, lead }: { kicker: string; title: string; l
   );
 }
 
-/** `base` is '' on the home page and '/' elsewhere, so the logo and the section links lead back home. */
-export function Header({ onStart, base = '' }: Start & { base?: string }) {
-  const { t, lang, toggleLang } = useApp();
-  return (
-    <header className="sticky top-0 z-40 bg-[var(--c-nav)] pt-[env(safe-area-inset-top,0px)] text-white">
-      <div className="c-wrap flex h-16 items-center gap-2 lg:h-[72px] lg:gap-3">
-        <a href={base || '#top'} aria-label="Commit·AI" className="mr-auto shrink-0"><Logo size={30} variant="dark" /></a>
-        <button type="button" onClick={toggleLang} aria-label={t.a11y.switchLang} className="flex h-10 items-center rounded-lg px-2.5 text-[14px] font-semibold text-[var(--c-on-nav-2)] hover:bg-white/10 hover:text-white">{lang === 'fr' ? 'EN' : 'FR'}</button>
-        <a href={waLink(t.contact.waText)} target="_blank" rel="noopener noreferrer" className="c-btn c-btn-onnav c-btn-sm max-md:hidden"><WhatsAppIcon className="size-4" />WhatsApp</a>
-        <button type="button" onClick={onStart} className="c-btn c-btn-primary c-btn-sm">
-          <span className="sm:hidden">{START[lang]}</span><span className="max-sm:hidden">{t.nav.cta}</span>
-        </button>
-      </div>
-    </header>
-  );
-}
-
-/** The chapters of the page as one row of links under the header; it scrolls sideways on phones. */
-function Chapters() {
+/** The chapters of the home page: the links of the section bar and of the phone menu. */
+function useChapters(): [string, string, typeof Check][] {
   const { t, lang } = useApp();
-  const items: [string, string, typeof Check][] = [
+  return [
     ['work', COPY[lang].work.kicker, Rocket],
     ['services', t.nav.services, MonitorSmartphone],
     ['process', t.nav.process, CalendarClock],
@@ -70,18 +53,82 @@ function Chapters() {
     ['faq', t.nav.faq, FileText],
     ['contact', t.nav.contact, PhoneCall],
   ];
+}
+
+/**
+ * The header of the home and service pages, sticky at the top: the navy bar (logo, language, WhatsApp, start a
+ * project) and the chapters of the home page. At the top of the page the chapters are a row of links under the
+ * bar; once the visitor scrolls down, the row folds away and a menu button in the bar opens them as a panel.
+ * `base` is '' on the home page and '/' elsewhere, so the logo and the chapter links lead back home (Contact
+ * stays on the page: every page that uses this header ends with the contact block).
+ */
+export function Header({ onStart, base = '' }: Start & { base?: string }) {
+  const { t, lang, toggleLang } = useApp();
+  const chapters = useChapters();
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const on = () => {
+      const s = window.scrollY > 80;
+      setScrolled(s);
+      if (!s) setOpen(false); // back at the top the row is visible again: the panel is not needed
+    };
+    on();
+    window.addEventListener('scroll', on, { passive: true });
+    return () => window.removeEventListener('scroll', on);
+  }, []);
+  useEffect(() => {
+    if (!open) return;
+    const esc = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    document.addEventListener('keydown', esc);
+    return () => document.removeEventListener('keydown', esc);
+  }, [open]);
+  const close = () => setOpen(false);
   return (
-    <nav aria-label={t.a11y.menu} className="border-b border-line bg-bg">
-      <ul className="c-wrap flex gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {items.map(([id, label, Icon]) => (
-          <li key={id} className="shrink-0">
-            <a href={`#${id}`} className="inline-flex items-center gap-2 border-b-[3px] border-transparent px-3 pt-3.5 pb-3 text-[14.5px] font-semibold whitespace-nowrap text-soft transition-colors hover:border-[var(--c-amber)] hover:text-fg">
-              <Icon className="size-[18px]" strokeWidth={1.8} aria-hidden="true" />{label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <header className="sticky top-0 z-40">
+      <div className="bg-[var(--c-nav)] pt-[env(safe-area-inset-top,0px)] text-white">
+        <div className="c-wrap flex h-16 items-center gap-2 lg:h-[72px] lg:gap-3">
+          <a href={base || '#top'} aria-label="Commit·AI" onClick={close} className="mr-auto shrink-0"><Logo size={30} variant="dark" /></a>
+          <button type="button" onClick={toggleLang} aria-label={t.a11y.switchLang} className="flex h-10 items-center rounded-lg px-2.5 text-[14px] font-semibold text-[var(--c-on-nav-2)] hover:bg-white/10 hover:text-white">{lang === 'fr' ? 'EN' : 'FR'}</button>
+          <a href={waLink(t.contact.waText)} target="_blank" rel="noopener noreferrer" className="c-btn c-btn-onnav c-btn-sm max-md:hidden"><WhatsAppIcon className="size-4" />WhatsApp</a>
+          <button type="button" onClick={() => { close(); onStart(); }} className="c-btn c-btn-primary c-btn-sm">
+            <span className="sm:hidden">{START[lang]}</span><span className="max-sm:hidden">{t.nav.cta}</span>
+          </button>
+          <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-controls="site-menu" aria-label={open ? t.a11y.close : t.a11y.openMenu} className={`size-10 items-center justify-center rounded-lg text-white hover:bg-white/10 ${scrolled ? 'flex' : 'hidden'}`}>
+            {open ? <X className="size-6" aria-hidden="true" /> : <Menu className="size-6" aria-hidden="true" />}
+          </button>
+        </div>
+      </div>
+      {/* at the top of the page: the chapters as a row of links (it scrolls sideways on phones) */}
+      <nav aria-label={t.a11y.menu} className={`border-b border-line bg-bg ${scrolled ? 'hidden' : ''}`}>
+        <ul className="c-wrap flex gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {chapters.map(([id, label, Icon]) => (
+            <li key={id} className="shrink-0">
+              <a href={id === 'contact' ? '#contact' : `${base}#${id}`} className="inline-flex items-center gap-2 border-b-[3px] border-transparent px-3 pt-3 pb-2.5 text-[14.5px] font-semibold whitespace-nowrap text-soft transition-colors hover:border-[var(--c-amber)] hover:text-fg">
+                <Icon className="size-[18px]" strokeWidth={1.8} aria-hidden="true" />{label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      {/* once scrolled: the same links in a panel under the bar, opened by the menu button */}
+      {open && scrolled && (
+        <nav id="site-menu" aria-label={t.a11y.menu} data-lenis-prevent className="border-b border-line bg-bg shadow-[var(--c-sh-2)]">
+          <ul className="c-wrap grid grid-cols-2 gap-1.5 pt-3 sm:grid-cols-3 lg:grid-cols-4">
+            {chapters.map(([id, label, Icon]) => (
+              <li key={id}>
+                <a href={id === 'contact' ? '#contact' : `${base}#${id}`} onClick={close} className="flex items-center gap-2.5 rounded-[10px] px-3 py-3 text-[15.5px] font-semibold text-fg hover:bg-bg-alt">
+                  <Icon className="size-5 text-accent" strokeWidth={1.8} aria-hidden="true" />{label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="c-wrap pt-2 pb-4 md:hidden">
+            <a href={waLink(t.contact.waText)} target="_blank" rel="noopener noreferrer" onClick={close} className="c-btn c-btn-secondary w-full"><WhatsAppIcon className="size-[18px]" />{t.contact.whatsapp}</a>
+          </div>
+        </nav>
+      )}
+    </header>
   );
 }
 
@@ -396,7 +443,7 @@ function Faq() {
   return (
     <section id="faq" className="scroll-mt-20 border-y border-line bg-bg-alt">
       <div className="c-wrap grid gap-8 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-14 lg:py-16">
-        <div className="flex flex-col gap-2 lg:sticky lg:top-24 lg:self-start">
+        <div className="flex flex-col gap-2 lg:sticky lg:top-28 lg:self-start">
           <span className="c-kicker">{f.kicker}</span>
           <h2 className="text-[clamp(1.6rem,2.8vw,2.15rem)] leading-[1.15]">{f.title}</h2>
           <p className="text-[16px] text-soft">{f.lead} <a href="#contact" className="font-semibold text-accent hover:underline">{t.nav.contact}</a></p>
@@ -416,7 +463,6 @@ function Faq() {
   );
 }
 
-/** The call to action: a navy block with the two ways to start and the contact details. */
 /** The message form of the contact block. Sending works as on today's page (sendMessage in sections/Contact). */
 function MessageForm() {
   const { t, lang } = useApp();
@@ -539,7 +585,6 @@ export function Home({ onStart }: Start) {
   return (
     <div id="top" className="clean font-sans">
       <Header onStart={onStart} />
-      <Chapters />
       <main id="main">
         <Hero onStart={onStart} />
         <Metrics />
