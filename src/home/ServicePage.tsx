@@ -1,7 +1,7 @@
 /**
  * One service explained, in the home page's look: a navy opening with the title, the introduction, the two
- * actions and the tools used; then what we build, the real projects of this service, how working together goes,
- * what you get, the contact block with the message form, and a link to the next service.
+ * actions and the tools used; then what we build, the real projects of this service, how working together goes
+ * (with the code-ownership and maintenance promises), the contact block with the message form, and a link to the next service.
  * On phones the cards become rows you swipe sideways, as on the home page.
  */
 import { useEffect } from 'react';
@@ -19,8 +19,8 @@ import './home.css';
 
 /** Extra labels of the service pages, in both languages. */
 const LABELS = {
-  fr: { tools: 'Les outils', buildsTitle: 'Concrètement, nous construisons :', examplesTitle: 'Des projets réels, en production ou livrés.', getTitle: 'Ce que vous obtenez, quel que soit le projet.' },
-  en: { tools: 'The tools', buildsTitle: 'In practice, we build:', examplesTitle: 'Real projects, live or delivered.', getTitle: 'What you get, whatever the project.' },
+  fr: { tools: 'Les outils', buildsTitle: 'Concrètement, nous construisons :', examplesTitle: 'Des projets réels, en production ou livrés.' },
+  en: { tools: 'The tools', buildsTitle: 'In practice, we build:', examplesTitle: 'Real projects, live or delivered.' },
 } as const;
 
 export function ServicePage({ id, onStart }: { id: ServiceId; onStart: () => void }) {
@@ -110,22 +110,15 @@ export function ServicePage({ id, onStart }: { id: ServiceId; onStart: () => voi
           </section>
         )}
 
-        {/* how working together goes */}
+        {/* how working together goes, then the two promises the steps do not already say */}
         <section className="c-wrap py-12 lg:py-16">
           <Head kicker={ui.how} title={t.how.title} lead={t.how.titleB} />
           <Steps />
-        </section>
-
-        {/* what you get */}
-        <section className="c-wrap pb-4">
-          <div className="c-card p-5 sm:p-8">
-            <Head kicker={ui.get} title={L.getTitle} />
-            <ul className="grid gap-x-8 gap-y-3 md:grid-cols-2">
-              {ui.getItems.map((g) => (
-                <li key={g} className="flex items-start gap-2.5 text-[15.5px] leading-[1.55]"><Check className="mt-1 size-4 shrink-0 text-[var(--c-primary)]" strokeWidth={2.5} aria-hidden="true" />{g}</li>
-              ))}
-            </ul>
-          </div>
+          <ul className="mt-5 grid gap-3 md:grid-cols-2">
+            {ui.getItems.slice(3).map((g) => (
+              <li key={g} className="flex items-start gap-2.5 rounded-[12px] bg-bg-alt px-4 py-3 text-[15px] leading-[1.5] font-medium"><Check className="mt-0.5 size-4 shrink-0 text-[var(--c-primary)]" strokeWidth={2.5} aria-hidden="true" />{g}</li>
+            ))}
+          </ul>
         </section>
 
         <Cta />
