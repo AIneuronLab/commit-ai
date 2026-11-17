@@ -4,11 +4,12 @@
  * pushed by the cursor, a click makes it implode and re-form, and scrolling scatters everything.
  * Ported from the standalone hero (three.js); started by <LogoScene>, which passes the elements and gets back a
  * function that stops everything.
+ * `transparent` draws the scene without its night background, so it can sit over a photo.
  */
 import * as THREE from 'three';
 import { LITE_3D } from '../lib/useMedia';
 
-export function startLogoScene(host: HTMLElement, canvas: HTMLCanvasElement, hint: HTMLElement): () => void {
+export function startLogoScene(host: HTMLElement, canvas: HTMLCanvasElement, hint: HTMLElement, opts: { transparent?: boolean } = {}): () => void {
   const T = 2.4, INTRO_END = 4.6, LOOP_AT = 5.8, FOV = 32;
   const FONT = 'Inter, "Helvetica Neue", Helvetica, Arial, sans-serif';
   const BG = 0x070b12, WORD = [0xffffff, 0x7f97b5], BLUE = [0x2196f3, 0x0f5da8];
@@ -42,9 +43,9 @@ export function startLogoScene(host: HTMLElement, canvas: HTMLCanvasElement, hin
   // a pulse that travels outward through the mark every few seconds once it has settled
   const bump = (lt: number, d: number) => { if (lt < 0) return 0; const l = ((((lt / P) - d / 700) % 1) + 1) % 1; return l < 0.4 ? Math.pow(Math.sin((Math.PI * l) / 0.4), 2) : 0; };
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !lite, powerPreference: 'high-performance' });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !lite, alpha: !!opts.transparent, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, lite ? 1.5 : 2));
-  const scene = new THREE.Scene(); scene.background = new THREE.Color(BG);
+  const scene = new THREE.Scene(); scene.background = opts.transparent ? null : new THREE.Color(BG);
   const fog = new THREE.Fog(BG, 1800, 4200); scene.fog = fog;
   const camera = new THREE.PerspectiveCamera(FOV, 1, 10, 9000);
 

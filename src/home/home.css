@@ -1,0 +1,97 @@
+/*
+ * The home page's look: white pages, a solid navy header, one blue for every action and amber for highlights,
+ * flat cards with a thin border, sentence-case titles in the logo's typeface. Loaded by src/home/Home.tsx.
+ * Everything is scoped to `.clean`, so the service and legal pages keep their own colours.
+ */
+.clean {
+  /* the site's theme colours, re-pointed to a white palette (same trick as .force-dark in index.css) */
+  --ca-bg: #ffffff;
+  --ca-bg-alt: #f4f7fb;
+  --ca-card: #ffffff;
+  --ca-card-alt: #eaeff6;
+  --ca-line: #e1e7f0;
+  --ca-line-strong: #c9d2e0;
+  --ca-fg: #0b1526;
+  --ca-soft: #47546b;
+  --ca-muted: #5f6c83;
+  --ca-accent: #1654bd;
+  --ca-accent-soft: #e8f0fd;
+  --ca-ok: #0e7a47;
+  --ca-warn: #b54708;
+  --color-bg: var(--ca-bg);
+  --color-bg-alt: var(--ca-bg-alt);
+  --color-card: var(--ca-card);
+  --color-card-alt: var(--ca-card-alt);
+  --color-line: var(--ca-line);
+  --color-line-strong: var(--ca-line-strong);
+  --color-fg: var(--ca-fg);
+  --color-soft: var(--ca-soft);
+  --color-muted: var(--ca-muted);
+  --color-accent: var(--ca-accent);
+  --color-accent-soft: var(--ca-accent-soft);
+  --color-ok: var(--ca-ok);
+  --color-warn: var(--ca-warn);
+
+  /* only in this variant */
+  --c-nav: #0a1730;
+  --c-on-nav-2: #c3cde0;
+  --c-ok-soft: #e3f5ec;
+  /* the second colour: a warm amber (#fbbf24), used as it is. Too light for text on white (1.7:1),
+     so on white it is only used for bars and fills, with navy text on it (10.7:1). */
+  --c-amber: #fbbf24;
+  /* the action colour: buttons, links, icons, selected states */
+  --c-primary: var(--color-brand);
+  --c-primary-hover: var(--color-brand-deep);
+  --c-on-primary: #ffffff;
+  --c-primary-glow: rgb(29 99 216 / 0.8);
+  --c-sh-1: 0 1px 2px rgb(11 21 38 / 0.06);
+  --c-sh-2: 0 14px 34px -14px rgb(11 21 38 / 0.2);
+  --c-sh-3: 0 30px 70px -24px rgb(11 21 38 / 0.34);
+
+  color-scheme: light;
+  background: var(--ca-bg);
+  color: var(--ca-fg);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+/* in-page links land below the sticky header: the navy bar on phones (the links row folds away once scrolled),
+   the bar and the links row on computers */
+.clean [id] { scroll-margin-top: 80px; }
+@media (min-width: 768px) { .clean [id] { scroll-margin-top: 136px; } }
+
+/* phones: a long list becomes one row you swipe from right to left, the next card peeking in */
+@media (max-width: 767px) {
+  .c-swipe { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; margin-inline: -16px; padding: 0 16px 8px; scroll-padding-inline: 16px; scrollbar-width: none; }
+  .c-swipe::-webkit-scrollbar { display: none; }
+  .c-swipe > * { flex: 0 0 85%; scroll-snap-align: start; }
+}
+
+@layer components {
+  .clean :is(h1, h2, h3) { font-family: var(--font-logo); font-weight: 700; letter-spacing: -0.03em; text-wrap: balance; }
+  .clean :focus-visible { outline-color: var(--c-primary); }
+  .clean ::selection { background: var(--c-primary); color: var(--c-on-primary); }
+
+  /* page width */
+  .c-wrap { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: 16px; }
+  @media (min-width: 720px) { .c-wrap { padding-inline: 28px; } }
+
+  .c-card { background: var(--ca-card); border: 1px solid var(--ca-line); border-radius: 16px; }
+
+  .c-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 18px; border: 1px solid transparent; border-radius: 10px; font-size: 15px; font-weight: 600; white-space: nowrap; cursor: pointer; transition: background-color .15s, border-color .15s, transform .1s; }
+  .c-btn:active { transform: translateY(1px); }
+  .c-btn-primary { background: var(--c-primary); color: var(--c-on-primary); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.18), 0 8px 18px -10px var(--c-primary-glow); }
+  .c-btn-primary:hover { background: var(--c-primary-hover); }
+  /* the hero's second button: an amber outline next to the blue one */
+  .c-btn-alt { border-color: var(--c-amber); color: var(--c-amber); }
+  .c-btn-alt:hover { background: var(--c-amber); color: #0a1730; }
+  .c-btn-secondary { background: var(--ca-bg); border-color: var(--ca-line-strong); color: var(--ca-fg); }
+  .c-btn-secondary:hover { background: var(--ca-bg-alt); }
+  .c-btn-onnav { border-color: rgb(255 255 255 / 0.4); color: #fff; }
+  .c-btn-onnav:hover { background: rgb(255 255 255 / 0.1); }
+  .c-btn-lg { min-height: 52px; padding: 0 22px; font-size: 16px; }
+  .c-btn-sm { min-height: 40px; padding: 0 14px; font-size: 14px; box-shadow: none; }
+
+  .c-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 6px; font-size: 12.5px; font-weight: 600; line-height: 1.5; }
+  .c-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ca-fg); }
+}

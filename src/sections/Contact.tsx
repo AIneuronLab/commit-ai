@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { ArrowUpRight, Check, Mail, MapPin, MessageCircle, PenLine } from 'lucide-react';
+import { ArrowUpRight, Check, Mail, MapPin, MessageCircle } from 'lucide-react';
 import { Sheet } from '../components/Sheet';
 import { Btn, Container, Kinetic, Measure } from '../components/ui';
 import { LinkedInIcon, WhatsAppIcon } from '../components/BrandIcons';
@@ -8,13 +8,47 @@ import { SITE, waLink } from '../data/site';
 import { pathFor } from '../lib/route';
 import { useApp } from '../i18n';
 
-type Status = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
+export type Status = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
 
 /** Public by design (Web3Forms: it only maps to your email address). Set VITE_WEB3FORMS_KEY at build time. */
 const FORM_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
 
 const field = 'h-12 w-full border-0 border-b border-line-strong bg-transparent px-0 text-[17px] text-fg placeholder:text-muted outline-none transition focus:border-fg';
 const label = 'measure flex flex-col gap-1';
+
+/**
+ * Sends the contact form (fields `name`, `email`, `message`, and the hidden `botcheck`) and says how it went.
+ * With the Web3Forms key the message goes straight to our inbox; without it, the visitor's mail app opens with the
+ * message ready. Used by the form below and by the home page's form (src/home/Home.tsx).
+ */
+export async function sendMessage(form: HTMLFormElement): Promise<Exclude<Status, 'idle' | 'sending'>> {
+  const data = new FormData(form);
+  const name = String(data.get('name') ?? '');
+  const email = String(data.get('email') ?? '');
+  const message = String(data.get('message') ?? '');
+  if (data.get('botcheck')) { form.reset(); return 'sent'; } // a bot ticked the hidden box: pretend, send nothing
+
+  if (!FORM_KEY) {
+    // no key configured (local dev, or not set yet): let the visitor's own mail app send it
+    const body = `${message}\n\n— ${name} (${email})`;
+    window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(`${SITE.brand} — ${name}`)}&body=${encodeURIComponent(body)}`;
+    return 'mailto';
+  }
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ access_key: FORM_KEY, subject: `Nouveau message depuis ${SITE.url.replace('https://', '')}`, from_name: SITE.brand, name, email, message, botcheck: false }),
+    });
+    const json = (await res.json()) as { success?: boolean };
+    if (!res.ok || !json.success) throw new Error(String(res.status));
+    form.reset();
+    return 'sent';
+  } catch {
+    return 'error';
+  }
+}
 
 function Form() {
   const { t, lang } = useApp();
@@ -23,35 +57,8 @@ function Form() {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    const name = String(data.get('name') ?? '');
-    const email = String(data.get('email') ?? '');
-    const message = String(data.get('message') ?? '');
-    if (data.get('botcheck')) { form.reset(); setStatus('sent'); return; } // a bot ticked the hidden box: pretend, send nothing
-
-    if (!FORM_KEY) {
-      // no key configured (local dev, or not set yet): let the visitor's own mail app send it
-      const body = `${message}\n\n— ${name} (${email})`;
-      window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(`${SITE.brand} — ${name}`)}&body=${encodeURIComponent(body)}`;
-      setStatus('mailto');
-      return;
-    }
-
     setStatus('sending');
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ access_key: FORM_KEY, subject: `Nouveau message depuis ${SITE.url.replace('https://', '')}`, from_name: SITE.brand, name, email, message, botcheck: false }),
-      });
-      const json = (await res.json()) as { success?: boolean };
-      if (!res.ok || !json.success) throw new Error(String(res.status));
-      form.reset();
-      setStatus('sent');
-    } catch {
-      setStatus('error');
-    }
+    setStatus(await sendMessage(e.currentTarget));
   }
 
   return (
@@ -144,7 +151,7 @@ export function Contact({ onStart }: { onStart: () => void }) {
   );
 }
 
-/** "Start a project" sheet: the three quickest ways to reach out. */
+/** "Start a project" sheet: the two quickest ways to reach out, WhatsApp and the message form (which emails us). */
 export function ContactSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { t } = useApp();
   const s = t.contact.sheet;
@@ -156,12 +163,8 @@ export function ContactSheet({ open, onClose }: { open: boolean; onClose: () => 
           <span className="flex size-11 items-center justify-center rounded-full bg-night text-glow"><MessageCircle className="size-5" /></span>
           <span className="flex flex-col leading-tight"><b>{t.contact.whatsapp}</b><span className="text-[14px] opacity-80">{t.contact.whatsappHint}</span></span>
         </a>
-        <a href={`mailto:${SITE.email}`} onClick={onClose} className="flex min-h-16 items-center gap-3.5 rounded-[var(--radius-media)] border border-line bg-card-alt px-4 py-3">
-          <span className="flex size-11 items-center justify-center rounded-full bg-accent-soft text-accent"><Mail className="size-5" /></span>
-          <span className="flex min-w-0 flex-col leading-tight"><b>{t.contact.email}</b><span className="truncate text-[14px] text-muted">{SITE.email}</span></span>
-        </a>
         <a href="#message" onClick={onClose} className="flex min-h-16 items-center gap-3.5 rounded-[var(--radius-media)] border border-line bg-card-alt px-4 py-3">
-          <span className="flex size-11 items-center justify-center rounded-full bg-accent-soft text-accent"><PenLine className="size-5" /></span>
+          <span className="flex size-11 items-center justify-center rounded-full bg-accent-soft text-accent"><Mail className="size-5" /></span>
           <b>{s.form}</b>
         </a>
       </div>

@@ -3,19 +3,12 @@ import { MotionConfig } from 'motion/react';
 import { AppProvider, useApp } from './i18n';
 import { TopBar } from './components/Nav';
 import { useSmoothScroll } from './lib/useSmoothScroll';
-import { Hero } from './sections/Hero';
-import { LogoScene } from './sections/LogoScene';
-import { Welcome } from './sections/Proof';
-import { How } from './sections/How';
-import { Services } from './sections/Services';
-import { Journey } from './sections/Journey';
-import { Testimonials } from './sections/Testimonials';
-import { Contact, ContactSheet } from './sections/Contact';
-import { Faq } from './sections/Faq';
+import { Home } from './home/Home';
+import { ContactSheet } from './sections/Contact';
 import { Footer } from './sections/Footer';
 import { WhatsAppFab } from './components/WhatsAppFab';
 import { LegalPage } from './sections/LegalPage';
-import { ServicePage } from './sections/ServicePage';
+import { ServicePage } from './home/ServicePage';
 import { pageFor, serviceFor } from './lib/route';
 
 // the page is chosen once from the address: links between pages are ordinary page loads
@@ -32,25 +25,13 @@ function Shell() {
     <>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-white">{t.a11y.skip}</a>
       {PAGE === 'home' ? (
-        <>
-          <TopBar onStart={open} />
-          <main id="main">
-            <LogoScene />
-            <Hero onStart={open} />
-            <Welcome />
-            <Services onStart={open} />
-            <How />
-            <Testimonials />
-            <Journey />
-            <Faq />
-            <Contact onStart={open} />
-          </main>
-          <Footer />
-        </>
+        <Home onStart={open} />
+      ) : PAGE === 'service' ? (
+        SERVICE && <ServicePage id={SERVICE} onStart={open} />
       ) : (
         <>
           <TopBar onStart={open} base="/" />
-          {PAGE === 'service' ? SERVICE && <ServicePage id={SERVICE} onStart={open} /> : <LegalPage page={PAGE} />}
+          <LegalPage page={PAGE} />
           <Footer base="/" />
         </>
       )}

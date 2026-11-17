@@ -14,7 +14,7 @@ export type ServiceText = {
 
 /** Tools shown on each page, by their name in src/data/stack.ts. */
 export const SERVICE_TOOLS: Record<ServiceId, string[]> = {
-  automation: ['n8n', 'Python', 'LLM & RAG', 'LangChain', 'Mastra'],
+  automation: ['n8n', 'Python', 'LLM & RAG', 'LangChain', 'LangGraph', 'Mastra'],
   web: ['React', 'TypeScript', 'Cloudflare', 'Docker'],
   mobile: ['CNN', 'Python', 'FastAPI', 'Docker'],
   api: ['FastAPI', 'Flask', 'NestJS', 'Spring Boot', 'Docker', 'Linux'],
@@ -34,8 +34,9 @@ export const SERVICES_TEXT: Record<'fr' | 'en', Record<ServiceId, ServiceText>> 
         { t: 'Chatbots sur vos documents', d: 'Vos équipes posent leurs questions en langage naturel ; l’assistant répond en citant la page source.' },
       ],
       examples: [
-        { title: 'Veille des appels d’offres', client: 'Réalisé chez Ashia Group · 2026', result: '50 à 60 offres triées chaque jour', desc: 'Les offres publiques sont collectées chaque matin, triées et résumées par l’IA, puis envoyées dans la boîte mail de l’équipe commerciale. Environ 200 offres traitées en 3 jours.' },
-        { title: 'Chatbot RH sur documents', client: 'Réalisé chez Ashia Group · 2026', result: 'Un guide de 88 pages, interrogeable', desc: 'Les équipes posent leurs questions en langage naturel. Le chatbot cherche dans le guide RH et répond en citant la page source.' },
+        { title: 'Veille des appels d’offres', client: 'Réalisé chez Ashia Group · 2026', result: 'Les offres utiles, chaque matin dans la boîte mail', desc: 'Les offres publiques sont collectées chaque matin, triées et résumées par l’IA, puis envoyées dans la boîte mail de l’équipe commerciale. Environ 200 offres traitées en 3 jours.' },
+        { title: 'Assistant IA des processus internes', client: 'Réalisé chez Ashia Group · 2026', result: 'Toutes les procédures internes, en une question', desc: 'Les équipes posent leurs questions en langage naturel sur les procédures et les fichiers internes. L’assistant IA cherche dans les documents de l’entreprise et répond en citant sa source.' },
+        { title: 'Bras robotique de tri par couleur', client: 'Projet de licence · Mécatronique', result: 'Les objets triés par couleur, sans intervention', desc: 'Un bras robotique qui trie des objets selon leur couleur. Un capteur de proximité détecte l’objet, la caméra reconnaît sa couleur par vision par ordinateur, puis le bras le dépose dans le bon bac.' },
       ],
     },
     web: {
@@ -59,7 +60,7 @@ export const SERVICES_TEXT: Record<'fr' | 'en', Record<ServiceId, ServiceText>> 
         { t: 'Lien avec vos outils', d: 'L’application parle à votre back-office et à vos API existantes.' },
       ],
       examples: [
-        { title: 'BayKat', client: 'Réalisé chez SOTILMA · 2026', result: 'Agent IA de diagnostic des cultures', desc: 'L’agriculteur photographie une feuille : l’agent IA détecte la maladie et conseille traitement et irrigation. Web et mobile.' },
+        { title: 'Agent IA de diagnostic des cultures', client: 'Réalisé chez SOTILMA · 2026', result: 'La maladie reconnue sur une photo', desc: 'L’agriculteur photographie une feuille : l’agent IA détecte la maladie et conseille traitement et irrigation. Web et mobile.' },
       ],
     },
     api: {
@@ -83,8 +84,9 @@ export const SERVICES_TEXT: Record<'fr' | 'en', Record<ServiceId, ServiceText>> 
         { t: 'Chatbots on your documents', d: 'Your teams ask questions in plain language; the assistant answers and cites the source page.' },
       ],
       examples: [
-        { title: 'Tender monitoring', client: 'Built at Ashia Group · 2026', result: '50 to 60 tenders sorted every day', desc: 'Public tenders are collected every morning, sorted and summarised by AI, then sent to the sales team’s inbox. About 200 tenders processed in 3 days.' },
-        { title: 'HR chatbot on documents', client: 'Built at Ashia Group · 2026', result: 'An 88-page guide, searchable', desc: 'Teams ask questions in plain language. The chatbot searches the HR guide and answers with the source page.' },
+        { title: 'Tender monitoring', client: 'Built at Ashia Group · 2026', result: 'The right tenders, in the inbox every morning', desc: 'Public tenders are collected every morning, sorted and summarised by AI, then sent to the sales team’s inbox. About 200 tenders processed in 3 days.' },
+        { title: 'AI assistant for internal processes', client: 'Built at Ashia Group · 2026', result: 'Every internal procedure, one question away', desc: 'Teams ask about internal procedures and files in plain language. The AI assistant searches the company’s documents and answers with its source.' },
+        { title: 'Colour-sorting robotic arm', client: 'Bachelor project · Mechatronics', result: 'Objects sorted by colour, hands-free', desc: 'A robotic arm that sorts objects by colour. A proximity sensor detects the object, the camera recognises its colour with computer vision, then the arm drops it in the right bin.' },
       ],
     },
     web: {
@@ -108,7 +110,7 @@ export const SERVICES_TEXT: Record<'fr' | 'en', Record<ServiceId, ServiceText>> 
         { t: 'Connected to your tools', d: 'The app talks to your back office and your existing APIs.' },
       ],
       examples: [
-        { title: 'BayKat', client: 'Built at SOTILMA · 2026', result: 'AI agent for crop diagnosis', desc: 'The farmer photographs a leaf: the AI agent detects the disease and advises treatment and irrigation. Web and mobile.' },
+        { title: 'AI agent for crop diagnosis', client: 'Built at SOTILMA · 2026', result: 'The disease recognised from a photo', desc: 'The farmer photographs a leaf: the AI agent detects the disease and advises treatment and irrigation. Web and mobile.' },
       ],
     },
     api: {

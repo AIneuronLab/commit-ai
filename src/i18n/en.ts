@@ -37,8 +37,7 @@ export const en: Dict = {
   metricsKicker: 'In numbers',
   metrics: [
     { value: '10+', label: 'projects in production' },
-    { value: '50–60', label: 'tenders sorted every day' },
-    { value: '88', label: 'pages of HR guide, searchable' },
+    { value: '4', label: 'services, one team' },
     { value: '3', label: 'countries of experience' },
   ],
   statement: {
