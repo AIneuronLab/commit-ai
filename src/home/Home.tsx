@@ -57,8 +57,8 @@ function useChapters(): [string, string, typeof Check][] {
 
 /**
  * The header of the home and service pages, sticky at the top: the navy bar (logo, language, WhatsApp, start a
- * project) and the chapters of the home page. At the top of the page the chapters are a row of links under the
- * bar; once the visitor scrolls down, the row folds away and a menu button in the bar opens them as a panel.
+ * project) and the chapters of the home page, as a row of links under the bar. On computers the row always stays
+ * in view; on phones it folds away once the visitor scrolls down, and a menu button in the bar opens the links.
  * `base` is '' on the home page and '/' elsewhere, so the logo and the chapter links lead back home (Contact
  * stays on the page: every page that uses this header ends with the contact block).
  */
@@ -94,13 +94,13 @@ export function Header({ onStart, base = '' }: Start & { base?: string }) {
           <button type="button" onClick={() => { close(); onStart(); }} className="c-btn c-btn-primary c-btn-sm">
             <span className="sm:hidden">{START[lang]}</span><span className="max-sm:hidden">{t.nav.cta}</span>
           </button>
-          <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-controls="site-menu" aria-label={open ? t.a11y.close : t.a11y.openMenu} className={`size-10 items-center justify-center rounded-lg text-white hover:bg-white/10 ${scrolled ? 'flex' : 'hidden'}`}>
+          <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-controls="site-menu" aria-label={open ? t.a11y.close : t.a11y.openMenu} className={`size-10 items-center justify-center rounded-lg text-white hover:bg-white/10 ${scrolled ? 'flex md:hidden' : 'hidden'}`}>
             {open ? <X className="size-6" aria-hidden="true" /> : <Menu className="size-6" aria-hidden="true" />}
           </button>
         </div>
       </div>
-      {/* at the top of the page: the chapters as a row of links (it scrolls sideways on phones) */}
-      <nav aria-label={t.a11y.menu} className={`border-b border-line bg-bg ${scrolled ? 'hidden' : ''}`}>
+      {/* the chapters as a row of links: always on computers, only at the top of the page on phones (it scrolls sideways there) */}
+      <nav aria-label={t.a11y.menu} className={`border-b border-line bg-bg ${scrolled ? 'max-md:hidden' : ''}`}>
         <ul className="c-wrap flex gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {chapters.map(([id, label, Icon]) => (
             <li key={id} className="shrink-0">
@@ -111,10 +111,10 @@ export function Header({ onStart, base = '' }: Start & { base?: string }) {
           ))}
         </ul>
       </nav>
-      {/* once scrolled: the same links in a panel under the bar, opened by the menu button */}
+      {/* phones, once scrolled: the same links in a panel under the bar, opened by the menu button */}
       {open && scrolled && (
-        <nav id="site-menu" aria-label={t.a11y.menu} data-lenis-prevent className="border-b border-line bg-bg shadow-[var(--c-sh-2)]">
-          <ul className="c-wrap grid grid-cols-2 gap-1.5 pt-3 sm:grid-cols-3 lg:grid-cols-4">
+        <nav id="site-menu" aria-label={t.a11y.menu} data-lenis-prevent className="border-b border-line bg-bg shadow-[var(--c-sh-2)] md:hidden">
+          <ul className="c-wrap grid grid-cols-2 gap-1.5 pt-3 sm:grid-cols-3">
             {chapters.map(([id, label, Icon]) => (
               <li key={id}>
                 <a href={id === 'contact' ? '#contact' : `${base}#${id}`} onClick={close} className="flex items-center gap-2.5 rounded-[10px] px-3 py-3 text-[15.5px] font-semibold text-fg hover:bg-bg-alt">
@@ -123,7 +123,7 @@ export function Header({ onStart, base = '' }: Start & { base?: string }) {
               </li>
             ))}
           </ul>
-          <div className="c-wrap pt-2 pb-4 md:hidden">
+          <div className="c-wrap pt-2 pb-4">
             <a href={waLink(t.contact.waText)} target="_blank" rel="noopener noreferrer" onClick={close} className="c-btn c-btn-secondary w-full"><WhatsAppIcon className="size-[18px]" />{t.contact.whatsapp}</a>
           </div>
         </nav>
@@ -443,7 +443,7 @@ function Faq() {
   return (
     <section id="faq" className="scroll-mt-20 border-y border-line bg-bg-alt">
       <div className="c-wrap grid gap-8 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-14 lg:py-16">
-        <div className="flex flex-col gap-2 lg:sticky lg:top-28 lg:self-start">
+        <div className="flex flex-col gap-2 lg:sticky lg:top-40 lg:self-start">
           <span className="c-kicker">{f.kicker}</span>
           <h2 className="text-[clamp(1.6rem,2.8vw,2.15rem)] leading-[1.15]">{f.title}</h2>
           <p className="text-[16px] text-soft">{f.lead} <a href="#contact" className="font-semibold text-accent hover:underline">{t.nav.contact}</a></p>

@@ -55,8 +55,10 @@
   line-height: 1.55;
 }
 
-/* in-page links land below the sticky header: once scrolled it is only the navy bar (64px, 72px on wide screens) */
-.clean [id] { scroll-margin-top: 88px; }
+/* in-page links land below the sticky header: the navy bar on phones (the links row folds away once scrolled),
+   the bar and the links row on computers */
+.clean [id] { scroll-margin-top: 80px; }
+@media (min-width: 768px) { .clean [id] { scroll-margin-top: 136px; } }
 
 /* phones: a long list becomes one row you swipe from right to left, the next card peeking in */
 @media (max-width: 767px) {
