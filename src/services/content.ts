@@ -32,10 +32,9 @@ export const SERVICES_TEXT: Record<'fr' | 'en', Record<ServiceId, ServiceText>> 
         { t: 'Workflows planifiés', d: 'Des tâches qui tournent seules chaque matin ou à chaque événement, et vous préviennent par e-mail.' },
         { t: 'Résumés et tri par l’IA', d: 'Les documents longs résumés, les demandes classées par priorité, les informations clés extraites.' },
         { t: 'Chatbots sur vos documents', d: 'Vos équipes posent leurs questions en langage naturel ; l’assistant répond en citant la page source.' },
+        { t: 'Service de ticketing', d: 'Les demandes de vos clients arrivent par e-mail ou formulaire, sont classées par l’IA selon le sujet et la priorité, assignées à la bonne équipe et suivies jusqu’à la réponse.' },
       ],
       examples: [
-        { title: 'Veille des appels d’offres', client: 'Réalisé chez Ashia Group · 2026', result: 'Les offres utiles, chaque matin dans la boîte mail', desc: 'Les offres publiques sont collectées chaque matin, triées et résumées par l’IA, puis envoyées dans la boîte mail de l’équipe commerciale. Environ 200 offres traitées en 3 jours.' },
-        { title: 'Assistant IA des processus internes', client: 'Réalisé chez Ashia Group · 2026', result: 'Toutes les procédures internes, en une question', desc: 'Les équipes posent leurs questions en langage naturel sur les procédures et les fichiers internes. L’assistant IA cherche dans les documents de l’entreprise et répond en citant sa source.' },
         { title: 'Bras robotique de tri par couleur', client: 'Projet de licence · Mécatronique', result: 'Les objets triés par couleur, sans intervention', desc: 'Un bras robotique qui trie des objets selon leur couleur. Un capteur de proximité détecte l’objet, la caméra reconnaît sa couleur par vision par ordinateur, puis le bras le dépose dans le bon bac.' },
       ],
     },
@@ -82,10 +81,9 @@ export const SERVICES_TEXT: Record<'fr' | 'en', Record<ServiceId, ServiceText>> 
         { t: 'Scheduled workflows', d: 'Tasks that run on their own every morning or on every event, and notify you by email.' },
         { t: 'AI summaries and triage', d: 'Long documents summarised, requests ranked by priority, key information extracted.' },
         { t: 'Chatbots on your documents', d: 'Your teams ask questions in plain language; the assistant answers and cites the source page.' },
+        { t: 'Ticketing service', d: 'Customer requests come in by email or form, are classified by AI by topic and priority, assigned to the right team and tracked until they are answered.' },
       ],
       examples: [
-        { title: 'Tender monitoring', client: 'Built at Ashia Group · 2026', result: 'The right tenders, in the inbox every morning', desc: 'Public tenders are collected every morning, sorted and summarised by AI, then sent to the sales team’s inbox. About 200 tenders processed in 3 days.' },
-        { title: 'AI assistant for internal processes', client: 'Built at Ashia Group · 2026', result: 'Every internal procedure, one question away', desc: 'Teams ask about internal procedures and files in plain language. The AI assistant searches the company’s documents and answers with its source.' },
         { title: 'Colour-sorting robotic arm', client: 'Bachelor project · Mechatronics', result: 'Objects sorted by colour, hands-free', desc: 'A robotic arm that sorts objects by colour. A proximity sensor detects the object, the camera recognises its colour with computer vision, then the arm drops it in the right bin.' },
       ],
     },
