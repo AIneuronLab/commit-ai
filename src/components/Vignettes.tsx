@@ -47,15 +47,15 @@ export function CodePanel({ className = '' }: { className?: string }) {
     <div className={`overflow-hidden rounded-xl border border-[#1e2a40] bg-[#0b1322] font-mono text-[12.5px] leading-[1.7] text-[#c9d4e5] ${className}`}>
       <div className="flex items-center gap-3 border-b border-[#1e2a40] px-4 py-3"><Dots /><span className="text-[#8b9ab2]">REST API</span></div>
       <pre className="m-0 overflow-x-auto px-4 py-4"><code>
-        <span className="text-[#4fd08f]">GET</span> /v1/offres?pertinent=true{'\n'}
+        <span className="text-[#4fd08f]">GET</span> /v1/tickets?statut=ouvert{'\n'}
         <span className={m}>Authorization: Bearer ••••••••</span>{'\n\n'}
         <span className={m}>200 OK · 84 ms</span>{'\n'}
         {'{'}{'\n'}
-        {'  '}<span className={k}>"total"</span>: <span className={n}>58</span>,{'\n'}
+        {'  '}<span className={k}>"total"</span>: <span className={n}>12</span>,{'\n'}
         {'  '}<span className={k}>"items"</span>: [{'{'}{'\n'}
-        {'    '}<span className={k}>"titre"</span>: <span className={s}>"Système d’information RH"</span>,{'\n'}
-        {'    '}<span className={k}>"source"</span>: <span className={s}>"portail public"</span>,{'\n'}
-        {'    '}<span className={k}>"score"</span>: <span className={n}>0.91</span>{'\n'}
+        {'    '}<span className={k}>"sujet"</span>: <span className={s}>"Facture en double"</span>,{'\n'}
+        {'    '}<span className={k}>"priorite"</span>: <span className={s}>"haute"</span>,{'\n'}
+        {'    '}<span className={k}>"equipe"</span>: <span className={s}>"support"</span>{'\n'}
         {'  '}{'}'}, …]{'\n'}
         {'}'}
       </code></pre>
